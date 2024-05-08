@@ -1,0 +1,149 @@
+<section class="content">
+  <div class="content-block">
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="header mb-3">
+            <h2><strong>Paramètres</strong> fonctionnalités</h2>
+          </div>
+          <div class="body">
+            <section class="section-parametre"
+              [ngBusy]="{busy: busyGet, message: 'Veuillez patienter ...', backdrop: false}">
+              <div class="">
+                <div class="row clearfix">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="card">
+                      <div class="body table-responsive">
+
+                        <table class="table table-condensed table-striped table-hover">
+                          <thead>
+                            <tr>
+                              <th colspan="10">
+                                <div class="row mt-4">
+                                  <div class="col-md-7">
+                                    <input [(ngModel)]="itemToSearch.libelle"
+                                      class="form-control custom-input pull-left" placeholder="Rechercher sur libelle ..."
+                                      (keyup)="currentPage = 1;getItems()" />
+                                  </div>
+                                  <div class="col-md-5">
+                                    <button type="button" class="btn btn-md custom_btn_primary pull-right"
+                                      (click)="openModal(null,templateCrud)"> <i class="fa fa-plus"></i>&nbsp; Ajouter
+                                    </button>
+                                  </div>
+                                </div>
+                              </th>
+                            </tr>
+                            <tr class="custom-table-head">
+                              <th>
+                                <a style="cursor: pointer;" (click)="currentPage = 1;getItems()" title="Actualiser"> <i
+                                    class="fa fa-redo-alt"></i></a>&nbsp;&nbsp;
+                                #
+                              </th>
+                              <th>Code</th>
+                              <th>Libellé</th>
+                              <th>Parent</th>
+                              <th>Date et Heure création</th>
+                              <th class="txt-align-center">Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let item of items; let indice = index">
+                              <td class="txt-align-center">{{indice + 1}}</td>
+                              <td>{{item?.code}}</td>
+                              <td>{{item?.libelle}}</td>
+                              <td>{{item?.fonctionnaliteLibelle}}</td>
+                              <td>{{item?.createdAt}}</td>
+                              <td>
+                                <div class="custom-td-action">
+                                  <a title="Modifier" (click)="openModal(item,templateCrud)" class="custom-btn-update">
+                                    <i class="fa fa-edit"></i></a>
+                                  <a title="Supprimer" (click)="confirmDelete(item)" class="custom-btn-delete"> <i
+                                      class="fa fa-trash"></i></a>
+                                </div>
+
+                              </td>
+                            </tr>
+                          </tbody>
+                          <tfoot>
+                            <tr *ngIf="items && items.length > 0">
+                              <td colspan="4">
+                                <div class="row pagination-part">
+                                  <div class="col-md-9" style="text-align: center">
+                                    <pagination [boundaryLinks]="true" [itemsPerPage]="itemsPerPage"
+                                      [totalItems]="totalItems" [(ngModel)]="currentPage" class="pagination-sm"
+                                      previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"
+                                      (pageChanged)="pageChanged($event)"></pagination>
+                                  </div>
+                                  <div class="col-md-3">
+                                    <span class="span_total_entree pull-right">Total : {{totalItems}}</span>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr *ngIf="!items || items.length == 0">
+                              <td colspan="4">
+                                <div class="col-md-12 txt-align-center">
+                                  Aucune données disponible
+                                </div>
+                              </td>
+                            </tr>
+                          </tfoot>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <!-- Enregistrer une fonctionnalitée -->
+            <ng-template #templateCrud>
+              <div class="modal-header">
+                <h4 class="modal-title pull-left">
+                  {{itemToSave?.id ? "Modification" : "Enregistrement"}}
+                </h4>
+                <button mat-icon-button class="pull-right" (click)="modalRef.hide()" aria-label="Close dialog">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+              <div class="modal-body" [ngBusy]="{busy: busySave, message: 'Veuillez patienter ...', backdrop: false}">
+                <form class="m-1">
+                  <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                      <label>Libellé :
+                        <span class="required_champs">*</span>
+                      </label>
+                      <input class="form-control custom-input" placeholder="Libellé" autocomplete="off"
+                        [(ngModel)]="itemToSave.libelle" name="nom" required type="text">
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
+                      <label>Parent :
+                        <!-- <span class="required_champs">*</span> -->
+                      </label>
+                      <select name="parentId" [(ngModel)]="itemToSave.idParent" class="form-control custom-input">
+                        <option value="">Choisir parent</option>
+                        <option *ngFor="let item of ListNoParentFonctionnalites" [(value)]="item.id">{{item.libelle}}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </form>
+
+              </div>
+              <div class="modal-footer modal-footer-custom">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
+                  <button type="button" (click)="confirmSaveItem(itemToSave)"
+                    class="btn btn-md custom_btn_primary pull-right" [disabled]="!itemToSave.libelle"
+                    [class.auth-spinner]="loading" [disabled]="loading"> {{itemToSave?.id ?
+                                'Modifier' : "Enregistrer"}}</button>
+                  <button type="button" class="btn btn-md btn-cancel pull-right"
+                    (click)="modalRef.hide()">Annuler</button>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,31 @@
+
+.btn-add{
+    margin-top: 20px;
+    background-color: #489aff;
+    color: #fff;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn-arrow {
+    background-color: #fff;
+    border: 1px solid #eceeee;
+}
+
+.btn-arrow :hover {
+    // background-color: #489aff;
+    color: #489aff;
+}
+
+.btn-manger-part{
+    border-top: 1px solid #eceeee;
+    padding-top: 15px;
+    margin-top: 20px;
+    .btn-cancel{
+        margin-right: 10px;
+    }
+}

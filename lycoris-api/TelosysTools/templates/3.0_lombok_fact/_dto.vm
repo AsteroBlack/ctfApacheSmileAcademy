@@ -1,0 +1,35 @@
+##----------------------------------------------------------------------------------------------------
+## JPA beans suffix
+##set ( $env.entityClassNameSuffix = "Dto" )
+#set ( $dto = ${entity.name} + "Dto" )
+
+/*
+ * Java dto for entity table ${entity.databaseTable} 
+ * Created on $today.date ( Time $today.time )
+ * Generator tool : $generator.name ( version $generator.version )
+ * Copyright 2018 Geo. All Rights Reserved.
+ */
+
+package ${target.javaPackageFromFolder(${SRC})};
+
+#foreach( $import in $java.imports($entity) )
+import $import;
+#end
+#foreach( $import in $java.imports($entity.attributes) )
+import $import;
+#end
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import ${ROOT_PKG}.utils.contract.*;
+
+/**
+ * DTO customize for table "${entity.databaseTable}"
+ * 
+ * @author Geo
+ *
+ */
+@JsonInclude(Include.NON_NULL)
+public class _${dto} {
+
+}

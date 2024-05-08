@@ -1,0 +1,115 @@
+<ng-container>
+    <div class="row"  [ngBusy]="{busy: busyGet, message: 'Veuillez patienter ...', backdrop: false}">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <table class="table table-bordered table-striped table-hover table-condensed">
+                <thead>
+                    <tr *ngIf="title && !isHistoriqueConsultation">
+                        <th colspan="10" style="text-align: center;background-color: #fff;">
+                            <h2 class="titla">
+                                {{title}} 
+                            </h2>
+                        </th>
+                    </tr>
+                    <tr *ngIf="!isHistoriqueConsultation">
+                        <th colspan="10">
+                            <div class="col-md-12" *ngIf="!hasNeedPlusColonne">
+                                <input [(ngModel)]="itemToSearch.searchTxt"
+                                    class="form-control custom-input pull-left"
+                                    placeholder="Rechercher ..." (keyup)="currentPage = 1;getItems()" />
+                            </div>
+
+                            <div class="col-md-3" *ngIf="hasNeedPlusColonne">
+                                <input [(ngModel)]="itemToSearch.searchTxt"
+                                    class="form-control custom-input pull-left"
+                                    placeholder="Rechercher ..." (keyup)="currentPage = 1;getItems()" />
+                            </div>
+                        </th>
+                    </tr>
+                    <tr  class="custom-table-head">
+                        <th style="width: 50px;">
+                            # 
+                            <a (click)="currentPage = 1;getItems()" title="Actualiser"> <i class="fa fa-redo-alt" style="font-size: 10px;"></i></a>&nbsp;&nbsp;
+                        </th>
+                        <th  class="txt-align-center" *ngIf="hasNeedPlusColonne"> Photo </th>
+                        <th> N° Accueil</th>
+                        <th> Date & Heure</th>
+                        <th> Matricule</th>
+                        <th> Patient </th>
+                        <th *ngIf="hasNeedPlusColonne"> Unité fonctionnelle </th>
+                        <th *ngIf="hasNeedEtapeCircuit"> Etape circuit </th>
+                        <th *ngIf="hasNumeroDossier" class="txt-align-center" style="width:160px"> N° Dossier </th>
+                        <th *ngIf="hasNeedPlusColonne" class="txt-align-center"> Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let item of items;let indice = index" (click)="seletedItem(item)" style="cursor: pointer;" [class.rowActive]="item?.id == itemSelected?.id">
+                        <td  class="txt-align-center" >
+                            {{getExactlyNumberRow(this.currentPage,indice)}}
+                        </td>
+                        <td  *ngIf="hasNeedPlusColonne" class="txt-align-center">
+                            <img src="https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg" alt="Photo assuré" class="img-assure" />
+                        </td>
+                        <td>{{item?.code}}</td>
+                        <td>{{item?.createdAt}}</td>
+                        <td>{{item?.matriculeBeneficiaire}}</td>
+                        <td>{{item?.beneficiaireNom + ' '+item?.beneficiairePrenom}}
+                            <i class="fa-solid fa-hand-back-point-right pull-right"></i>
+                        </td>
+                        <td *ngIf="hasNeedPlusColonne">{{item?.adminUniteFonctionnelleLibelle}}</td>
+                       
+                        <td *ngIf="hasNeedEtapeCircuit">
+                            {{item?.etapeCircuit}}
+                            <sup *ngIf="item?.etapeCircuit == 'CONSULTATION EN COURS'">
+                                <i class="fa fa-circle inProgress"></i>
+                            </sup>
+                        </td>
+                        <td *ngIf="hasNumeroDossier && item?.numeroDossier">{{item?.numeroDossier}}</td>
+                       
+
+                        <td *ngIf="hasNumeroDossier && !item?.numeroDossier"  class="txt-align-center">
+                            <div class="num-dossier-part">
+                                <input type="text" class="form-control" [(ngModel)]="item.numeroDossierRenseigne" [disabled]="item?.isGenerate" placeholder="N°Dossier" />
+                                <span>ou</span>
+                                <button type="button" class="btn btn-xs btn-default btn-generer-numero-dossier" title="Cliquez pour génerer un n° de dossier" (click)="genererNumDossier(item)" *ngIf="!item?.numeroDossier"> Génerer n°dossier</button>
+                            </div>
+                        </td>
+
+                        <td *ngIf="hasNeedPlusColonne"  class="txt-align-center">
+                            <button type="button" class="btn btn-xs btn-default custom_btn_primary" title="Cliquez pour sélectionner" *ngIf="!hasNumeroDossier"> Sélectionner</button>
+                            <button type="button" class="btn btn-xs btn-default custom_btn_primary" title="Cliquez pour sélectionner" *ngIf="hasNumeroDossier" (click)="transfererDossier(item)"> Transférer</button>
+                        </td>
+                    </tr>
+
+                    <tr *ngIf="items && items.length > 0">
+                        <td colspan="10">
+                            <div class="row pagination-part">
+                                <div class="col-md-9" style="text-align: center">
+                                    <pagination [boundaryLinks]="true" [itemsPerPage]="itemsPerPage"
+                                        [totalItems]="totalItems" [(ngModel)]="currentPage"
+                                        class="pagination-sm" previousText="&lsaquo;" nextText="&rsaquo;"
+                                        firstText="&laquo;" lastText="&raquo;"
+                                        (pageChanged)="pageChanged($event)"></pagination>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <span class="span_total_entree pull-right">Total : {{totalItems}}</span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr *ngIf="!items || items.length == 0">
+                        <td colspan="10">
+                            <div class="col-md-12 txt-align-center">
+                                Aucune données disponible
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</ng-container>

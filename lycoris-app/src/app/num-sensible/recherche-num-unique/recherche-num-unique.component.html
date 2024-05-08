@@ -1,0 +1,267 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">
+    {{ title | titlecase }}
+  </h4>
+
+  <button
+    mat-icon-button
+    class="pull-right"
+    (click)="bsModalRef.hide()"
+    aria-label="Close dialog"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div
+  class="modal-body"
+  [ngBusy]="{
+    busy: busySave,
+    message: 'Veuillez patienter ...',
+    backdrop: false
+  }"
+>
+  <div class="">
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="body table-responsive">
+            <table class="table table-condensed table-striped table-hover">
+              <thead>
+                <tr>
+                  <th colspan="11">
+                    <div class="test">
+                      <div class="col-md-3 arrange">
+                        <input
+                          [(ngModel)]="itemToSearch.numero"
+                          class="form-control custom-input pull-left"
+                          placeholder="Rechercher numero ..."
+                          mask="00-00-00-00-00"
+                        />
+                        <button
+                          class="import-file btn custom_btn_primary sub-menu"
+                          (click)="getItems()"
+                        >
+                          Valider
+                        </button>
+                      </div>
+
+                      <!-- <div class="btn custom_btn_primary sub-menu">
+                        <span
+                          class="p-2 spanstyle"
+                          id="dateNumSensible"
+                          appDateRangeSelector
+                          (periode)="onPeriodeEmitted($event)"
+                        >
+                          <em class="icofont icofont-ui-calendar"></em>&nbsp;
+                          <span></span>&nbsp;<em class="fa fa-caret-down"></em>
+                        </span>
+                      </div> -->
+                      <!-- <div class="btn-valider">
+                        <button
+                          type="button"
+                          class="import-file btn custom_btn_primary sub-menu"
+                          (click)="getItems()"
+                        >
+                          Valider
+                        </button>
+                      </div> -->
+                    </div>
+                  </th>
+                </tr>
+                <tr class="custom-table-head">
+                  <th>
+                    <a
+                      style="cursor: pointer"
+                      (click)="currentPage = 1; getItems()"
+                      title="Actualiser"
+                    >
+                      <em class="fa fa-redo-alt"></em></a
+                    >&nbsp;&nbsp; #
+                  </th>
+                  <th>Numéro</th>
+                  <th>Statut SIM</th>
+                  
+                  <th>Mise en machine</th>
+                  <th>Date d'activation</th>
+                  <th>Numéro Port</th>
+                  <th>Numéro série</th>
+                  <th>Offre</th>
+                  <th>Statut</th>
+                  <th *simSwapIsGranted="'FUNC-AB5G'">Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of items; let indice = index">
+                  <td class="txt-align-center">{{ indice + 1 }}</td>
+                  <td class="table-cell">
+                    {{ item?.msisdn ?? item?.numero | mask : "00 00 00 00 00" }}
+                  </td>
+
+                  <td>
+                    <span
+                      *ngIf="item?.lockStatus == 'DEBLOQUE' || item?.statusCode == 'DEBLOQUE'"
+                      style="background-color: green"
+                      class="badge badge-success"
+                      >{{ item?.lockStatus ?? item?.statusCode }}</span
+                    >
+                    <span
+                      *ngIf="item?.lockStatus == 'BLOQUE' || item?.statusCode == 'BLOQUE'"
+                      style="background-color: rgb(242, 186, 1)"
+                      class="badge badge-danger"
+                      >{{ item?.lockStatus ?? item?.statusCode }}</span
+                    >
+                    <span
+                      *ngIf="item?.lockStatus == 'MISE EN MACHINE' || item?.statusCode == 'MISE EN MACHINE'"
+                      style="background-color: rgb(50, 111, 233)"
+                      class="badge badge-danger"
+                      >Mise en Machine</span
+                    >
+
+                    <span
+                      *ngIf="item?.lockStatus == 'SUPPRIMER'"
+                      style="background-color: red"
+                      class="badge badge-danger"
+                      >{{ item?.lockStatus }}</span
+                    >
+                  </td>
+                  
+                  <td>
+                    <span
+                      *ngIf="item?.isFrozen == true"
+                      style="background-color: green"
+                      class="badge badge-success"
+                      >MISE EN MACHINE</span
+                    >
+
+                    <span
+                      *ngIf="item?.isFrozen == false"
+                      style="background-color: red"
+                      class="badge badge-danger"
+                      >PAS EN MACHINE</span
+                    >
+                  </td>
+                  <td>
+                    {{ item?.activationDate | date : "dd/MM/yyyy H:mm:ss" }}
+                  </td>
+                  <!--| date: "dd/MM/yyyy H:mm:ss" -->
+                  <td>{{ item?.portNumber }}</td>
+                  <td>{{ item?.serialNumber }}</td>
+                  <td>{{ item?.offerName }}</td>
+                  <td>{{ item?.status ?? item?.statusBscs }}</td>
+                  <td *simSwapIsGranted="'FUNC-AB5G'">
+                    <div class="custom-td-action">
+                      <div>
+                        <a
+                          *ngIf="item?.lockStatus ? item?.lockStatus !== 'BLOQUE' : item?.statusCode !== 'BLOQUE' "
+                          title="Bloqué"
+                          (click)="demandeBlocage(item, 1)"
+                          class="custom-btn-lock"
+                        >
+                          <em class="fa fa-lock"></em
+                        ></a>
+                      </div>
+
+                      <div *simSwapIsGranted="'FUNC-3HZ8'">
+                        <a
+                          *ngIf="item?.lockStatus ? item?.lockStatus !== 'DEBLOQUE' : item?.statusCode !== 'DEBLOQUE'"
+                          title="Débloqué"
+                          (click)="demandeDeblocage(item, 2)"
+                          class="custom-btn-unlock"
+                        >
+                          <em class="fa fa-unlock-alt"></em
+                        ></a>
+                      </div>
+                      <div *simSwapIsGranted="'FUNC-NZTE'">
+                        <a
+                          *ngIf="item?.isFrozen ? !item?.isFrozen : !item?.isMachine"
+                          title="Mise en machine"
+                          (click)="demandeMiseEnMachine(item, 3)"
+                          class="custom-btn-lock"
+                        >
+                          <em class="fa fa-rocket"></em
+                        ></a>
+                      </div>
+
+                      <ng-container *simSwapIsGranted="'FUNC-AY0K'">
+                        <a
+                          *ngIf="item?.typeNumeroLibelle === 'CORAIL'"
+                          title="Transfert de corbeille"
+                          (click)="demandeTransfertCorb(item, 2)"
+                          class="custom-btn-delete"
+                        >
+                          <em class="fa fa-redo-alt"></em
+                        ></a>
+                      </ng-container>
+                      <!-- <div>
+                      <a
+                      *ngIf="
+                        item?.statusCode != 'SUPPRIMER'"
+                      title="Supprimer"
+                      (click)="actionSurNumero(item, 4)"
+                      class="custom-btn-delete"
+                    >
+                      <em class="fa fa-trash"></em
+                    ></a>
+                     </div>-->
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+
+              <tfoot>
+                <tr *ngIf="items && items.length > 0">
+                  <td colspan="4">
+                    <div class="row pagination-part">
+                      <div class="col-md-9" style="text-align: center">
+                        <pagination
+                          [boundaryLinks]="true"
+                          [itemsPerPage]="itemsPerPage"
+                          [totalItems]="items.length"
+                          [(ngModel)]="currentPage"
+                          class="pagination-sm"
+                          previousText="&lsaquo;"
+                          nextText="&rsaquo;"
+                          firstText="&laquo;"
+                          lastText="&raquo;"
+                          (pageChanged)="pageChanged($event)"
+                        ></pagination>
+                      </div>
+
+                      <div class="col-md-3">
+                        <span class="span_total_entree pull-right"
+                          >Total : {{ items.length }}</span
+                        >
+                        <!---Utiliser totalItems pour afficher le nombre total d'element dans l'items-->
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr *ngIf="!items || items.length == 0">
+                  <td colspan="12">
+                    <div class="col-md-12 txt-align-center">
+                      Aucune données disponible
+                    </div>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer modal-footer-custom">
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+    <button
+      type="button"
+      class="btn btn-md btn-cancel pull-right"
+      (click)="bsModalRef.hide()"
+    >
+      Fermer
+    </button>
+  </div>
+</div>

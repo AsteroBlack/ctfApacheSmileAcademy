@@ -1,0 +1,61 @@
+.full-screen-modal {
+    width: 99%;
+  }
+  
+  .active {
+    opacity: 1;
+  }
+  .inactive {
+    opacity: 0.4;
+  }
+  
+  ::ng-deep .cdk-overlay-container {
+    position: fixed;
+    z-index: 10000;
+  }
+  
+  .table-details {
+    thead {
+      tr {
+        th {
+          padding: 2px;
+          font-size: 12px;
+          height: 25px;
+        }
+      }
+  
+      tr {
+        td {
+          font-size: 12px;
+          height: 30px;
+        }
+      }
+    }
+  }
+
+
+  .divElement{
+    display: flex;
+    justify-content: space-between;
+  }
+  .btnHover:hover{
+    color: aliceblue;
+  }
+  
+  .divImport{
+    margin-right: 30px;
+  }
+
+  .btn-import{
+    padding: 0 1.5rem 0 1.5rem;
+  }
+
+  .test{
+    display: flex;
+    justify-content: space-between;
+    //border: 2px solid red;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+  }

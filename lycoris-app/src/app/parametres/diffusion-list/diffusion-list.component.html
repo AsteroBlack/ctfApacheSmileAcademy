@@ -1,0 +1,271 @@
+<section class="content">
+  <div class="content-block">
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="header mb-3">
+            <h2><strong>Administration</strong> Liste de diffusions</h2>
+          </div>
+          <div class="body">
+            <section
+              class="section-parametre"
+              [ngBusy]="{
+                busy: busyGet,
+                message: 'Veuillez patienter ...',
+                backdrop: false
+              }"
+            >
+              <div class="">
+                <div class="row clearfix">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="card">
+                      <div class="body table-responsive">
+                        <table
+                          class="table table-condensed table-striped table-hover"
+                        >
+                          <thead>
+                            <tr>
+                              <th colspan="11">
+                                <div class="test">
+                                  <div class="">
+                                    <input
+                                      [(ngModel)]="searchTerm"
+                                      class="form-control custom-input pull-left"
+                                      placeholder="Rechercher ..."
+                                      (keyup)="filterItems()"
+                                    />
+                                  </div>
+
+                                  <div class="date">
+                                    <div class="" *simSwapIsGranted="'FUNC-CH40'">
+                                      <button
+                                        type="button"
+                                        class="btn btn-md custom_btn_primary pull-right btn-add"
+                                        (click)="
+                                          openModal(emptyItemToEdit, templateCrud)
+                                        "
+                                      >
+                                        <i class="fa fa-plus"></i>&nbsp; Ajouter
+                                      </button>
+                                    </div>
+  
+                                    <ng-container *simSwapIsGranted="'FUNC-TCGL'">
+                                      <div *ngIf="filePath" class="btn btn-md custom_btn_primary import-file divImport btn-import">
+                                        <button (click)="exporterFichier()" class="btn btnHover">Exporter <i class="fa fa-file"></i></button>
+                                      </div>
+                                    </ng-container>
+                                  </div>
+                                  
+                                </div>
+                              </th>
+                            </tr>
+                            <tr class="custom-table-head">
+                              <th>
+                                <a
+                                  style="cursor: pointer"
+                                  (click)="currentPage = 1; getItems()"
+                                  title="Actualiser"
+                                >
+                                  <i class="fa fa-redo-alt"></i></a
+                                >&nbsp;&nbsp; #
+                              </th>
+                              <th>Nom & Prénoms</th>
+                              <th>Email</th>
+                              <th>Téléphone</th>
+                              <th class="txt-align-center">Actions</th>
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                            <tr *ngFor="let item of items; let indice = index">
+                              <td class="txt-align-center">{{ indice + 1 }}</td>
+                              <td>{{ item.fullname }}</td>
+                              <td>{{ item.email }}</td>
+                              <td>{{ item.tel }}</td>
+                              <td>
+                                <div class="custom-td-action">
+                                  <a
+                                    title="Modifier"
+                                    (click)="openModal(item, templateCrud)"
+                                    class="custom-btn-update"
+                                  >
+                                    <em class="fa fa-edit"></em
+                                  ></a>
+                                  <a
+                                    title="Supprimer"
+                                    (click)="confirmDelete(item.id)"
+                                    class="custom-btn-delete"
+                                  >
+                                    <em class="fa fa-trash"></em
+                                  ></a>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+
+                          <tfoot>
+                            <tr *ngIf="items && items.length > 0">
+                              <td colspan="4">
+                                <div class="row pagination-part">
+                                  <div
+                                    class="col-md-9"
+                                    style="text-align: center"
+                                  >
+                                    <pagination
+                                      [boundaryLinks]="true"
+                                      [itemsPerPage]="itemsPerPage"
+                                      [totalItems]="totalItems"
+                                      [(ngModel)]="currentPage"
+                                      class="pagination-sm"
+                                      previousText="&lsaquo;"
+                                      nextText="&rsaquo;"
+                                      firstText="&laquo;"
+                                      lastText="&raquo;"
+                                      (pageChanged)="pageChanged($event)"
+                                    ></pagination>
+                                  </div>
+
+                                  <div class="col-md-3">
+                                    <span class="span_total_entree pull-right"
+                                      >Total : {{ totalItems }}</span
+                                    >
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr *ngIf="!items || items.length == 0">
+                              <td colspan="12">
+                                <div class="col-md-12 txt-align-center">
+                                  Aucune données disponible
+                                </div>
+                              </td>
+                            </tr>
+                          </tfoot>
+                        </table>
+                      </div>
+                    </div>
+
+                    <!-- Enregistrer un utilsateur -->
+                    <ng-template #templateCrud>
+                      <div class="modal-header">
+                        <h4 class="modal-title pull-left">
+                          {{
+                            itemToEdit?.id
+                              ? "Modifier les informations de diffusions"
+                              : "Créer les informations de diffusions"
+                          }}
+                        </h4>
+
+                        <button
+                          mat-icon-button
+                          class="pull-right"
+                          (click)="modalRef.hide()"
+                          aria-label="Close dialog"
+                        >
+                          <mat-icon>close</mat-icon>
+                        </button>
+                      </div>
+                      <form class="m-1" #form="ngForm">
+                        <div
+                          class="modal-body"
+                          [ngBusy]="{
+                            busy: busySave,
+                            message: 'Veuillez patienter ...',
+                            backdrop: false
+                          }"
+                        >
+                          <div class="row">
+                            <div class="col-md-12 mb-3">
+                              <label
+                                >Nom :
+                                <span class="required_champs">*</span>
+                              </label>
+                              <input
+                                class="form-control custom-input"
+                                placeholder="Nom"
+                                autocomplete="off"
+                                [(ngModel)]="itemToEdit.fullname"
+                                name="fullname"
+                                required
+                                type="text"
+                              />
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12 mb-3">
+                              <label
+                                >Email :
+                                <span class="required_champs">*</span>
+                              </label>
+                              <input
+                                class="form-control custom-input"
+                                placeholder="Email"
+                                autocomplete="off"
+                                [(ngModel)]="itemToEdit.email"
+                                name="email"
+                                required
+                                type="text"
+                              />
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12 mb-3">
+                              <label>Téléphone : </label>
+                              <span class="required_champs">*</span>
+                              <input
+                                class="form-control custom-input"
+                                placeholder="Téléphone"
+                                autocomplete="off"
+                                [(ngModel)]="itemToEdit.tel"
+                                name="tel"
+                                required
+                                type="text"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <!------------------------------------------------------------------------------->
+                        <div class="modal-footer modal-footer-custom">
+                          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                            <button
+                              type="button"
+                              (click)="confirmSaveItem(itemToEdit)"
+                              class="btn btn-md custom_btn_primary pull-right"
+                              [disabled]="
+                                form.invalid ||
+                                form.pristine ||
+                                editionRequestPerform
+                              "
+                              [class.auth-spinner]="loading"
+                            >
+                              <ng-container *ngIf="!editionRequestPerform">
+                                {{
+                                  itemToEdit?.id ? "Modifier" : "Enregistrer"
+                                }}
+                              </ng-container>
+                              <ng-container>
+                                {{ editionRequestPerform ? "En cours..." : "" }}
+                              </ng-container>
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-md btn-cancel pull-right"
+                              (click)="modalRef.hide()"
+                            >
+                              Annuler
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,70 @@
+Update date : Thu Jan 11 09:55:01 GMT 2024
+ 
+ Table 'action_en_masse' no longer exists in database
+ (-) table 'action_en_masse' removed
+ 
+ Table 'action_parametrable' no longer exists in database
+ (-) table 'action_parametrable' removed
+ 
+ Table 'action_simswap' no longer exists in database
+ (-) table 'action_simswap' removed
+ 
+ Table 'action_utilisateur' no longer exists in database
+ (-) table 'action_utilisateur' removed
+ 
+ Table 'ation_to_notifiable' no longer exists in database
+ (-) table 'ation_to_notifiable' removed
+ 
+ Table 'category' no longer exists in database
+ (-) table 'category' removed
+ 
+ Table 'civilite' no longer exists in database
+ (-) table 'civilite' removed
+ 
+ Table 'demande' no longer exists in database
+ (-) table 'demande' removed
+ 
+ Table 'fonctionnalite' no longer exists in database
+ (-) table 'fonctionnalite' removed
+ 
+ Table 'historique' no longer exists in database
+ (-) table 'historique' removed
+ 
+ Table 'numero_stories' no longer exists in database
+ (-) table 'numero_stories' removed
+ 
+ Table 'parametrage' no longer exists in database
+ (-) table 'parametrage' removed
+ 
+ Table 'parametrage_profil' no longer exists in database
+ (-) table 'parametrage_profil' removed
+ 
+ Table 'product' no longer exists in database
+ (-) table 'product' removed
+ 
+ Table 'profil' no longer exists in database
+ (-) table 'profil' removed
+ 
+ Table 'profil_fonctionnalite' no longer exists in database
+ (-) table 'profil_fonctionnalite' removed
+ 
+ Table 'status' no longer exists in database
+ (-) table 'status' removed
+ 
+ Table 'tache' no longer exists in database
+ (-) table 'tache' removed
+ 
+ Table 'transaction' no longer exists in database
+ (-) table 'transaction' removed
+ 
+ Table 'type_demande' no longer exists in database
+ (-) table 'type_demande' removed
+ 
+ Table 'type_numero' no longer exists in database
+ (-) table 'type_numero' removed
+ 
+ Table 'type_parametrage' no longer exists in database
+ (-) table 'type_parametrage' removed
+ 
+ Table 'user' no longer exists in database
+ (-) table 'user' removed

@@ -1,0 +1,29 @@
+Update date : Thu Jun 09 18:33:39 GMT 2022
+ 
+ Table 'action_utilisateur' found in repository
+ (=) table 'action_utilisateur' unchanged
+ 
+ Table 'fonctionnalite' found in repository
+ (=) table 'fonctionnalite' unchanged
+ 
+ Table 'historique' found in repository
+ (=) table 'historique' unchanged
+ 
+ Table 'profil' found in repository
+ (=) table 'profil' unchanged
+ 
+ Table 'profil_fonctionnalite' found in repository
+ (=) table 'profil_fonctionnalite' unchanged
+ 
+ Table 'status' found in repository
+ (=) table 'status' unchanged
+ 
+ Table 'type_numero' found in repository
+ (=) table 'type_numero' unchanged
+ 
+ Table 'user' found in repository
+ . Column 'locked' : Database type changed to BIT
+ . Column 'locked' : JDBC type code changed to -7
+ . Column 'locked' : Size changed to 1
+ . Column 'locked' updated
+ (*) table 'user' updated : 1 change(s)

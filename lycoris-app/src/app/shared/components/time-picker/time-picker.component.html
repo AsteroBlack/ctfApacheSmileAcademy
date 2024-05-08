@@ -1,0 +1,16 @@
+
+  <!-- <table class="table">
+    <tr *ngFor="let row of matrix">
+      <td *ngFor="let col of row" (click)="clickOnValue.emit(col)" [ngClass]="{'disabled': !col}">{{col}}</td>
+    </tr>
+    <tr>
+      <td colspan="4" (click)="errase()">
+        Effacer
+      </td>
+    </tr>
+    <tr>
+  </table> -->
+  <div class="row flex-display flex-wrap">
+    <div class="col-md-4 col-lg-4 text-center simple" style="margin-bottom: 4px;padding: 2px" (click)="selectHour(i)" [ngClass]="{'cursor-pointer':!item.disabled,'no-cursor':item.disabled,'active-hour':item.selected,'inactive-hour':!item.selected}" *ngFor="let item of dayHours;let i=index">{{item?.hour}}</div>
+  </div>
+

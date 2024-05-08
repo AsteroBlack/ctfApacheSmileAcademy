@@ -1,0 +1,56 @@
+Update date : Tue Oct 04 10:50:47 WAT 2022
+ 
+ Table 'action_en_masse' not found in repository
+ (+) table 'action_en_masse' added
+ 
+ Table 'action_utilisateur' found in repository
+ . Column 'date' : Database type changed to DATE
+ . Column 'date' : JDBC type code changed to 91
+ . Column 'date' : Size changed to 10
+ . Column 'date' updated
+ (*) table 'action_utilisateur' updated : 1 change(s)
+ 
+ Table 'category' not found in repository
+ (+) table 'category' added
+ 
+ Table 'civilite' found in repository
+ (=) table 'civilite' unchanged
+ 
+ Table 'demande' not found in repository
+ (+) table 'demande' added
+ 
+ Table 'fonctionnalite' found in repository
+ (=) table 'fonctionnalite' unchanged
+ 
+ Table 'historique' found in repository
+ . Column 'status_connection' added
+ (*) table 'historique' updated : 1 change(s)
+ 
+ Table 'numero_stories' found in repository
+ . Column 'created_at' : Database type changed to DATE
+ . Column 'created_at' : JDBC type code changed to 91
+ . Column 'created_at' : Size changed to 10
+ . Column 'created_at' updated
+ (*) table 'numero_stories' updated : 1 change(s)
+ 
+ Table 'profil' found in repository
+ (=) table 'profil' unchanged
+ 
+ Table 'profil_fonctionnalite' found in repository
+ . Foreign key 'FK95e2tu7yehlal800t8esq5enb' added
+ . Foreign key 'FKludlf40s7tc98ydiaoqxbx4fn' added
+ (*) table 'profil_fonctionnalite' updated : 2 change(s)
+ 
+ Table 'status' found in repository
+ (=) table 'status' unchanged
+ 
+ Table 'tache' not found in repository
+ (+) table 'tache' added
+ 
+ Table 'type_demande' not found in repository
+ (+) table 'type_demande' added
+ 
+ Table 'user' found in repository
+ . Column 'id_category' added
+ . Foreign key 'user_ibfk_1' added
+ (*) table 'user' updated : 2 change(s)

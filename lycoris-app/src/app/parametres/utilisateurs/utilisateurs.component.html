@@ -1,0 +1,431 @@
+<section class="content">
+  <div class="content-block">
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="header mb-3">
+            <h2><strong>Administration</strong> utilisateur</h2>
+          </div>
+          <div class="body">
+            <section
+              class="section-parametre"
+              [ngBusy]="{
+                busy: busyGet,
+                message: 'Veuillez patienter ...',
+                backdrop: false
+              }"
+            >
+              <div class="">
+                <div class="row clearfix">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="card">
+                      <div class="body table-responsive">
+                        <table
+                          class="table table-condensed table-striped table-hover"
+                        >
+                          <thead>
+                            <tr>
+                              <th colspan="11">
+                                <div class="test">
+                                  <div class="">
+                                    <input
+                                      [(ngModel)]="searchTerm"
+                                      class="form-control custom-input pull-left"
+                                      placeholder="Rechercher ..."
+                                      (keyup)="currentPage = 1; filterItems()"
+                                    />
+                                  </div>
+
+                                  <div class="date">
+                                    <div class="">
+                                      <button
+                                        type="button"
+                                        class="btn btn-md custom_btn_primary pull-right btn-add"
+                                        (click)="openModal(null, templateCrud)"
+                                        *simSwapIsGranted="'FUNC-EULT'"
+                                      >
+                                        <i class="fa fa-plus"></i>&nbsp; Ajouter
+                                      </button>
+                                    </div>
+  
+                                    <ng-container *simSwapIsGranted="'FUNC-1TJZ'">
+                                      <div *ngIf="filePath" class="btn btn-md custom_btn_primary import-file divImport btn-import">
+                                        <button (click)="exporterFichier()" class="btn btnHover">Exporter <i class="fa fa-file"></i></button>
+                                      </div>
+                                    </ng-container>
+                                  </div>
+                                  
+                                </div>
+                              </th>
+                            </tr>
+                            <tr class="custom-table-head">
+                              <th>
+                                <a
+                                  style="cursor: pointer"
+                                  (click)="currentPage = 1; getItems()"
+                                  title="Actualiser"
+                                >
+                                  <i class="fa fa-redo-alt"></i></a
+                                >&nbsp;&nbsp; #
+                              </th>
+                              <th>Login</th>
+                              <th>Email</th>
+                              <th>Nom prenoms</th>
+                              <th>Profil</th>
+                              <th>Catégorie</th>
+                              <th>Statut</th>
+                              <th>Contact</th>
+                              <th>Date et Heure création</th>
+                              <th class="txt-align-center">Actions</th>
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                            <tr *ngFor="let item of items; let indice = index">
+                              <td class="txt-align-center">{{ indice + 1 }}</td>
+                              <td>{{ item?.login }}</td>
+                              <td>{{item?.emailAdresse}}</td>
+                              <td>{{ item?.nom }} {{ item?.prenom }}</td>
+                              <td>{{ item?.profilLibelle }}</td>
+                              <td>{{ item?.categoryLibelle }}</td>
+                              <td>
+                                <span
+                                  *ngIf="item?.locked ==false"
+                                  style="background-color: #f89137"
+                                  class="badge badge-success"
+                                  >Actif</span
+                                >
+                                <span
+                                  *ngIf="item?.locked ==true"
+                                  style="background-color: red"
+                                  class="badge badge-danger"
+                                  >Bloqué</span
+                                >
+                              </td>
+                              <td>
+                                {{ item?.contact | mask: "00 00 00 00 00" }}
+                              </td>
+                              <td>{{ item?.createdAt }}</td>
+                              <td>
+                                <div class="custom-td-action">
+                                  <a
+                                  *ngIf="item?.locked ==false"
+                                    title="Bloqué"
+                                    (click)="lockUser(item.id)"
+                                    class="custom-btn-lock"
+                                  >
+                                    <em class="fa fa-lock"></em></a>
+                                  <ng-container *simSwapIsGranted="'FUNC-H0EN'">
+                                    <a
+                                      *ngIf="item?.locked ==true"
+                                        title="Débloqué"
+                                        (click)="unlockUser(item.id)"
+                                        class="custom-btn-unlock"
+                                      >
+                                        <em class="fa fa-unlock-alt"></em></a>
+                                  </ng-container>
+                                  <a
+                                    *simSwapIsGranted="'FUNC-YCRG'"
+                                    title="Modifier"
+                                    (click)="openModal(item, templateCrud)"
+                                    class="custom-btn-update"
+                                  >
+                                    <em class="fa fa-edit"></em></a>
+                                  <a
+                                    *simSwapIsGranted="'FUNC-4WOZ'"
+                                    title="Supprimer"
+                                    (click)="confirmDelete(item.id)"
+                                    class="custom-btn-delete"
+                                  >
+                                    <em class="fa fa-trash"></em></a>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+
+                          <tfoot>
+                            <tr *ngIf="items && items.length > 0">
+                              <td colspan="4">
+                                <div class="row pagination-part">
+                                  <div
+                                    class="col-md-9"
+                                    style="text-align: center"
+                                  >
+                                    <pagination
+                                      [boundaryLinks]="true"
+                                      [itemsPerPage]="itemsPerPage"
+                                      [totalItems]="totalItems"
+                                      [(ngModel)]="currentPage"
+                                      class="pagination-sm"
+                                      previousText="&lsaquo;"
+                                      nextText="&rsaquo;"
+                                      firstText="&laquo;"
+                                      lastText="&raquo;"
+                                      (pageChanged)="pageChanged($event)"
+                                    ></pagination>
+                                  </div>
+
+                                  <div class="col-md-3">
+                                    <span class="span_total_entree pull-right"
+                                      >Total : {{ totalItems }}</span
+                                    >
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr *ngIf="!items || items.length == 0">
+                              <td colspan="12">
+                                <div class="col-md-12 txt-align-center">
+                                  Aucune données disponible
+                                </div>
+                              </td>
+                            </tr>
+                          </tfoot>
+                        </table>
+                      </div>
+                    </div>
+
+                    <!-- Enregistrer un utilsateur -->
+                    <ng-template #templateCrud>
+                      <div class="modal-header">
+                        <h4 class="modal-title pull-left">
+                          {{
+                            itemToSave?.id
+                              ? "Modification d'utilisateur"
+                              : "Enregistrement d'utilisateur"
+                          }}
+                        </h4>
+
+                        <button
+                          mat-icon-button
+                          class="pull-right"
+                          (click)="modalRef.hide()"
+                          aria-label="Close dialog"
+                        >
+                          <mat-icon>close</mat-icon>
+                        </button>
+                      </div>
+                      <div
+                        class="modal-body"
+                        [ngBusy]="{
+                          busy: busySave,
+                          message: 'Veuillez patienter ...',
+                          backdrop: false
+                        }"
+                      >
+                        <form class="m-1">
+                          <div class="row" style="padding: 0">
+                            <div
+                              class="col-md-4"
+                              style="padding-left: 5px; padding-right: 5px"
+                            >
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <label
+                                    >Civilité :
+                                    <span class="required_champs">*</span>
+                                  </label>
+                                  <select
+                                        name="idCivilite"
+                                        [(ngModel)]="itemToSave.idCivilite"
+                                        class="form-control custom-input"
+                                      >
+                                        <option value="">Choisir la civilité</option>
+                                        <option
+                                          *ngFor="let item of itemsCivilite"
+                                          [(value)]="item.id"
+                                        >
+                                          {{ item.libelle }}
+                                        </option>
+                                      </select>
+                                </div>
+                                <div
+                                  class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1"
+                                >
+                                  <label
+                                    >Login :
+                                    <span class="required_champs">*</span>
+                                  </label>
+                                  <input
+                                    style="display: block"
+                                    class="form-control custom-input"
+                                    placeholder="Login"
+                                    autocomplete="off"
+                                    [(ngModel)]="itemToSave.login"
+                                    name="login"
+                                    required
+                                    type="text"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+
+                            <div
+                              class="col-xl-8 col-lg-8 col-md-8 col-sm-8 mb-8"
+                            >
+                              <div class="row" style="padding: 0">
+                                <div class="col-md-6">
+                                  <div class="row">
+                                    <div
+                                      class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1"
+                                    >
+                                      <label
+                                        >Nom :
+                                        <span class="required_champs">*</span>
+                                      </label>
+                                      <input
+                                        class="form-control custom-input"
+                                        placeholder="Nom"
+                                        autocomplete="off"
+                                        [(ngModel)]="itemToSave.nom"
+                                        name="nom"
+                                        autocomplete="off"
+                                        type="text"
+                                      />
+                                    </div>
+                                    <div
+                                      class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1"
+                                    >
+                                      <label>Contact : </label>
+                                      <input
+                                        class="form-control custom-input"
+                                        placeholder="Contact"
+                                        autocomplete="off"
+                                        [(ngModel)]="itemToSave.contact"
+                                        name="contact"
+                                        mask="00-00-00-00-00"
+                                        required
+                                        type="text"
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="row">
+                                    <div
+                                      class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1"
+                                    >
+                                      <label
+                                        >Prenoms :
+                                        <span class="required_champs">*</span>
+                                      </label>
+                                      <input
+                                        class="form-control custom-input"
+                                        placeholder="Prenoms"
+                                        autocomplete="off"
+                                        [(ngModel)]="itemToSave.prenom"
+                                        name="prenom"
+                                        autocomplete="off"
+                                        type="text"
+                                      />
+                                    </div>
+                                    <div
+                                      class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1"
+                                    >
+                                      <label
+                                        >Profil :
+                                        <span class="required_champs">*</span>
+                                      </label>
+                                      <select
+                                        name="idProfil"
+                                        [(ngModel)]="itemToSave.idProfil"
+                                        class="form-control custom-input"
+                                      >
+                                        <option value="">Choisir profil</option>
+                                        <option
+                                          *ngFor="let item of itemsProfiles"
+                                          [(value)]="item.id"
+                                        >
+                                          {{ item.libelle }}
+                                        </option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                      <!------------------------------------------------------------------------------->
+                            <div
+                              class="col-md-4"
+                              style="padding-left: 5px; padding-right: 5px"
+                            >
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <label
+                                    >Catégories :
+                                    <span class="required_champs">*</span>
+                                  </label>
+                                  <select
+                                        name="idCategory"
+                                        [(ngModel)]="itemToSave.idCategory"
+                                        class="form-control custom-input"
+                                      >
+                                        <option value="">Choisir la catégorie</option>
+                                        <option
+                                          *ngFor="let item of itemsCategory"
+                                          [(value)]="item.id"
+                                        >
+                                          {{ item.code }}
+                                        </option>
+                                      </select>
+                                </div>
+                              </div>
+
+                              <div
+                                      class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1"
+                                    >
+                                      <label
+                                        >Email :
+                                        <span class="required_champs">*</span>
+                                      </label>
+                                      <input
+                                        class="form-control custom-input"
+                                        placeholder="Email"
+                                        autocomplete="off"
+                                        [(ngModel)]="itemToSave.emailAdresse"
+                                        name="email"
+                                        autocomplete="off"
+                                        type="text"
+                                      />
+                                    </div>
+
+
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+<!------------------------------------------------------------------------------->
+                      <div class="modal-footer modal-footer-custom">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                          <button
+                            type="button"
+                            (click)="confirmSaveItem(itemToSave)"
+                            class="btn btn-md custom_btn_primary pull-right"
+                            [disabled]="!itemToSave.login"
+                            [class.auth-spinner]="loading"
+                            [disabled]="loading"
+                          >
+                            {{ itemToSave?.id ? "Modifier" : "Enregistrer" }}
+                          </button>
+
+                          <button
+                            type="button"
+                            class="btn btn-md btn-cancel pull-right"
+                            (click)="modalRef.hide()"
+                          >
+                            Annuler
+                          </button>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

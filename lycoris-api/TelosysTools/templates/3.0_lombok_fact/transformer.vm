@@ -1,0 +1,116 @@
+##----------------------------------------------------------------------------------------------------
+## JPA beans suffix
+
+#set ( $dto = ${entity.name} + "Dto" )
+#set ( $transformer = ${entity.name} + "Transformer" )
+#set ( $listOfForeignAttrib = ["code", "name", "firstName", "lastName", "libelle", "intitule", "login", "nom", "prenoms", "prenom", "denomination", "codeGroupe", "libelleGroupe", "raisonSociale"])
+#set ( $listOfSimpleAttrib = ["name", "firstName", "lastName", "libelle", "intitule", "login", "nom", "prenoms", "prenom", "denomination", "libelleGroupe", "raisonSociale"])
+
+/*
+ * Java transformer for entity table ${entity.databaseTable} 
+ * Created on $today.date ( Time $today.time )
+ * Generator tool : $generator.name ( version $generator.version )
+ * Copyright 2018 Geo. All Rights Reserved.
+ */
+
+package ${target.javaPackageFromFolder(${SRC})};
+
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.mapstruct.IterableMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
+import org.mapstruct.factory.Mappers;
+
+import ${ROOT_PKG}.utils.contract.*;
+import ${ROOT_PKG}.utils.dto.*;
+import ${ENTITY_PKG}.*;
+
+
+/**
+ * TRANSFORMER for table "${entity.databaseTable}"
+ * 
+ * @author Geo
+ *
+ */
+@Mapper
+public interface ${transformer} {
+
+	${transformer} INSTANCE = Mappers.getMapper(${transformer}.class);
+
+	@FullTransformerQualifier
+	@Mappings({
+#foreach( $field in $entity.attributes )
+#if( $field.isTimestampType() )
+		@Mapping(source="entity.${field.name}", dateFormat="dd/MM/yyyy",target="${field.name}"),
+#end
+#end
+#foreach( $link in $entity.selectedLinks )
+#if($link.isCardinalityManyToOne() || $link.isCardinalityOneToOne())
+#set( $entityFk = $link.targetEntity)
+#foreach($joinColumn in $link.joinColumns)
+#set( $refFieldName = $entity.getAttributeByColumnName($joinColumn.name) )
+#end
+		@Mapping(source="entity.${link.fieldName}.#foreach($field in $entityFk.keyAttributes)$field.name#end", target="$refFieldName.name"),
+##--------------------
+#foreach($attrib in $entityFk.attributes)
+#if($listOfForeignAttrib.indexOf($attrib.name) != -1)
+		@Mapping(source="entity.${link.fieldName}.$attrib.name", target="$fn.uncapitalize($entityFk.name)$fn.capitalize($attrib.name)"),
+#end
+#end
+##--------------------
+#end
+#end
+	})
+	${dto} toDto(${entity.name} entity) throws ParseException;
+
+	@IterableMapping(qualifiedBy = {FullTransformerQualifier.class})
+    List<${dto}> toDtos(List<${entity.name}> entities) throws ParseException;
+
+    default ${dto} toLiteDto($entity.name entity) {
+		if (entity == null) {
+			return null;
+		}
+		${dto} dto = new ${dto}();
+#foreach( $field in $entity.attributes )
+#if ( $field.isKeyElement() || $listOfSimpleAttrib.contains($field.name) )
+		dto.${field.setter}( entity.${field.getter}() );
+#end
+#end
+		return dto;
+    }
+
+	default List<${dto}> toLiteDtos(List<${entity.name}> entities) {
+		if (entities == null || entities.stream().allMatch(o -> o == null)) {
+			return null;
+		}
+		List<${dto}> dtos = new ArrayList<${dto}>();
+		for (${entity.name} entity : entities) {
+			dtos.add(toLiteDto(entity));
+		}
+		return dtos;
+	}
+
+	@Mappings({
+#foreach( $field in $entity.getAttributesByCriteria( $const.NOT_IN_SELECTED_LINKS ) )
+#if( $field.isTimestampType() )
+		@Mapping(source="dto.${field.name}", dateFormat="dd/MM/yyyy",target="${field.name}"),
+#end
+#if( !$field.isTimestampType() )
+		@Mapping(source="dto.${field.name}", target="${field.name}"),
+#end
+#end
+#foreach( $link in $entity.selectedLinks )
+#if( !$link.isCardinalityOneToMany() )
+		@Mapping(source="$link.fieldName", target="$link.fieldName"),
+#end
+#end
+	})
+    ${entity.name} toEntity(${dto} dto#foreach($link in $entity.selectedLinks)#if(!$link.isCardinalityOneToMany()), $link.fieldType $link.fieldName#end#end) throws ParseException;
+
+    //List<${entity.name}> toEntities(List<${dto}> dtos) throws ParseException;
+
+}

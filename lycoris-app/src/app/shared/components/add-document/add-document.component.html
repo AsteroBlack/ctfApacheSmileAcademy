@@ -1,0 +1,39 @@
+<div class="col-md-12">
+ 
+        <div class="col-md-12">
+          <div class="">
+              <div class="form-group col-md-6 pull-right" style="padding-left: 0px">
+                  <button id="btnadd-img"  type="button" (click)="gotoUploadFile()" class="btn btn-xs btn-add-document pull-left">
+                      Joindre des documents (Max:1 Mo)
+                    </button>
+              </div>
+    
+              <div class="form-group alert-danger col-md-6" *ngIf="itemImageATraiter.messageError">
+                 <span class="global-font-size" > {{itemImageATraiter.messageError}} </span> 
+              </div> 
+          </div>
+        </div>
+
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-4 col-xs-12" *ngFor="let img of ListeImagesUploader, let indice = index" style="text-align: center"> 
+                 <a title="Fermer" class="link-close"  (click)="img.isBiggerImg =! img.isBiggerImg" *ngIf="img?.isBiggerImg"> <i class="fa fa-times pull-right"></i></a>
+                <img src="{{img.fullBase64}}" class="img-add" [ngClass]="{'isBiggerImg':img?.isBiggerImg}" [title]="img?.isBiggerImg ? 'Cliquez pour reduire' : 'Cliquez pour zoomer'" style="cursor: pointer;" (click)="img.isBiggerImg =! img.isBiggerImg"  /> <br>
+                <button type="button" class="btn btn-xs btn-default btn-defaut-supprimer" title="Supprimer" (click)="deleteImg(indice)"> Supprimer </button>
+            </div>
+          </div>
+        </div>
+
+
+    <div class="row">
+        <div class="input-group-btn" style="display: none">
+          <span class="btn joindre-file fileinput-button" style="border-radius: 50%" title="Cliquez pour joindre un fichier.">
+            <span for="">
+              <i class=" fa fa-plus"> </i>
+            </span>
+            <input id="id-joindre-file" (change)="uploadFile($event)" class="input-file" type="file"  accept="image/*"/>
+          </span>
+        </div>
+    </div>
+
+</div>

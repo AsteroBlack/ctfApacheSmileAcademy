@@ -1,0 +1,37 @@
+{
+	"user": 1,
+	"datas": [
+#set ($count = $selectedEntities.size())
+#set ($index = 0)
+#foreach( $entity in $selectedEntities )
+#set ($index = $index + 1)
+#set ($entity_name = ${fn.toUpperCase($entity.databaseTable)})
+		{
+			"code": "${entity_name}",
+			"name": "${entity_name}"
+		},
+		{
+			"code": "VIEW_${entity_name}",
+			"parentCode": "${entity_name}",
+			"name": "VIEW ${entity_name}"
+		},
+		{
+			"code": "CREATE_${entity_name}",
+			"parentCode": "${entity_name}",
+			"name": "CREATE ${entity_name}"
+		},
+		{
+			"code": "UPDATE_${entity_name}",
+			"parentCode": "${entity_name}",
+			"name": "UPDATE ${entity_name}"
+		},
+		{
+			"code": "DELETE_${entity_name}",
+			"parentCode": "${entity_name}",
+			"name": "DELETE ${entity_name}"
+		}#if ($index != $count),#end
+
+#end
+
+	]
+}

@@ -1,0 +1,29 @@
+Update date : Wed Jul 20 15:59:46 GMT 2022
+ 
+ Table 'action_utilisateur' found in repository
+ (=) table 'action_utilisateur' unchanged
+ 
+ Table 'civilite' found in repository
+ (=) table 'civilite' unchanged
+ 
+ Table 'fonctionnalite' found in repository
+ (=) table 'fonctionnalite' unchanged
+ 
+ Table 'historique' found in repository
+ . Column 'is_connexion' added
+ (*) table 'historique' updated : 1 change(s)
+ 
+ Table 'numero_stories' found in repository
+ (=) table 'numero_stories' unchanged
+ 
+ Table 'profil' found in repository
+ (=) table 'profil' unchanged
+ 
+ Table 'profil_fonctionnalite' found in repository
+ (=) table 'profil_fonctionnalite' unchanged
+ 
+ Table 'status' found in repository
+ (=) table 'status' unchanged
+ 
+ Table 'user' found in repository
+ (=) table 'user' unchanged

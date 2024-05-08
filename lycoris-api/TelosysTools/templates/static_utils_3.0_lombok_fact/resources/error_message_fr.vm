@@ -1,0 +1,30 @@
+StatusMessage.SUCCESS=Operation effectuee avec succes
+
+StatusMessage.TECH_DB_NOT_CONNECT=Impossible de se connecter a la base de donnees
+StatusMessage.TECH_DB_FAIL=La base de donnees est indisponible
+StatusMessage.TECH_INTERN_ERROR=Erreur interne
+StatusMessage.TECH_DB_PERMISSION_DENIED=Permission refusee par la base de donnees
+StatusMessage.TECH_DB_QUERY_REFUSED=Le serveur de base de donnees a refuse la requete
+
+    
+StatusMessage.FUNC_AUTH_FAIL=Authentification echouee
+StatusMessage.FUNC_DATA_NOT_EXIST=Donnee inexistante
+StatusMessage.FUNC_DATA_EMPTY=Liste vide : il n'y a pas de donnees respectant ce critere
+StatusMessage.FUNC_DATA_EXIST=Donnee existante
+StatusMessage.FUNC_FIELD_EMPTY=Champ non renseigne
+StatusMessage.FUNC_USER_ALREADY_CONNECTED=Utilisateur deja connecte
+StatusMessage.FUNC_REQUEST_FAIL=la requete attendue n'est pas celle fournie
+StatusMessage.FUNC_TYPE_NOT_CORRECT=Le type est incorrect
+StatusMessage.FUNC_DATE_FORMAT_NOT_CORRECT=Le format de la date est incorrect
+StatusMessage.FUNC_INVALID_FORMAT=le serveur a signale un format invalide
+StatusMessage.FUNC_INVALID_CODE_LANGUAGE=le code de la langue n'est pas valide
+StatusMessage.FUNC_INVALID_DATE_PERIOD=la periode de date n'est pas valide
+StatusMessage.FUNC_SAVE_FAIL=une erreur est survenue lors de l'enregistrement
+StatusMessage.FUNC_INVALID_ENTITY_NAME=le name de l'entite n'est pas valide
+StatusMessage.FUNC_ONE_MUST_BE_FIELD_EMPTY=Veuillez renseigner une seule valeur pour cette donnee
+StatusMessage.FUNC_MUST_BE_INFERIOR_TO_100=La somme des pourcentages ne doit exceder 100
+StatusMessage.FUNC_FILE_GENERATION_ERROR=Erreur de generation de fichier
+StatusMessage.FUNC_LOGIN_FAIL=login et/ou mot de passe incorrect(s)
+StatusMessage.FUNC_DISALLOWED_OPERATION=Operation interdite/refusee
+StatusMessage.FUNC_DATA_NOT_DELETABLE=cette donnees ne peut etre supprimee car elle est utilisee
+StatusMessage.FUNC_DATA_TOO_LONG= cette donnees est trop superieure

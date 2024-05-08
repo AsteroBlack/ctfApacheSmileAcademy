@@ -1,0 +1,64 @@
+<ng-container>
+    <div class="row search-part">
+
+        <div class="col-md-12 col-sm-12 mb-0" >
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 mb-0">
+                    <input class="form-control custom-input" placeholder="Rechercher par le nom du médicament" autocomplete="off"
+                    [(ngModel)]="itemToSearch.searchText" (keyup)="getItems()" name="searchText" type="text">
+                </div>
+            </div>
+            
+           
+            <div class="row search-adherent-part" *ngIf="canDisplay" >
+                <table class="table table-condensed table-bordered table-striped table-hover" style="max-height: 350px; overflow: auto;">
+                    <thead>
+                        <tr class="custom-table-head">
+                            <th>#</th>
+                            <th>Médicament</th>
+                            <!-- <th>Qté</th> -->
+                            <th>Prix U. (Fcfa)
+                                <a class="pull-right" title="Fermer" (click)="canDisplay = false">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </th>
+                            <!-- <th>
+                                
+                            </th> -->
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        
+                            <tr *ngFor="let item of listItem; let indice = index" (click)="selectedItem(item)" style="cursor: pointer;">
+                                <td>
+                                    {{indice + 1}}
+                                </td>
+                                <td>
+                                    {{item?.libelle}}
+                                </td>
+                                <!-- <td>
+                                    <input class="form-control" type="text" [(ngModel)]="item.quantite" [ngModelOptions]="{standalone: true}">
+                                </td> -->
+                                <td>
+                                    {{item?.prixUnitaireVente  | moneyFormat}}
+                                </td>
+                                <!-- <td>
+                                    <button class="btn btn-primary"><i class="fa fa-plus"></i></button>
+                                </td> -->
+                            </tr>
+
+                            <tr *ngIf="!listItem || listItem.length == 0">
+                                <td colspan="4" style="text-align: center;">
+                                    <span> Aucune donnée disponible</span>
+                                </td>
+                            </tr>
+                    </tbody>
+                   
+                </table>
+            </div>
+        </div>
+
+    </div>
+</ng-container>

@@ -1,0 +1,454 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">
+    {{ title | titlecase }}
+  </h4>
+
+  <button
+    mat-icon-button
+    class="pull-right"
+    (click)="bsModalRef.hide()"
+    aria-label="Close dialog"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div
+  class="modal-body"
+  [ngBusy]="{
+    busy: busySave,
+    message: 'Veuillez patienter ...',
+    backdrop: false
+  }"
+>
+  <div class="">
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="body table-responsive">
+            <table class="table table-condensed table-striped table-hover">
+              <thead>
+                <tr>
+                  <th colspan="16">
+                    <div class="test">
+                      <div class="col-md-7 arrange">
+                        <input
+                          [(ngModel)]="itemToSearch.numero"
+                          class="form-control custom-input pull-left"
+                          placeholder="Rechercher Port, numéro série"
+                          mask="00-00-00-00-00"
+                        />
+                        <button
+                          class="import-file btn custom_btn_primary sub-menu"
+                          (click)="addItems()"
+                        >
+                          Ajouter
+                        </button>
+                        <div class="div-select">
+                          <mat-form-field>
+                            <mat-label>Numéros</mat-label>
+                            <mat-select [formControl]="numbersControl" multiple>
+                              <mat-option
+                                *ngFor="let numero of listeNumeros"
+                                [value]="numero"
+                                >{{ numero }}</mat-option
+                              >
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+
+                        <!-- <button (click)="removeSelectedItems()" class="btn-supprimer">Supprimer sélectionnés</button> -->
+                        <a
+                          title="Supprimer"
+                          (click)="removeSelectedItems()"
+                          class="custom-btn-delete action"
+                        >
+                          <em class="fa fa-trash"></em
+                        ></a>
+                        <button
+                          class="import-file btn custom_btn_primary sub-menu"
+                          (click)="listeNumeros.length != 0 ? getListNumbers() : getItems()"
+                        >
+                          Rechercher
+                        </button>
+
+                        <!-- <select id="options" [(ngModel)]="selectedOption">
+                              <option *ngFor="let option of optionsData" [value]="option">{{ option }}</option>
+                            </select> -->
+                      </div>
+
+                      <!-- <div class="toggle-button">
+                        <input
+                          type="checkbox"
+                          id="toggle"
+                          [(ngModel)]="isOn"
+                          (change)="onChangeToggle()"
+                        />
+                        <label for="toggle"></label>
+                        <span class="toggle-text">{{
+                          isOn ? "Multiple" : "Unitaire"
+                        }}</span>
+                      </div> -->
+
+                      <div
+                        *ngIf="datasCreateDem.length > 0"
+                        @animationSelectedActions
+                        class=""
+                      >
+                        <div class="div-multi-items-in">
+                          <ng-container
+                            *ngIf="checkAuthority(datasCreateDem, 1)"
+                          >
+                            <div class="multi-item">
+                              <a
+                                title="Bloqué"
+                                (click)="demandeBlocage(datasCreateDem, 1)"
+                                class="custom-btn-lock"
+                              >
+                                <em class="fa fa-lock"></em
+                              ></a>
+                            </div>
+                          </ng-container>
+
+                          <ng-container *simSwapIsGranted="'FUNC-3HZ8'">
+                            <div
+                              class="multi-item"
+                              *ngIf="checkAuthority(datasCreateDem, 2)"
+                            >
+                              <a
+                                title="Débloqué"
+                                (click)="demandeDeblocage(datasCreateDem, 2)"
+                                class="custom-btn-unlock"
+                              >
+                                <em class="fa fa-unlock-alt"></em
+                              ></a>
+                            </div>
+                          </ng-container>
+
+                          <ng-container *simSwapIsGranted="'FUNC-NZTE'">
+                            <div
+                              class="multi-item"
+                              *ngIf="checkAuthority(datasCreateDem, 3)"
+                            >
+                              <a
+                                title="Mise en machine"
+                                (click)="
+                                  demandeMiseEnMachine(datasCreateDem, 3)
+                                "
+                                class="custom-btn-lock"
+                              >
+                                <em class="fa fa-rocket"></em
+                              ></a>
+                            </div>
+                          </ng-container>
+
+                          <ng-container *simSwapIsGranted="'FUNC-AY0K'">
+                            <div
+                              class="multi-item"
+                              *ngIf="checkAuthority(datasCreateDem, 4)"
+                            >
+                              <a
+                                title="Transfert de corbeille"
+                                (click)="
+                                  demandeTransfertCorb(datasCreateDem, 2)
+                                "
+                                class="custom-btn-delete"
+                              >
+                                <em class="fa fa-redo-alt"></em
+                              ></a>
+                            </div>
+                          </ng-container>
+
+                          <ng-container *simSwapIsGranted="'FUNC-Q8W6'">
+                            <a
+                              title="Transfert de corbeille"
+                              (click)="demandeSuppression(datasCreateDem, 4)"
+                              class="custom-btn-delete action"
+                            >
+                              <em class="fa fa-trash"></em
+                            ></a>
+                          </ng-container>
+                        </div>
+                      </div>
+
+                      <div class="btn custom_btn_primary sub-menu">
+                        <span
+                          class="p-2 spanstyle"
+                          id="dateNumSensible"
+                          appDateRangeSelector
+                          (periode)="onPeriodeEmitted($event)"
+                          (click)="isActiveDate = true"
+                        >
+                          <em class="icofont icofont-ui-calendar"></em>&nbsp;
+                          <span></span>&nbsp;<em class="fa fa-caret-down"></em>
+                        </span>
+                      </div>
+
+                      <!-- <div class="col-md-3 import-file btn custom_btn_primary sub-menu">
+                            <label for="options">Sélectionnez une option :</label>
+                            <select id="options" [(ngModel)]="selectedOption">
+                              <option *ngFor="let option of optionsData" [value]="option">{{ option }}</option>
+                            </select>
+                          </div> -->
+                    </div>
+                  </th>
+                </tr>
+
+                <div class="table-responsive">
+                  <table>
+                    <thead>
+                      <tr class="custom-table-head">
+                        <th></th>
+                        <th>
+                          <a
+                            style="cursor: pointer"
+                            (click)="currentPage = 1; getItems()"
+                            title="Actualiser"
+                          >
+                            <em class="fa fa-redo-alt"></em></a
+                          >&nbsp;&nbsp; #
+                        </th>
+                        <th>Utilisateur</th>
+                        <th>Numéro</th>
+
+                        <th>Offre</th>
+                        <th>Numéro Port</th>
+                        <th>Numéro Série</th>
+                        <th>Categorie</th>
+                        <th>Statut SIM</th>
+                        <th>Motif</th>
+                        <!--- <th>Statut Action</th> -->
+                        <th>Date Action</th>
+                        <th>Mise en Machine</th>
+                        <th>Date Mise en Machine</th>
+                        <th>Statut TELCO</th>
+
+                        <th class="txt-align-center">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        *ngFor="let item of items; let indice = index"
+                        class="ligne"
+                      >
+                        <td>
+                          <input
+                            type="checkbox"
+                            [ngModelOptions]="{
+                              standalone: true
+                            }"
+                            name="ligneChecked"
+                            [(ngModel)]="item.isChecked"
+                            (change)="setCheckedItem(item, $event)"
+                          />
+                        </td>
+                        <td class="txt-align-center">{{ indice + 1 }}</td>
+                        <td>{{ item?.userLogin }}</td>
+                        <td class="table-cell">
+                          {{ item?.numero | mask : "00 00 00 00 00" }}
+                        </td>
+
+                        <td>{{ item?.offerName }}</td>
+                        <td>{{ item?.portNumber }}</td>
+                        <td>{{ item?.serialNumber }}</td>
+                        <td>{{ item?.categoryCode }}</td>
+                        <td>
+                          <span
+                            *ngIf="item?.statusCode == 'DEBLOQUE'"
+                            style="background-color: green"
+                            class="badge badge-success"
+                            >{{ item?.statusCode }}</span
+                          >
+                          <span
+                            *ngIf="item?.statusCode == 'BLOQUE'"
+                            style="background-color: rgb(242, 186, 1)"
+                            class="badge badge-danger"
+                            >{{ item?.statusCode }}</span
+                          >
+                          <span
+                            *ngIf="item?.statusCode == 'MISE EN MACHINE'"
+                            style="background-color: rgb(50, 111, 233)"
+                            class="badge badge-danger"
+                            >Mise en Machine</span
+                          >
+
+                          <span
+                            *ngIf="item?.statusCode == 'SUPPRIMER'"
+                            style="background-color: red"
+                            class="badge badge-danger"
+                            >{{ item?.statusCode }}</span
+                          >
+                        </td>
+                        <td>{{ item?.motif ?? "N/A" }}</td>
+                        <td>{{ item?.updatedAt }}</td>
+                        <!--| date: "dd/MM/yyyy H:mm:ss" -->
+                        <td>
+                          <span
+                            *ngIf="item?.isMachine == true"
+                            style="background-color: green"
+                            class="badge badge-success"
+                            >MISE EN MACHINE</span
+                          >
+
+                          <span
+                            *ngIf="item?.isMachine == false"
+                            style="background-color: red"
+                            class="badge badge-danger"
+                            >PAS EN MACHINE</span
+                          >
+                        </td>
+                        <td>{{ item?.lastMachineDate }}</td>
+                        <!--| date: "dd/MM/yyyy H:mm:ss" -->
+                        <td>
+                          <span
+                            *ngIf="item?.statusBscs == 'Actif'"
+                            style="background-color: green"
+                            class="badge badge-success"
+                            >Actif</span
+                          >
+
+                          <span
+                            *ngIf="item?.statusBscs == false"
+                            style="background-color: red"
+                            class="badge badge-danger"
+                            >Inactif</span
+                          >
+
+                          <span
+                            *ngIf="item?.statusBscs == 'Suspendu'"
+                            style="background-color: red"
+                            class="badge badge-danger"
+                            >Suspendu</span
+                          >
+                        </td>
+                        <td 
+                          *simSwapIsGranted="'FUNC-AB5G'"
+                          class="table-cell"
+                        >
+                          <ng-container>
+                            <a
+                              *ngIf="
+                                item?.typeNumeroLibelle === 'CORAIL' &&
+                                item?.statusCode !== 'BLOQUE'
+                              "
+                              title="Bloqué"
+                              (click)="demandeBlocage(item, 1)"
+                              class="custom-btn-lock"
+                            >
+                              <em class="fa fa-lock action"></em
+                            ></a>
+                          </ng-container>
+
+                          <ng-container *simSwapIsGranted="'FUNC-3HZ8'">
+                            <a
+                              *ngIf="
+                                item?.typeNumeroLibelle === 'CORAIL' &&
+                                item?.statusCode !== 'DEBLOQUE' &&
+                                !item?.isUnlocked
+                              "
+                              title="Débloqué"
+                              (click)="demandeDeblocage(item, 2)"
+                              class="custom-btn-unlock action"
+                            >
+                              <em class="fa fa-unlock-alt"></em
+                            ></a>
+                          </ng-container>
+
+                          <ng-container *simSwapIsGranted="'FUNC-NZTE'">
+                            <a
+                              *ngIf="
+                                item?.typeNumeroLibelle === 'CORAIL' &&
+                                !item?.isMachine
+                              "
+                              title="Mise en machine"
+                              (click)="demandeMiseEnMachine(item, 3)"
+                              class="custom-btn-lock action"
+                            >
+                              <em class="fa fa-rocket"></em
+                            ></a>
+                          </ng-container>
+
+                          <ng-container *simSwapIsGranted="'FUNC-AY0K'">
+                            <a
+                              *ngIf="
+                                item?.typeNumeroLibelle === 'CORAIL' &&
+                                !item?.isTransferred
+                              "
+                              title="Transfert de corbeille"
+                              (click)="demandeTransfertCorb(item, 2)"
+                              class="custom-btn-delete action"
+                            >
+                              <em class="fa fa-redo-alt"></em
+                            ></a>
+                          </ng-container>
+
+                          <ng-container *simSwapIsGranted="'FUNC-Q8W6'">
+                            <a
+                              *ngIf="item?.typeNumeroLibelle === 'CORAIL'"
+                              title="Transfert de corbeille"
+                              (click)="demandeSuppression(item, 4)"
+                              class="custom-btn-delete action"
+                            >
+                              <em class="fa fa-trash"></em
+                            ></a>
+                          </ng-container>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </thead>
+
+              <tfoot>
+                <tr *ngIf="items && items.length > 0">
+                  <td colspan="4">
+                    <div class="row pagination-part">
+                      <div class="col-md-12" style="text-align: center">
+                        <mat-paginator
+                          *ngIf="items && items.length > 0"
+                          [pageSizeOptions]="[5, 10, 20, 40, 80]"
+                          [pageIndex]="currentPage"
+                          [pageSize]="itemsPerPage"
+                          [length]="totalItems"
+                          (page)="pageChanged($event)"
+                          showFirstLastButtons
+                        >
+                        </mat-paginator>
+                      </div>
+
+                      <div class="col-md-6">
+                        <span class="span_total_entree pull-right"
+                          >Total : {{ items.length }}</span
+                        >
+                        <!--totalItems--->
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr *ngIf="!items || items.length == 0">
+                  <td colspan="12">
+                    <div class="col-md-12 txt-align-center">
+                      Aucune données disponible
+                    </div>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer modal-footer-custom">
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+    <button
+      type="button"
+      class="btn btn-md btn-cancel pull-right"
+      (click)="bsModalRef.hide()"
+    >
+      Fermer
+    </button>
+  </div>
+</div>

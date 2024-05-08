@@ -1,0 +1,176 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div  class="col-xl-2 col-lg-2 col-md-2 col-sm-12 ">
+                <label>N° dossier hospi :</label>
+                <input style="font-size: 12px;" class="form-control custom-input" placeholder="Numéro dossier"
+                    autocomplete="off" [(ngModel)]="itemToSave.numeroDossier" disabled
+                     name="numeroDossier"
+                    required type="text">
+            </div>
+            <div  class="col-xl-2 col-lg-2 col-md-2 col-sm-12 ">
+                <label>Date heure :</label>
+                <input style="font-size: 12px;" class="form-control custom-input" placeholder="Date heure"
+                    autocomplete="off" [(ngModel)]="itemToSave.dateHeure" disabled
+                     name="dateHeure"
+                    required type="text">
+            </div>
+            <div  class="col-xl-2 col-lg-2 col-md-2 col-sm-12 ">
+                <label>N° demande :</label>
+                <input style="font-size: 12px;" class="form-control custom-input" placeholder="Numéro demande"
+                    autocomplete="off" [(ngModel)]="itemToSave.hospiNumeroDemande" disabled
+                     name="hospiNumeroDemande"
+                    required type="text">
+            </div>
+            <div  class="col-xl-3 col-lg-4 col-md-4 col-sm-4 ">
+                <label>Medecin traitant: </label>
+                <input style="font-size: 12px;" class="form-control custom-input" placeholder="Medecin"
+                    autocomplete="off" [(ngModel)]="itemToSave.medecinFullName" disabled
+                     name="medecinFullName"
+                    required type="text">
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 ">
+                <label>Unité fonctionnelle : </label>
+                <input style="font-size: 12px;" class="form-control custom-input" placeholder="Unité fonctionnelle"
+                    autocomplete="off" [(ngModel)]="itemToSave.adminUniteFonctionnelleLibelle" disabled
+                     name="adminUniteFonctionnelleLibelle"
+                    required type="text">
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 ">
+                <label>Cause hospitalisation : </label>
+                <input style="font-size: 12px;" class="form-control custom-input" placeholder="Cause hospitalisation"
+                    autocomplete="off" [(ngModel)]="itemToSave.causeHospi" disabled
+                     name="causeHospi"
+                    required type="text">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-12">
+        <div class="row">
+
+            <legend style="color: red;font-size: 11px;"> Patient </legend>
+                <div class="col-md-11">
+                <div class="row">
+                    <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 ">
+                        <label>Matricule : </label>
+                        <input style="font-size: 12px;" class="form-control custom-input" placeholder="Matricule"
+                            autocomplete="off" [(ngModel)]="beneficiaireInfo.matriculeBeneficiaire" disabled
+                            name="matricule" required
+                            type="text">
+                    </div>
+
+                    <div  class="col-xl-7 col-lg-7 col-md-7 col-sm-7 ">
+                        <label>Nom et prénoms : </label>
+                        <input class="form-control custom-input" placeholder="Nom & Prénoms"
+                            autocomplete="off" [(ngModel)]="itemToSave.fullName" disabled
+                            name="fullName" required
+                            type="text">
+                    </div>
+                           
+              
+                </div>
+                    <div class="row">
+                        <div  class="col-xl-3 col-lg-3 col-md-3 col-sm-3 ">
+                            <label>Catégorie patient : </label>
+                            <select (change)="onSelectCategorie()" class="form-control" name="categorieClientId" [(ngModel)]="itemToSave.categorieClientId" id="">
+                                <option *ngFor="let item of itemsCategorie" [(value)]="item.id">{{item.libelle}}</option>
+                            </select>
+                        </div>
+                        
+
+
+                    <div class="col-md-6" *ngIf="itemToSave.categorieClientId ==2">
+                                <label>Assurances :
+                                    <!-- <span class="required_champs">*</span> -->
+                                </label>
+                                <select (change)="onSelectAssaurance()" class="form-control custom_input" id="assuranceSelected"
+                                    [(ngModel)]="currentAssurance" (change)="addAssurance()"
+                                    name="assuranceSelected">
+                                    <option value="">-- Choisissez --</option>
+                                    <option *ngFor="let item of itemsAssurances"
+                                        [disabled]="item.disabled" [ngValue]="item">
+                                        {{ item.raisonSociale  }}
+                                    </option>
+                                </select>
+                                <table  class="table table-bordered table-condensed table-striped table-reception">
+                                    <thead>
+                                        <tr class="custom-table-head">
+                                            <th style="text-align: center;">#</th>
+                                            <th>Assurance</th>
+                                            <th>Taux</th>
+                                            <th>N° Bon</th>
+                                            <th>N°Carte</th>
+                                            <!-- <th> Coût Assurance </th> -->
+                                            <th style="text-align: center;width: 20px;">#</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr
+                                            *ngFor="let assurance of listAssurancesToSave; let indice = index">
+                                            <td style="text-align: center;">{{indice + 1}}</td>
+                                            <td>{{assurance?.raisonSociale || assurance?.libelle || assurance?.adminAssuranceRaisonSociale}} </td>
+                                            <td>
+                                                <input [disabled]="assurance.isOld" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Taux"
+                                                    [(ngModel)]="assurance.taux" mask='separator'  maxlength="3" />
+                                            </td>
+                                            <td>
+                                                <input [disabled]="assurance.isOld" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="N°Bon"
+                                                    [(ngModel)]="assurance.numeroBon" />
+                                            </td>
+                                            <td>
+                                                <input [disabled]="assurance.isOld" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="N°Carte"
+                                                    [(ngModel)]="assurance.numeroCarte" />
+                                            </td>
+                                            <!-- <td> {{ assurance?.partAssurance | moneyFormat }}</td> -->
+                                            <td style="text-align: center;">
+                                                <a title="Supprimer assurance"
+                                                    (click)="listAssurancesToSave.splice(indice,1)"
+                                                    style="color: red;">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr *ngIf="!listAssurancesToSave || listAssurancesToSave.length == 0">
+                                            <td colspan="6" style="text-align: center;">
+                                                Aucune donnée disponible
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                          
+                    </div>
+
+                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
+                        <label>Genre : </label>
+                        <input style="font-size: 12px;" class="form-control custom-input" placeholder="Sexe"
+                            autocomplete="off" [(ngModel)]="beneficiaireInfo.sexe" disabled
+                             name="genre" required
+                            type="text">
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2" >
+                        <label>Age : </label>
+                        <input class="form-control custom-input" placeholder="Age"
+                            autocomplete="off" [(ngModel)]="beneficiaireInfo.age" disabled
+                            name="age" required
+                            type="text">
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-1">
+                <img src="https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg"
+                    alt="Photo assuré" class="pull-right img-assure" />
+            </div>
+
+            
+        </div>
+    </div>
+    
+
+</div>

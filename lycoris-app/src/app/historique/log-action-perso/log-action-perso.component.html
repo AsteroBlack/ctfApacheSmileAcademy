@@ -1,0 +1,303 @@
+<section class="content">
+    <div class="content-block">
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="header mb-3">
+              <h2><strong>Log sur mes actions</strong></h2>
+            </div>
+            <div class="body">
+              <section
+                class="section-parametre"
+                [ngBusy]="{
+                  busy: busyGet,
+                  message: 'Veuillez patienter ...',
+                  backdrop: false
+                }"
+              >
+                <div class="">
+                  <div class="row clearfix">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <div class="card">
+                        <div class="body table-responsive">
+                          <table
+                            class="table table-condensed table-striped table-hover"
+                          >
+                            <thead>
+                              <tr>
+                                <th colspan="11">
+                                  <div class="test">
+                                    <div class="">
+                                      <input
+                                        [(ngModel)]="searchTermName"
+                                        class="form-control custom-input pull-left"
+                                        placeholder="Rechercher ..."
+                                      (keyup)="currentPage = 1; filterItemsName()"
+                                      />
+                                    </div>
+  
+                                    <!-- <div class="date">
+                                      <div class="btn custom_btn_primary sub-menu">
+                                        <span
+                                          class="p-2 "
+                                          id="reportrangeSecond"
+                                          appDateRangeSelector
+                                          (periode)="onPeriodeEmitted($event)"
+                                          (click)="isActiveDate= true"
+                                        >
+                                          <em class="icofont icofont-ui-calendar"></em>&nbsp;
+                                          <span></span>&nbsp;<em class="fa fa-caret-down"></em>
+                                        </span>
+                                      </div>
+  
+                                      <div class="btn custom_btn_primary import-file divImport btn-import" *simSwapIsGranted="'FUNC-RXMY'">
+                                        <button (click)="exporterFichier()" class="btn btnHover"> Exporter <i class="fa fa-file"></i></button>
+                                      </div>
+                                    </div> -->
+  
+  
+  
+                                  </div>
+  
+  
+                                </th>
+                              </tr>
+  
+                              <div class="table-responsive">
+                                <mat-accordion> 
+                                  <mat-expansion-panel class="custom-panel"
+                                    *ngFor="let item of dataActions; let i= index" (opened)="item.opened = true; getLogActions(item.id); item.isActiveDate= true" 
+                                    (closed)="item.opened= false;" 
+                                  
+                                  >
+                                    <mat-expansion-panel-header>
+                                      <mat-panel-title>{{item.libelle}}</mat-panel-title>
+                                    </mat-expansion-panel-header>
+  
+                                    <div class="test">
+                                      <div class="">
+                                        <input
+                                          class="form-control custom-input pull-left"
+                                          placeholder="Rechercher ..."
+                                          (keyup)="currentPage = 1; filtre($event.target.value)"
+                                        />
+                                      </div>
+    
+                                      <div class="date">
+                                        <div class="btn custom_btn_primary sub-menu">
+                                          <span
+                                            class="p-2 "
+                                            [id]="createUniqueId()"
+                                            appDateRangeSelector
+                                            (periode)="onPeriodeEmittedLogs($event, item.id, item.isActiveDate)"
+                                            (click)="isActiveDateLogs = true"
+                                            title="Filtrer par période"
+                                          >
+                                            <em class="icofont icofont-ui-calendar"></em>&nbsp;
+                                            <span></span>&nbsp;<em class="fa fa-caret-down"></em>
+                                          </span>
+                                        </div>
+  
+                                        <div class="btn custom_btn_primary import-file divImport btn-import" *simSwapIsGranted="'FUNC-0VO5'">
+                                          <button (click)="exporterFichier()" class="btn btnHover"><i class="fa fa-file"></i> Exporter </button>
+                                        </div>
+    
+                                      </div>
+                                    </div>
+  
+                                    <table mat-table [dataSource]="dataLogActions" class="table-mat">
+                                      <ng-container matColumnDef="login">
+                                        <th mat-header-cell *matHeaderCellDef> Login</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.login ?? 'N/A'}} </td>
+                                      </ng-container>
+  
+                                      <ng-container matColumnDef="nom">
+                                        <th mat-header-cell *matHeaderCellDef> Nom </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.nom ?? 'N/A'}} </td>
+                                      </ng-container>
+  
+                                      <ng-container matColumnDef="prenoms">
+                                        <th mat-header-cell *matHeaderCellDef> Prénoms </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.prenom ?? 'N/A'}} </td>
+                                      </ng-container>
+  
+                                      <ng-container matColumnDef="libelle">
+                                        <th mat-header-cell *matHeaderCellDef> Libelle </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.actionSimswapLibelle ?? 'N/A'}} </td>
+                                      </ng-container>
+  
+                                      <ng-container matColumnDef="dateHeure">
+                                        <th mat-header-cell *matHeaderCellDef> Date et Heure </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.createdAt ?? 'N/A'}} </td>
+                                      </ng-container>
+  
+                                      <ng-container matColumnDef="adresseIp">
+                                        <th mat-header-cell *matHeaderCellDef> Adresse IP </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.ipadress ?? 'N/A'}} </td>
+                                      </ng-container>
+  
+                                      <ng-container matColumnDef="machine">
+                                        <th mat-header-cell *matHeaderCellDef> Machine </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.machine ?? 'N/A'}} </td>
+                                      </ng-container>
+  
+                                      <ng-container matColumnDef="statuCo">
+                                        <th mat-header-cell *matHeaderCellDef> Statu Connection </th>
+                                        <td mat-cell *matCellDef="let element">
+                                          <span
+                                            *ngIf="element.statusConnection == 'SUCCESS'"
+                                            style="background-color: green;"
+                                            class="badge badge-success"
+                                          >
+                                          {{element.statusConnection}}
+                                          </span>
+                                          <span
+                                            *ngIf="element.statusConnection == 'FAILED'"
+                                            style="background-color: red;"
+                                            class="badge badge-danger"
+                                          >
+                                          {{element.statusConnection}}
+                                          </span>
+                                        </td>
+                                      </ng-container>
+
+                                      <ng-container matColumnDef="raison">
+                                        <th mat-header-cell *matHeaderCellDef> Raison </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.raison ?? 'N/A'}} </td>
+                                      </ng-container>
+  
+                                      <ng-container matColumnDef="statuCode">
+                                        <th mat-header-cell *matHeaderCellDef> Status Code </th>
+                                        <td mat-cell *matCellDef="let element">
+                                          <span
+                                            *ngIf="element.statusCode && element.statusCode == 'ACTIF'"
+                                            style="background-color: green;"
+                                            class="badge badge-success"
+                                          >
+                                          {{element.statusCode ?? 'N/A'}}
+                                          </span>
+                                          <span
+                                            *ngIf="element.statusCode && element.statusCode == 'BLOQUE'"
+                                            style="background-color: red;"
+                                            class="badge badge-danger"
+                                          >
+                                          {{element.statusCode ?? 'N/A'}}
+                                          </span>
+                                        </td>
+                                      </ng-container>
+
+                                      <ng-container matColumnDef="numero">
+                                        <th mat-header-cell *matHeaderCellDef> Numéro </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.numero ?? 'N/A'}} </td>
+                                      </ng-container>
+                                      
+                                      <ng-container matColumnDef="username">
+                                        <th mat-header-cell *matHeaderCellDef> Login affecté </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.username ?? 'N/A'}} </td>
+                                      </ng-container>
+  
+                                      <ng-container matColumnDef="nomPrenoms">
+                                        <th mat-header-cell *matHeaderCellDef> Personne affectée </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.name && element.firstname ? element.name+" "+element.firstname : 'N/A'}} </td>
+                                      </ng-container>
+  
+                                      <tr mat-header-row *matHeaderRowDef="dataLogsColumns"></tr>
+                                      <tr mat-row *matRowDef="let row; columns: dataLogsColumns;"></tr>
+                                    </table>
+                                    <mat-paginator
+                                        *ngIf="dataLogActions && dataLogActions.length > 0"
+                                        [pageSizeOptions]="[5, 10, 20, 40, 80]"
+                                        [pageIndex]="currentPageLogs"
+                                        [pageSize]="itemsPerPageLogActs"
+                                        [length]="totalItemsLogActs"
+                                        (page)="pageChangedLogs($event, item.id)"
+                                        showFirstLastButtons
+                                      >
+                                      </mat-paginator>
+                                  </mat-expansion-panel>
+                                </mat-accordion>
+                              </div>
+                              <!-- <tr class="custom-table-head">
+                                <th>
+                                  <a
+                                    style="cursor: pointer"
+                                    (click)="currentPage = 1; getItems()"
+                                    title="Actualiser"
+                                  >
+                                    <i class="fa fa-redo-alt"></i></a
+                                  >&nbsp;&nbsp; #
+                                </th>
+                                <th>Login</th>
+                                <th>Nom prenoms</th>
+                                <th>Numéro</th>
+                                <th>Action effectué</th>
+                                <th>Statut connexion</th>
+                                <th>Profile</th>
+                                <th>Date et Heure</th>
+                              </tr>
+                            </thead>
+  
+                            <tbody>
+                              <tr *ngFor="let item of items; let indice = index">
+                                <td class="txt-align-center">{{ indice + 1 }}</td>
+                                <td>{{ item?.userLogin }}</td>
+                                <td>{{ item?.userNom }} {{ item?.userPrenom }}</td>
+                                <td>{{ item?.numero}}</td>
+                                <td>{{ item?.statusCode }}</td>
+                                <td>{{item?.statut}}</td>
+                                <td>{{ item?.profilLibelle }}</td>
+                                <td>{{ item?.createdAt }}</td>
+                              </tr>
+                            </tbody> -->
+  
+                            <tfoot>
+                              <tr *ngIf="dataActions && dataActions.length > 0">
+                                <td colspan="4">
+                                  <div class="row pagination-part">
+                                    <div
+                                      class="col-md-12"
+                                      style="text-align: center"
+                                    >
+                                    <mat-paginator
+                                    *ngIf="dataActions && dataActions.length > 0"
+                                    [pageSizeOptions]="[5, 10, 20, 40, 80]"
+                                    [pageIndex]="currentPage"
+                                    [pageSize]="itemsPerPage"
+                                    [length]="totalItems"
+                                    (page)="pageChanged($event)"
+                                    showFirstLastButtons
+                                  >
+                                  </mat-paginator>
+                                    </div>
+  
+                                    <div class="col-md-6">
+                                      <span class="span_total_entree pull-right"
+                                        >Total : {{ totalItems }}</span
+                                      >
+                                    </div>
+                                  </div>
+                                </td>
+                              </tr>
+  
+                              <tr *ngIf="!dataActions || dataActions.length == 0">
+                                <td colspan="12">
+                                  <div class="col-md-12 txt-align-center">
+                                    Aucune données disponible
+                                  </div>
+                                </td>
+                              </tr>
+                            </tfoot>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

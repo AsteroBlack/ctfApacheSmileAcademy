@@ -1,0 +1,28 @@
+
+.logo-app{
+  
+    width: 25%;
+    height: auto;
+    margin-top: -12px;
+
+}
+
+.notification-dropdown{
+    .user_dw_menu{
+        li>a{
+            font-size: 12px !important;
+        }
+    }
+}
+
+.navbar{
+    .container-fluid{
+        background-color: #000 !important;
+        color: #fff;
+    }
+    
+}
+
+.theme-white .navbar .navbar-nav.navbar-right .user_profile span {
+    color: #fff !important;
+}

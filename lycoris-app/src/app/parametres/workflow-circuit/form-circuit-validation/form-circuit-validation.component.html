@@ -1,0 +1,81 @@
+
+<section  [ngBusy]="{busy: busyGet, message: 'Veuillez patienter ...', backdrop: false}">
+    <div class="row">
+        <div class="col-5 mb-3">
+            <label>Utilisateur : </label>
+    
+            <ng-select [(ngModel)]="itemToSave.userSelected" [ngModelOptions]="{standalone: true}" placeholder="Choisissez un utilisateur"
+                name="userSelected" id="userSelected">
+                <ng-option *ngFor="let user of ListeUtilisateurs" [value]="user"> {{ user?.identite }}
+                </ng-option>
+            </ng-select>
+    
+            <!-- <input class="form-control custom-input" placeholder="Libellé" autocomplete="off" [(ngModel)]="itemToSave.numeroAccueil" [disabled]="true" (keyup.enter)="confirmSaveItem(itemToSave)" name="numeroAccueil" required type="text"> -->
+        </div>
+    
+        <div class="col-5 mb-3">
+            <label>Fonction : </label>
+            <input class="form-control custom-input" placeholder="Fonction" autocomplete="off"
+                [(ngModel)]="itemToSave.fonctionValidateur" name="numeroAccueil" required type="text" />
+        </div>
+    
+        <div class="col-2">
+            <button class="btn btn-xs btn-default btn-add" type="button" (click)="addUser()">
+                Ajouter
+            </button>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr class="custom-table-head">
+                        <th class="txt-align-center" style="width: 30px;">Ordre</th>
+                        <th>Utilisateur</th>
+                        <th>Fonction</th>
+                        <th style="width: 50px"></th>
+                        <th style="width: 20px"></th>
+                    </tr>
+                </thead>
+    
+                <tbody>
+                    <tr *ngFor="let item of ListeValidateurs; let indice = index;">
+                        <td class="txt-align-center">{{ indice +1 }}</td>
+                        <td>{{ item.userIdentite }}</td>
+                        <td>{{ item.fonctionValidateur }}</td>
+                        <td>
+                            <div class="action-btn">
+    
+                                <button type="button" class="btn btn-md btn-arrow" title="Modifier l'ordre de validation" (click)="mouvementItem(item,indice,true)" *ngIf="indice != 0">
+                                    <i class="fa fa-arrow-up"></i>
+                                </button>
+        
+                                <button type="button" class="btn btn-md btn-arrow" title="Modifier l'ordre de validation"  (click)="mouvementItem(item,indice,false)"  *ngIf="indice != (ListeValidateurs.length - 1)">
+                                    <i class="fa fa-arrow-down"></i>
+                                </button>
+                            </div>
+                         
+                        </td>
+                        <td>
+                             <a title="Supprimer" (click)="deleteItemValidateur(indice)" style="color: rgb(239, 117, 117)">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="row btn-manger-part">
+    
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+    
+            <button type="button" class="btn btn-md custom_btn_primary pull-right" (click)="confirmSaveItem(itemToSave)"> Enregistrer </button>
+    
+            <button type="button" class="btn btn-md btn-cancel pull-right" (click)="formClose()">Fermer </button>
+        </div>
+    
+    </div>
+</section>

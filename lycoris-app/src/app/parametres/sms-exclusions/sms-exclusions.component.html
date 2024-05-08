@@ -1,0 +1,217 @@
+<section class="content">
+  <div class="content-block">
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="header mb-3">
+            <h2><strong>SMS</strong> périodes d'exclusion de notification</h2>
+          </div>
+          <div class="body">
+            <section
+              class="section-parametre"
+              [ngBusy]="{
+                busy: busyQuery,
+                message: 'Veuillez patienter ...',
+                backdrop: false
+              }"
+            >
+              <div class="">
+                <div class="row clearfix">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="card">
+                      <form class="m-1" #form="ngForm">
+                        <div
+                          *ngFor="let exclusion of exclusions; let i = index"
+                          class="row"
+                        >
+                          <div class="col-xs-2 col-md-2">
+                            <button
+                              (click)="removeExclusionDay(i)"
+                              [disabled]="performRequest"
+                              class="btn btn-md custom_btn_primary row-form-btn"
+                            >
+                              Retirer Jour
+                            </button>
+                          </div>
+                          <div class="col-xs-4 col-md-4">
+                            <label>Jour </label>
+                            <select
+                              [name]="'exlusion-' + i"
+                              [(ngModel)]="exclusions[i].day"
+                              [disabled]="performRequest"
+                              class="form-control custom-input"
+                            >
+                              <option
+                                *ngFor="let day of getAvailableDays(i)"
+                                [value]="day"
+                              >
+                                {{ day }}
+                              </option>
+                            </select>
+                          </div>
+                          <div class="col-xs-6 col-md-6">
+                            <div
+                              *ngFor="
+                                let time of exclusions[i].times;
+                                let x = index
+                              "
+                              class="row"
+                            >
+                              <div
+                                *ngIf="time.type === exclusionTimeType.HOUR"
+                                class="col-xs-6 col-md-6"
+                              >
+                                <label>Heure </label>
+                                <select
+                                  [name]="'exclusion-' + i + '-time-' + x"
+                                  [(ngModel)]="exclusions[i].times[x].hour"
+                                  [disabled]="performRequest"
+                                  class="form-control custom-input"
+                                >
+                                  <option
+                                    *ngFor="let hour of getAvailableHours(i, x)"
+                                    [value]="hour"
+                                  >
+                                    {{ hour }}
+                                  </option>
+                                </select>
+                              </div>
+
+                              <div
+                                *ngIf="time.type === exclusionTimeType.PERIOD"
+                                class="col-xs-6 col-md-6"
+                              >
+                                <label>Période en heure</label>
+                                <div class="row">
+                                  <div class="col-md-5">
+                                    <select
+                                      [name]="
+                                        'exclusion-' +
+                                        i +
+                                        '-time-' +
+                                        x +
+                                        'start-period'
+                                      "
+                                      [(ngModel)]="
+                                        exclusions[i].times[x].period.startHour
+                                      "
+                                      (change)="autoDefineGoodPeriodEndHour(i, x)"
+                                      [disabled]="performRequest"
+                                      class="form-control custom-input"
+                                    >
+                                      <option
+                                        *ngFor="
+                                          let hour of getAvailablePeriodStartHours(
+                                            i,
+                                            x
+                                          )
+                                        "
+                                        [value]="hour"
+                                      >
+                                        {{ hour }}
+                                      </option>
+                                    </select>
+                                  </div>
+
+                                  <div class="col-md-1">
+                                    <span>à</span>
+                                  </div>
+                                  <div class="col-md-5">
+                                    <select
+                                      [name]="
+                                        'exclusion-' +
+                                        i +
+                                        '-time-' +
+                                        x +
+                                        'end-period'
+                                      "
+                                      [(ngModel)]="
+                                        exclusions[i].times[x].period.endHour
+                                      "
+                                      [disabled]="performRequest"
+                                      class="form-control custom-input"
+                                    >
+                                      <option
+                                        *ngFor="
+                                          let hour of getAvailablePeriodEndHours(
+                                            i,
+                                            x
+                                          )
+                                        "
+                                        [value]="hour"
+                                      >
+                                        {{ hour }}
+                                      </option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                              <div *ngIf="checkTimeTypeCanSwitch(i, x)" class="col-md-1">
+                                <button
+                                  (click)="switchExclusionTimeType(i, x)"
+                                  [disabled]="performRequest"
+                                  class="btn btn-md custom_btn_primary row-form-btn"
+                                >
+                                <i class="btn-icon material-icons-two-tone">autorenew</i>
+                                </button>
+                              </div>
+                              <div class="col-xs-5 col-md-5">
+                                <button
+                                  (click)="removeExclusionTime(i, x)"
+                                  [disabled]="performRequest"
+                                  class="btn btn-md custom_btn_primary row-form-btn"
+                                >
+                                  Retirer Heure
+                                </button>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6">
+                                <button
+                                  *ngIf="canAddExclusionTime(i)"
+                                  (click)="addExclusionTime(i)"
+                                  [disabled]="performRequest"
+                                  class="btn btn-md custom_btn_primary row-form-btn"
+                                >
+                                  Ajouter Heure
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <button
+                              *ngIf="canAddExclusionDay()"
+                              (click)="addExclusioDay()"
+                              [disabled]="performRequest"
+                              class="btn btn-md custom_btn_primary"
+                            >
+                              Ajouter jour
+                            </button>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12 d-flex justify-content-end">
+                            <button
+                              (click)="onSubmit()"
+                              class="btn btn-md custom_btn_primary"
+                              type="submit"
+                              [disabled]="form.invalid || performRequest"
+                            >
+                              Mettre à jour
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

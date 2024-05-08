@@ -1,0 +1,263 @@
+<section class="content">
+  <div class="content-block">
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="header mb-3">
+            <h2><strong>Paramètres</strong> Profil</h2>
+          </div>
+          <div class="body">
+            <section class="section-parametre" [ngBusy]="{
+                busy: busyGet,
+                message: 'Veuillez patienter ...',
+                backdrop: false
+              }">
+              <div class="">
+                <div class="row clearfix">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="card">
+                      <div class="row" style="margin-left: 5px; margin-right: 5px">
+                        <div class="col-md-6" style="
+                            background: white;
+                            padding-top: 20px;
+                            max-height: 700px;
+                            overflow: auto;
+                          ">
+                          <div class="table-responsive">
+                            <table class="table table-condensed table-striped table-hover">
+                              <thead>
+                                <tr>
+                                  <th colspan="10">
+                                    <div class="test">
+                                      <div class="col-md-7">
+                                        <input [(ngModel)]="itemToSearch.libelle"
+                                          class="form-control custom-input pull-left" placeholder="Rechercher ..."
+                                          (keyup)="currentPage = 1; getItems()" />
+                                      </div>
+
+                                      <ng-container *simSwapIsGranted="'FUNC-3MI6'">
+                                        <div  class="btn custom_btn_primary import-file btn-import">
+                                          <button (click)="exporterFichier()" class="btn btnHover"><i class="fa fa-file"></i> Exporter </button>
+                                        </div>
+                                      </ng-container>
+                                    </div>
+                                  </th>
+                                </tr>
+                                <tr class="custom-table-head">
+                                  <th class="text-center" width="5%">
+                                    <i class="fa fa-refresh" (click)="getItems()"></i>
+                                    #
+                                  </th>
+                                  <th>Libellé</th>
+                                  <th>Date et Heure création</th>
+                                  <!-- <th class="text-center" style="width: 4%;">
+                                    Actions
+                                  </th> -->
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr [class.activeRow]="selectedRow.id == item.id" (click)="
+                                    onSetMatchedFuncs(item); selectRow(item)
+                                  " *ngFor="let item of result; let i = index" style="cursor: pointer">
+                                  <td class="text-center">{{ i + 1 }}</td>
+                                  <td>
+                                    {{ item.libelle }}
+                                  </td>
+                                  <td>{{ item.createdAt }}</td>
+                                  <!-- <td class="text-center" style="width: 50px;">
+                                    <a title="Supprimer" (click)="onConfirmDelete(item)" class="custom-btn-delete">
+                                      <i class="fa fa-trash"></i></a>
+                                  </td> -->
+                                </tr>
+                                <tr>
+                                  <td colspan="7" *ngIf="result && result.length == 0" class="text-center"
+                                    style="font-weight: 700">
+                                    Aucune donnée disponible
+                                  </td>
+                                </tr>
+                              </tbody>
+                              <tfoot>
+                                <tr *ngIf="items && items.length > 0">
+                                  <td colspan="4">
+                                    <div class="row pagination-part">
+                                      <div class="col-md-9" style="text-align: center">
+                                        <pagination [boundaryLinks]="true" [itemsPerPage]="itemsPerPage"
+                                          [totalItems]="totalItems" [(ngModel)]="currentPage" class="pagination-sm"
+                                          previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+                                          lastText="&raquo;" (pageChanged)="pageChanged($event)"></pagination>
+                                      </div>
+
+                                      <div class="col-md-3">
+                                        <span class="span_total_entree pull-right">Total : {{ totalItems }}</span>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tfoot>
+                            </table>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6 mt-3">
+                          <div class="form-group col-md-12">
+                            <div class="row">
+                              <div class="col-8 mb-3">
+                                <label>Libellé :
+                                  <span class="required_champs">*</span>
+                                </label>
+                                <input class="form-control custom-input" placeholder="Libellé" autocomplete="off"
+                                  [(ngModel)]="itemToSave.libelle" name="libelle" required type="text"
+                                  style="padding-left: 10px" />
+                              </div>
+
+                              <div class="col-4 btn-part">
+                                <button  class="btn btn-md btn-cancel" (click)="
+                                    uncheckFull();
+                                    itemToSave = {};
+                                    selectedRow = {};
+                                    isAllParentChecked = false
+                                  ">
+                                  Annuler
+                                </button>
+
+                                <button [ngStyle]="{'margin-right': itemToSave.id ? '0px' : '-2px'}" type="button" (click)="onConfirmSave()"
+                                  class="btn btn-md custom_btn_primary pull-right" [class.auth-spinner]="loading"
+                                  
+                                  [disabled]="loading">
+                                  {{
+                                  itemToSave?.id ? "Modifier" : "Enregistrer"
+                                  }}
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="form-group col-md-12" style="max-height: 700px; overflow: auto">
+                            <table class="table table-condensed table-striped table-hover">
+                              <tbody>
+                                <tr>
+                                  <td>
+                                    <input [disabled]="disabledMode" type="checkbox" class="checkbox" name="ttcoch"
+                                      name="checkAll" (change)="setCheckedFull($event)"
+                                      [(ngModel)]="isAllParentChecked" />
+                                  </td>
+                                  <td colspan="6">Tout cocher</td>
+                                </tr>
+                                <tr *ngFor="
+                                    let parentFonctionnalite of ListFonctionnalites;
+                                    let indice = index
+                                  ">
+                                  <td style="position: relative" *ngIf="
+                                      parentFonctionnalite.datasChildren &&
+                                      parentFonctionnalite.datasChildren.length
+                                    ">
+                                    <a style="position: absolute; top: 11px" (click)="
+                                        displayDetails(parentFonctionnalite)
+                                      ">
+                                      <i class="fa fa-caret-right" *ngIf="!parentFonctionnalite.isOpen"></i>
+                                      <i class="fa fa-caret-down" *ngIf="parentFonctionnalite.isOpen"></i>
+                                    </a>
+                                  </td>
+                                  <td style="position: relative">
+                                    <input style="position: absolute; top: 11px" [disabled]="disabledMode"
+                                      type="checkbox" [ngModelOptions]="{ standalone: true }" name="ligneChecked"
+                                      [(ngModel)]="
+                                        parentFonctionnalite.isChecked
+                                      " (change)="
+                                        setCheckedItem(
+                                          $event,
+                                          parentFonctionnalite
+                                        )
+                                      " />
+                                  </td>
+                                  <td colspan="5">
+                                    {{ parentFonctionnalite.libelle }}
+                                    <div class="col-md-12" style="padding: 0px" *ngIf="parentFonctionnalite.isOpen">
+                                      <table class="table">
+                                        <tbody>
+                                          <tr *ngFor="
+                                              let parent of parentFonctionnalite.datasChildren
+                                            ">
+                                            <!-- <td style="background-color: blue;"  *ngIf='parent.datasChildren && parent.datasChildren.length>0 '>
+                                                                            <a (click)="displayDetails(parent)" >
+                                                                                <i class="fa fa-caret-right fa-ico-fct" *ngIf="!parent.isOpen" ></i>
+                                                                                <i class="fa fa-caret-down fa-ico-fct" *ngIf="parent.isOpen" ></i>
+                                                                            </a>
+                                                                        </td> -->
+
+                                            <td>
+                                              <input [disabled]="disabledMode" type="checkbox" (change)="
+                                                  setCheckedChildItem(
+                                                    $event,
+                                                    parentFonctionnalite
+                                                  )
+                                                " [ngModelOptions]="{
+                                                  standalone: true
+                                                }" name="ligneChecked" [(ngModel)]="parent.isChecked" />
+                                            </td>
+                                            <td colspan="5">
+                                              {{ parent.libelle }}
+
+                                              <div class="col-md-12" style="padding: 0px" *ngIf="
+                                                  parent.datasChildren &&
+                                                  parent.datasChildren.length >
+                                                    0 &&
+                                                  parent.isOpen
+                                                ">
+                                                <table class="table">
+                                                  <tbody>
+                                                    <tr *ngFor="
+                                                        let chil of parent.datasChildren
+                                                      ">
+                                                      <td>
+                                                        <input type="checkbox" [ngModelOptions]="{
+                                                            standalone: true
+                                                          }" name="ligneChecked" [(ngModel)]="
+                                                            chil.isChecked
+                                                          " (change)="
+                                                            setCheckedChildItem(
+                                                              $event,
+                                                              parentFonctionnalite
+                                                            )
+                                                          " />
+                                                      </td>
+                                                      <td>
+                                                        {{ chil.libelle }}
+                                                      </td>
+                                                    </tr>
+                                                  </tbody>
+                                                </table>
+                                              </div>
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                              <tfoot>
+                                <tr>
+                                  <td colspan="7" *ngIf="
+                                      ListFonctionnalites &&
+                                      ListFonctionnalites.length == 0
+                                    " class="text-center" style="font-weight: 700">
+                                    Aucune donnée disponible
+                                  </td>
+                                </tr>
+                              </tfoot>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

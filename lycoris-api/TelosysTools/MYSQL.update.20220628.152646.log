@@ -1,0 +1,26 @@
+Update date : Tue Jun 28 15:26:46 GMT 2022
+ 
+ Table 'action_utilisateur' found in repository
+ (=) table 'action_utilisateur' unchanged
+ 
+ Table 'civilite' found in repository
+ (=) table 'civilite' unchanged
+ 
+ Table 'fonctionnalite' found in repository
+ (=) table 'fonctionnalite' unchanged
+ 
+ Table 'historique' found in repository
+ (=) table 'historique' unchanged
+ 
+ Table 'profil' found in repository
+ (=) table 'profil' unchanged
+ 
+ Table 'profil_fonctionnalite' found in repository
+ (=) table 'profil_fonctionnalite' unchanged
+ 
+ Table 'status' found in repository
+ (=) table 'status' unchanged
+ 
+ Table 'user' found in repository
+ . Column 'is_locked' deleted
+ (*) table 'user' updated : 1 change(s)

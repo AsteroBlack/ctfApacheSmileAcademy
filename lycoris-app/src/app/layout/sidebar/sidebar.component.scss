@@ -1,0 +1,26 @@
+.sidebar {
+   background-color: rgb(250, 246, 246);
+}
+.sub-menu-toggle {
+  // background: #ffffff;
+}
+
+.sidebar .menu .list a span {
+  color: #000;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.sidebar .menu .list .active .menu-toggle {
+  // background: #c1d4eb
+  background-color: #ff7900;
+
+}
+
+.theme-white .sidebar .menu .list .ml-menu:hover {
+  background-color: #ff7900 !important;
+}
+
+.ml-menu>li>a {
+  // padding-left: 20px !important;
+}

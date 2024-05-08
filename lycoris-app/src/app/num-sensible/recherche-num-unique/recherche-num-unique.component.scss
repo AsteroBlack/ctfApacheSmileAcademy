@@ -1,0 +1,26 @@
+.arrange{
+    display: flex;
+    align-items: center;
+    //border: 2px solid red;
+}
+
+.arrange button{
+    margin-left: 0.5rem;
+}
+
+.btn-valider{
+    margin-left: 0;
+}
+
+.test{
+    display: flex;
+    justify-content: space-between;
+    //border: 2px solid red;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.table-cell {
+    white-space: nowrap;
+}

@@ -1,0 +1,28 @@
+
+/*
+ * Created on $today.date ( Time $today.time )
+ * Generator tool : $generator.name ( version $generator.version )
+ * Copyright 2018 Geo. All Rights Reserved.
+ */
+
+package ${target.javaPackageFromFolder(${SRC})};
+
+import lombok.*;
+import ${ROOT_PKG}.utils.Status;
+
+/**
+ * Response Base
+ * 
+ * @author Geo
+ *
+ */
+@Data
+@ToString
+@NoArgsConstructor
+public class ResponseBase {
+
+	protected Status	status = new Status();
+	protected boolean	hasError;
+	protected String	sessionUser;
+	protected Long		count;
+}

@@ -1,0 +1,75 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">
+    {{ title | titlecase }}
+  </h4>
+
+  <button
+    mat-icon-button
+    class="pull-right"
+    (click)="bsModalRef.hide()"
+    aria-label="Close dialog"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div
+  class="modal-body"
+  [ngBusy]="{
+    busy: busySave,
+    message: 'Veuillez patienter ...',
+    backdrop: false
+  }"
+>
+  <ng-container>
+    <div class="row">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-12 mb-1">
+            <label
+              >Code DUO :
+              <span class="required_champs">*</span>
+            </label>
+            <input
+              class="form-control custom-input"
+              placeholder="000 000"
+              autocomplete="off"
+              [(ngModel)]="codeDuo"
+              name="codeDuo"
+              mask="000 000"
+              autocomplete="off"
+              [maxlength]="7"
+              [minlength]="6"
+              type="text"
+            />
+            <!-- <select class="form-control" [(ngModel)]="uniteFonctionnelleSelected" name="uniteFonctionnelleSelected" id="">
+                                    <option value="">Choisir unité fonctionnelle</option>
+                                    <option *ngFor="let item of userUnitesFonctinnelles" [ngValue]="item">{{item.libelleUniteFonctionnelle}}</option>
+                                </select> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<div class="modal-footer modal-footer-custom">
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+    <button
+      type="button"
+      (click)="confirmSaveItem()"
+      class="btn btn-md custom_btn_primary pull-right"
+      [class.auth-spinner]="loading"
+      [disabled]="loading"
+    >
+      {{ itemToSave?.id ? "Connexion" : "Connexion" }}
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-md btn-cancel pull-right"
+      (click)="bsModalRef.hide()"
+    >
+      Annuler
+    </button>
+  </div>
+</div>

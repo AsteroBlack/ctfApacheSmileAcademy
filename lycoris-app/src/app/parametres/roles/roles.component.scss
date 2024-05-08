@@ -1,0 +1,31 @@
+select {
+  height: 35px;
+}
+td {
+  width: 1px;
+}
+
+::ng-deep .activeRow {
+  background-color: #d3e1f1;
+  // color: white !important;
+}
+
+.btn-part {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.test{
+  display: flex;
+  justify-content: space-between;
+  //border: 2px solid red;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.btnHover:hover{
+  color: aliceblue;
+}
+

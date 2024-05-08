@@ -1,0 +1,70 @@
+<div class="auth-container">
+  <div class="row auth-main">
+    <div class="col-sm-6 px-0 d-none d-sm-block">
+      <div class="left-img" style="background-image: url(assets/images/images-app/img.jpeg);
+      background-repeat: no-repeat;
+  background-size: 100% 100%;">
+      </div>
+    </div>
+    <div class="col-sm-6 auth-form-section">
+      <div class="form-section">
+        <div class="auth-wrapper">
+       
+          <div class="logo-part">
+            <div class="logo-app-part">
+              <img src="assets/images/images-app/orange_logo.svg" class="logo-app" alt="" />
+            </div>
+          </div>
+
+          <div class="text-login">
+            <h2 class="login-title">Connectez-vous</h2>
+          </div>
+         
+          <form class="validate-form" [formGroup]="authForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Identifiant</mat-label>
+                  <input matInput formControlName="login" />
+                  <mat-icon matSuffix>face</mat-icon>
+                  <mat-error *ngIf="authForm?.get('login')?.hasError('required')">
+                    L'identifiant est obligatoire
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Mot de passe</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                  <a class="show-pwd-icon" href="#" onClick="return false;" matSuffix (click)="hide = !hide"
+                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </a>
+                  <mat-error *ngIf="authForm?.get('password')?.hasError('required')">
+                    Le mot de passe est obligatoire
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+            <div class="container-auth-form-btn">
+              <div style="text-align:center">
+                <button mat-raised-button color="primary" [class.auth-spinner]="loading" [disabled]="loading"
+                  class="auth-form-btn custom_btn_primary" [disabled]="!authForm.valid " type="submit">Se connecter</button>
+              </div>
+            </div>
+            <br>
+            <!--<div class="container-auth-form-btn">
+              <div style="text-align:center">
+                <a style="text-decoration: underline; cursor: pointer;" (click)="forgotPassword()">Mot de passe oublié?</a>
+              </div>
+            </div>-->
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,31 @@
+
+/*
+ * Created on $today.date ( Time $today.time )
+ * Generator tool : $generator.name ( version $generator.version )
+ * Copyright 2018 Geo. All Rights Reserved.
+ */
+
+package ${target.javaPackageFromFolder(${SRC})};
+
+import java.util.List;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import lombok.*;
+
+/**
+ * Response
+ * 
+ * @author Geo
+ *
+ */
+@Data
+@ToString
+@NoArgsConstructor
+@XmlRootElement
+@JsonInclude(Include.NON_NULL)
+public class Response<T> extends ResponseBase {
+
+	protected List<T> items;
+}

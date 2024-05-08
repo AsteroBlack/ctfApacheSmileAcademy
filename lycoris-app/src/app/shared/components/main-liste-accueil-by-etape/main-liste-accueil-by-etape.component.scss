@@ -1,0 +1,52 @@
+.rowActive{
+        td{
+            color: orange;
+        }
+}
+
+td{
+    padding: 5px 5px !important;
+
+    .btn-selecte{
+        border: 1px solid #489aff !important;
+        color: #489aff;
+        font-size: 11px !important;
+        background-color: #fff;
+    }
+
+    .span_total_entree{
+        color: #0665aa;
+        font-weight: bold;
+    }
+}
+
+.titla{
+    font-size: 15px;
+}
+
+.img-assure{
+    width: 35px;
+    height: 35px;
+    border: 1px solid #eceeee;
+    // padding: 5px;
+    // margin-top: 20px;
+}
+
+.inProgress{
+    color: orange;
+    font-size: 10px;
+}
+
+.btn-generer-numero-dossier {
+    background-color: #b5b1b1;
+    color: #454242;
+    font-size: 11px !important;
+}
+
+.num-dossier-part {
+    display: grid;
+
+    input {
+        text-align: center;
+    }
+}

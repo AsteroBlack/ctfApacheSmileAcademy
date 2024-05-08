@@ -1,0 +1,136 @@
+##----------------------------------------------------------------------------------------------------
+## JPA beans suffix
+##set ( $env.entityClassNameSuffix = "Dto" )
+#set ( $dto = ${entity.name} + "Dto" )
+#set ( $listOfForeignAttrib = ["code", "name", "firstName", "lastName", "libelle", "intitule", "login", "nom", "prenoms", "prenom", "denomination", "codeGroupe", "libelleGroupe", "raisonSociale"])
+
+/*
+ * Java dto for entity table ${entity.databaseTable} 
+ * Created on $today.date ( Time $today.time )
+ * Generator tool : $generator.name ( version $generator.version )
+ * Copyright 2018 Geo. All Rights Reserved.
+ */
+
+package ${target.javaPackageFromFolder(${SRC})};
+
+#foreach( $import in $java.imports($entity) )
+import $import;
+#end
+#foreach( $import in $java.imports($entity.attributes) )
+import $import;
+#end
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import lombok.*;
+
+import ${ROOT_PKG}.utils.contract.*;
+import ${ROOT_PKG}.utils.dto.customize._${dto};
+
+/**
+ * DTO for table "${entity.databaseTable}"
+ *
+ * @author Geo
+ */
+@Data
+@ToString
+@JsonInclude(Include.NON_NULL)
+@JsonPropertyOrder(alphabetic = true)
+public class ${dto} extends _${dto} implements Cloneable{
+
+#foreach( $field in $entity.keyAttributes )
+#if (${field.databaseComment} != "")
+	/*
+	 * $field.databaseComment
+	 */
+#end
+    private $field.formattedType(10) $field.formattedName(20) #if($field.hasInitialValue())= ${field.initialValue} #end; // Primary Key
+#end
+
+#foreach( $field in $entity.nonKeyAttributes )
+#if ( !$field.isTimestampType() )
+#if (${field.databaseComment} != "")
+	/*
+	 * $field.databaseComment
+	 */
+#end
+    private $field.formattedType(10) $field.formattedName(20) #if($field.hasInitialValue())= ${field.initialValue} #end;
+#else
+#set ( $padderString = "" )
+#if (${field.databaseComment} != "")
+	/*
+	 * $field.databaseComment
+	 */
+#end
+	private $padderString.format("%-10s", "String") $field.formattedName(20) #if($field.hasInitialValue())= ${field.initialValue} #end;
+#end
+#end
+
+    //----------------------------------------------------------------------
+    // ENTITY LINKS FIELD ( RELATIONSHIP )
+    //----------------------------------------------------------------------
+#foreach( $link in $entity.selectedLinks )
+#if($link.isCardinalityManyToOne() || $link.isCardinalityOneToOne())
+#set( $entityFk = $link.targetEntity)
+##--------------------
+#foreach($attrib in $entityFk.attributes)
+#set( $currentLinkField = "$fn.uncapitalize($entityFk.name)$fn.capitalize($attrib.name)" )
+#if($listOfForeignAttrib.indexOf($attrib.name) != -1)
+	private String $currentLinkField;
+#end
+#end
+##--------------------
+#end
+#end
+
+	// Search param
+#foreach( $field in $entity.attributes)
+#set ( $padderString = "" )
+#if($field.isTimestampType())
+	#set ( $searchParamType = "SearchParam<String>" )
+#else
+	#set ( $searchParamType = "SearchParam<" + $fn.capitalize($field.type) + ">" )
+#end
+#set ( $searchParamName = ${field.name} + "Param" )
+	private $padderString.format("%-22s%-22s%-22s", $searchParamType, $searchParamName, ";")
+#end
+##-------------------------------------------------------------------BEGIN
+#foreach( $link in $entity.selectedLinks )
+#if($link.isCardinalityManyToOne() || $link.isCardinalityOneToOne())
+#set( $entityFk = $link.targetEntity)
+##--------------------
+#foreach($attrib in $entityFk.attributes)
+#set( $currentLinkField = "$fn.uncapitalize($entityFk.name)$fn.capitalize($attrib.name)" )
+#if($listOfForeignAttrib.indexOf($attrib.name) != -1)
+#set ( $padderString = "" )
+#if($attrib.isTimestampType())
+	#set ( $searchParamType = "SearchParam<String>" )
+#end
+#if(!$attrib.isTimestampType())
+	#set ( $searchParamType = "SearchParam<" + ${attrib.type}+ ">" )
+#end
+#set ( $searchParamName = "$fn.uncapitalize($entityFk.name)$fn.capitalize($attrib.name)" + "Param" )
+	private $padderString.format("%-22s%-22s%-22s", $searchParamType, $searchParamName, ";")
+#end
+#end
+##--------------------
+#end
+#end
+##-------------------------------------------------------------------END
+    /**
+     * Default constructor
+     */
+    public ${dto}()
+    {
+        super();
+    }
+    
+	//----------------------------------------------------------------------
+    // clone METHOD
+    //----------------------------------------------------------------------
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
+}

@@ -1,0 +1,46 @@
+.division{
+  height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.part{
+  //border: 1px solid black;
+  width: 50%;
+  padding-top: 1rem;
+}
+
+.part-box{
+  width: 50%;
+  margin: 0 auto;
+}
+
+.part-content{
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 0.2rem;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.chart-card-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chart-card-total{
+  display: flex;
+  justify-content: center;
+}
+
+.test{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

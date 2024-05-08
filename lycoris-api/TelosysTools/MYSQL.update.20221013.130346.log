@@ -1,0 +1,45 @@
+Update date : Thu Oct 13 13:03:47 GMT 2022
+ 
+ Table 'action_en_masse' found in repository
+ (=) table 'action_en_masse' unchanged
+ 
+ Table 'action_utilisateur' found in repository
+ . Column 'offerName' deleted
+ . Column 'offer_name' added
+ (*) table 'action_utilisateur' updated : 2 change(s)
+ 
+ Table 'category' found in repository
+ (=) table 'category' unchanged
+ 
+ Table 'civilite' found in repository
+ (=) table 'civilite' unchanged
+ 
+ Table 'demande' found in repository
+ (=) table 'demande' unchanged
+ 
+ Table 'fonctionnalite' found in repository
+ (=) table 'fonctionnalite' unchanged
+ 
+ Table 'historique' found in repository
+ (=) table 'historique' unchanged
+ 
+ Table 'numero_stories' found in repository
+ (=) table 'numero_stories' unchanged
+ 
+ Table 'profil' found in repository
+ (=) table 'profil' unchanged
+ 
+ Table 'profil_fonctionnalite' found in repository
+ (=) table 'profil_fonctionnalite' unchanged
+ 
+ Table 'status' found in repository
+ (=) table 'status' unchanged
+ 
+ Table 'tache' found in repository
+ (=) table 'tache' unchanged
+ 
+ Table 'type_demande' found in repository
+ (=) table 'type_demande' unchanged
+ 
+ Table 'user' found in repository
+ (=) table 'user' unchanged

@@ -1,0 +1,320 @@
+<section class="content">
+  <div class="content-block">
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="header mb-3">
+            <h2><strong>Blocage Automatique</strong></h2>
+          </div>
+          <div class="body">
+            <section
+              class="section-parametre"
+              [ngBusy]="{
+                busy: busyGet,
+                message: 'Veuillez patienter ...',
+                backdrop: false
+              }"
+            >
+              <div class="">
+                <div class="row clearfix">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="card">
+                      <div class="body table-responsive">
+                        <table
+                          class="table table-condensed table-striped table-hover"
+                        >
+                          <thead>
+                            <tr>
+                              <th colspan="13">
+                                <!--  <div class="col-md-3 pull-left btnMarge">
+                                    <button
+                                    type="button"
+                                    id="div-import"
+                                    class="import-file btn custom_btn_primary sub-menu"
+                                    (click)="openSearch()"
+                                  >
+                                    <em
+                                      class="fa fa-search"
+                                      style="
+                                        font-size: 16px;
+                                        position: relative;
+                                        bottom: 1px;
+                                      "
+                                    ></em>
+                                    Rechercher
+                                  </button>
+                                  </div> -->
+
+                                <div
+                                  class="test"
+                                >
+                                  <div class="btn custom_btn_primary sub-menu">
+                                    <span
+                                      class=""
+                                      id="dateActionMax-3"
+                                      appDateRangeSelector
+                                      (periode)="onPeriodeEmitted($event)"
+                                      (click)="isActiveDate = true"
+                                      title="Filtrer par période"
+                                    >
+                                      <em
+                                        class="icofont icofont-ui-calendar"
+                                      ></em
+                                      >&nbsp; <span></span>&nbsp;<em
+                                        class="fa fa-caret-down"
+                                      ></em>
+                                    </span>
+                                  </div>
+
+                                  <div
+                                    *ngIf="datasCreateDem.length > 0"
+                                    @animationSelectedActions
+                                    class=""
+                                  >
+                                    <div class="div-multi-items-in">
+                                      <ng-container *simSwapIsGranted="'FUNC-1VC6'">
+                                        <a
+                                          *ngIf="checkAuthority(datasCreateDem)"
+                                          title="Suppression"
+                                          (click)="demandeSuppression(datasCreateDem)"
+                                          class="custom-btn-delete action"
+                                        >
+                                          <em class="fa fa-trash"></em
+                                        ></a>
+                                      </ng-container>
+                                    </div>
+                                  </div>
+
+                                  <ng-container *simSwapIsGranted="'FUNC-IG3Q'">
+                                    <div
+                                      *ngIf="filePath"
+                                      class="btn custom_btn_primary import-file btn-import"
+                                    >
+                                      <button
+                                        (click)="exporterFichier()"
+                                        class="btn btnHover"
+                                      >
+                                      <i class="fa fa-file"></i>
+                                        Exporter 
+                                      </button>
+                                    </div>
+                                  </ng-container>
+
+                                  <ng-container *simSwapIsGranted="'FUNC-M6EA'">
+                                    <div
+                                      
+                                      class="btn custom_btn_primary import-file btn-import"
+                                    >
+                                      <button
+                                        (click)="reblockNumbers()"
+                                        class="btn btnHover"
+                                      >
+                                        Rebloquer numéros débloqués
+                                      </button>
+                                    </div>
+                                  </ng-container>
+
+                                  <ng-container *simSwapIsGranted="'FUNC-8AEX'">
+                                    <div
+                                      class="btn custom_btn_primary import-file btn-import"
+                                    >
+                                      <button
+                                        (click)="refreshNumbers()"
+                                        class="btn btnHover"
+                                      >
+                                        Raffraichir Numéros Corail
+                                      </button>
+                                    </div>
+                                  </ng-container>
+
+                                  <ng-container *simSwapIsGranted="'FUNC-VU8V'">
+                                    <div
+                                      class="btn custom_btn_primary import-file btn-import"
+                                    >
+                                      <button
+                                        (click)="importAuto()"
+                                        class="btn btnHover"
+                                      >
+                                        Importation automatique numéros
+                                      </button>
+                                    </div>
+                                  </ng-container>
+
+                                </div>
+
+                                <div>
+                                  <!--class="col-md-9"-->
+                                  <div
+                                    class="posit col-md-1 pull-left btnImporter"
+                                  >
+                                    <input
+                                      id="file"
+                                      type="file"
+                                      class="custom-input form-control inpColor"
+                                      accept=".xlsx, .csv"
+                                      (change)="uploadFile($event)"
+                                      name="fichier"
+                                      [disabled]="click"
+                                    />
+                                  </div>
+                                </div>
+                              </th>
+                            </tr>
+                            <tr class="custom-table-head">
+                              <th></th>
+                              <th>
+                                <a
+                                  style="cursor: pointer"
+                                  (click)="currentPage = 1; getItemsAuto()"
+                                  title="Actualiser"
+                                >
+                                  <em class="fa fa-redo-alt"></em></a
+                                >&nbsp;&nbsp; #
+                              </th>
+                              <th>Code</th>
+                              <th>Libelle</th>
+                              <th>Date et Heure création</th>
+                              <th>Statut</th>
+                              <th class="txt-align-center">Actions</th>
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                            <tr *ngFor="let item of items; let indice = index">
+                              <td>
+                                <input
+                                  type="checkbox"
+                                  [ngModelOptions]="{
+                                    standalone: true
+                                  }"
+                                  name="ligneChecked"
+                                  [(ngModel)]="item.isChecked"
+                                  (change)="setCheckedItem(item, $event)"
+                                />
+                              </td>
+                              <td class="txt-align-center">{{ indice + 1 }}</td>
+                              <td>
+                                {{ item?.code }}
+                              </td>
+                              <td>{{ item?.libelle }}</td>
+
+                              <td>{{ item?.createdAt }}</td>
+                              <!--| date: "dd/MM/yyyy H:mm:ss" -->
+
+                              <td>
+                                <span
+                                  *ngIf="item?.isOk"
+                                  style="background-color: green"
+                                  class="badge badge-success"
+                                  >FICHIER TRAITE</span
+                                >
+
+                                <span
+                                  *ngIf="!item?.isOk"
+                                  style="background-color: red"
+                                  class="badge badge-danger"
+                                  >FICHIER PAS ENCORE TRAITE</span
+                                >
+                              </td>
+
+                              <td class="iconAction">
+                                <!-- <ng-container>
+                                  <a
+                                    href="{{ item?.lienImport }}"
+                                    title="Retélécharger votre fichier"
+                                    class="custom-btn-lock"
+                                  >
+                                    <em class="fa fa-arrow-down"></em
+                                  ></a>
+                                </ng-container> -->
+
+                                <ng-container *simSwapIsGranted="'FUNC-R2LG'">
+                                  <a
+                                    *ngIf="item?.lienFichier"
+                                    href="{{ item?.lienFichier }}"
+                                    title="Télécharger"
+                                    class="custom-btn-lock"
+                                  >
+                                    <em class="fa fa-download"></em
+                                  ></a>
+                                </ng-container>
+
+                                <ng-container *simSwapIsGranted="'FUNC-9OWQ'">
+                                  <a
+                                    *ngIf="item.isOk === false"
+                                    (click)="BlocageMasse(item, 1)"
+                                    title="Lancer le Blocage de Masse"
+                                    class="custom-btn-lock"
+                                  >
+                                    <em class="fa fa-play"></em
+                                  ></a>
+                                </ng-container>
+
+                                <ng-container *simSwapIsGranted="'FUNC-1VC6'">
+                                  <a
+                                    *ngIf="!item?.isOk"
+                                    title="Suppression"
+                                    (click)="demandeSuppression(item)"
+                                    class="custom-btn-delete action"
+                                  >
+                                    <em class="fa fa-trash"></em
+                                  ></a>
+                                </ng-container>
+                              </td>
+                            </tr>
+                          </tbody>
+
+                          <tfoot>
+                            <tr *ngIf="items && items.length > 0">
+                              <td colspan="4">
+                                <div class="row pagination-part">
+                                  <div
+                                    class="col-md-9"
+                                    style="text-align: center"
+                                  >
+                                    <pagination
+                                      [boundaryLinks]="true"
+                                      [itemsPerPage]="itemsPerPage"
+                                      [totalItems]="totalItems"
+                                      [(ngModel)]="currentPage"
+                                      class="pagination-sm"
+                                      previousText="&lsaquo;"
+                                      nextText="&rsaquo;"
+                                      firstText="&laquo;"
+                                      lastText="&raquo;"
+                                      (pageChanged)="pageChanged($event)"
+                                    ></pagination>
+                                    <!--[totalItems]="totalItems"-->
+                                  </div>
+
+                                  <div class="col-md-3">
+                                    <span class="span_total_entree pull-right"
+                                      >Total : {{ items.length }}</span
+                                    >
+                                    <!--totalItems--->
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr *ngIf="!items || items.length == 0">
+                              <td colspan="12">
+                                <div class="col-md-12 txt-align-center">
+                                  Aucune données disponible
+                                </div>
+                              </td>
+                            </tr>
+                          </tfoot>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

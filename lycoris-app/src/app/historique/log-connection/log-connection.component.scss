@@ -1,0 +1,124 @@
+.full-screen-modal {
+    width: 99%;
+  }
+
+  .active {
+    opacity: 1;
+  }
+  .inactive {
+    opacity: 0.4;
+  }
+
+  ::ng-deep .cdk-overlay-container {
+    position: fixed;
+    z-index: 10000;
+  }
+
+  .table-details {
+    thead {
+      tr {
+        th {
+          padding: 2px;
+          font-size: 12px;
+          height: 25px;
+        }
+      }
+
+      tr {
+        td {
+          font-size: 12px;
+          height: 30px;
+        }
+      }
+    }
+  }
+
+
+  .divElement{
+    display: flex;
+    justify-content: space-between;
+  }
+  .btnHover:hover{
+    color: aliceblue;
+  }
+
+  .divImport{
+    margin-right: 30px;
+  }
+
+  .toggle-button {
+    // position: relative;
+    // display: inline-block;
+    // margin-top: 0.5rem;
+    //border: 2px solid yellowgreen;
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .toggle-button input[type="checkbox"] {
+    display: none;
+  }
+
+  .toggle-button label {
+    display: block;
+    width: 50px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: #ccc;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .toggle-button label:after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: left 0.3s ease-in-out;
+  }
+
+  .toggle-button input[type="checkbox"]:checked + label {
+    background-color: #ff7900;
+  }
+
+  .toggle-button input[type="checkbox"]:checked + label:after {
+    left: calc(100% - 25px);
+  }
+
+  .toggle-text {
+    // position: absolute;
+    // top: 8px;
+    // left: 60px;
+    color: #666;
+    font-weight: bold;
+  }
+
+  .test{
+    display: flex;
+    justify-content: space-between;
+    //border: 2px solid red;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .date{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    //border: 1px solid green;
+    width: 30%;
+    padding-left: 1.5rem;
+  }
+
+  .btn-import{
+    padding: 0 1.5rem 0 1.5rem;
+  }

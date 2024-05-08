@@ -1,0 +1,42 @@
+<div class="card card-statistic-2" *simSwapIsGranted= "userProperties.code">
+  <div class="clearfix chart-card-header">
+    <div class="card-icon shadow-primary bg-orange">
+      <i class="material-icons align-middle">{{ icon }}</i>
+    </div>
+    <div class="test">
+      <h5 class="float-end">{{ label }} <br>{{label2}}</h5>
+    </div>
+  </div>
+  <div class="chart-card-total">
+    <div class="m-r-10 m-l-10">
+      <h3 class="bold float-end mb-0">
+        {{ totalValue }}
+      </h3>
+    </div>
+  </div>
+  <div class="division">
+    <!-- <div class="part">
+      <div class="part-box">
+        <h5 class="part-content">{{ leftValueLabel }}</h5>
+        <h5 class="part-content bold">{{ leftValue }}</h5>
+      </div>
+    </div> -->
+    <!-- <div class="part">
+      <div class="part-box">
+        <h5 class="part-content">{{ rightValueLabel }}</h5>
+        <h5 class="part-content bold">{{ rightValue }}</h5>
+      </div>
+    </div> -->
+  </div>
+  <div class="card-chart">
+    <canvas
+      baseChart
+      [chartType]="'line'"
+      [datasets]="cardChart1Data"
+      [labels]="cardChart1Label"
+      [options]="cardChart1"
+      [legend]="true"
+    >
+    </canvas>
+  </div>
+</div>

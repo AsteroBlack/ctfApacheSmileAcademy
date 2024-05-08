@@ -1,0 +1,324 @@
+##-------------------------------------------------------------------------------------------------------
+## JPA beans suffix
+#set ( $env.entityClassNameSuffix = "" )
+#set ( $listOfForeignAttrib = ["code", "name", "firstName", "lastName", "libelle", "intitule", "login", "nom", "prenoms", "prenom", "denomination", "codeGroupe", "libelleGroupe", "raisonSociale"])
+#set ( $listOfUNiqueAttrib = ["code", "name", "libelle", "intitule", "login", "userName", "email", "numero"])
+##-------------------------------------------------------------------------------------------------------
+#if( $entity.hasCompositePrimaryKey() )
+#set( $entityKeyType = ${entity.name} + "EntityKey" )
+#else
+#if($entity.keyAttributesCount > 0)
+#set( $entityKeyType = ${entity.keyAttributes[0].formattedType(0)} )
+#end
+#if($entity.keyAttributesCount <= 0)
+#set( $entityKeyType = "Integer" )
+#end
+#end
+##-------------------------------------------------------------------------------------------------------
+package ${target.javaPackageFromFolder(${SRC})};
+
+#foreach( $import in $java.imports($entity) )
+import $import;
+#end
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Locale;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import ${ROOT_PKG}.utils.*;
+import ${ROOT_PKG}.utils.dto.*;
+import ${ROOT_PKG}.utils.contract.*;
+import ${ROOT_PKG}.utils.contract.Request;
+import ${ROOT_PKG}.utils.contract.Response;
+import ${ENTITY_PKG}.*;
+#if ( $entity.hasCompositePrimaryKey() )
+import ${ENTITY_PKG}.${entityKeyType};
+#end
+import ${ROOT_PKG}.dao.repository.customize._${entity.name}Repository;
+
+/**
+ * Repository : ${entity.name}.
+ */
+@Repository
+public interface ${entity.name}Repository extends JpaRepository<${entity.name}, ${entityKeyType}>, _${entity.name}Repository {
+#foreach( $field in $entity.getAttributesByCriteria( $const.KEY ) )
+	/**
+	 * Finds ${entity.name} by using ${field.name} as a search criteria.
+	 * 
+	 * @param ${field.name}
+	 * @return An Object ${entity.name} whose ${field.name} is equals to the given ${field.name}. If
+	 *         no ${entity.name} is found, this method returns null.
+	 */
+	@Query("select e from ${entity.name} e where e.${field.name} = :${field.name}#foreach( $attrib in $entity.nonKeyAttributes )#if( (${attrib.name} == "isDeleted" || ${attrib.name} == "deleted") && ${field.name} != "isDeleted" && ${field.name} != "deleted" ) and e.${attrib.name} = :isDeleted#end#end")
+	${entity.name} findOne(@Param("${field.name}")${field.type} ${field.name}#foreach( $attrib in $entity.nonKeyAttributes )#if( (${attrib.name} == "isDeleted" || ${attrib.name} == "deleted") && ${field.name} != "isDeleted" && ${field.name} != "deleted" ), @Param("isDeleted")Boolean isDeleted#end#end);
+
+#end
+#foreach( $field in $entity.getAttributesByCriteria( $const.NOT_KEY, $const.NOT_IN_SELECTED_LINKS ) )
+	/**
+	 * Finds ${entity.name} by using ${field.name} as a search criteria.
+	 * 
+	 * @param ${field.name}
+	 * @return An Object ${entity.name} whose ${field.name} is equals to the given ${field.name}. If
+	 *         no ${entity.name} is found, this method returns null.
+	 */
+	@Query("select e from ${entity.name} e where e.${field.name} = :${field.name}#foreach( $attrib in $entity.nonKeyAttributes )#if( (${attrib.name} == "isDeleted" || ${attrib.name} == "deleted") && ${field.name} != "isDeleted" && ${field.name} != "deleted" ) and e.${attrib.name} = :isDeleted#end#end")
+#if($listOfUNiqueAttrib.contains($field.name))
+	${entity.name} findBy$fn.capitalize(${field.name})(@Param("${field.name}")${field.type} ${field.name}#foreach( $attrib in $entity.nonKeyAttributes )#if( (${attrib.name} == "isDeleted" || ${attrib.name} == "deleted") && ${field.name} != "isDeleted" && ${field.name} != "deleted" ), @Param("isDeleted")Boolean isDeleted#end#end);
+#else
+##if($field.name != "code" && $field.name != "name" && $field.name != "login" || $field.name != "userName")
+	List<${entity.name}> findBy$fn.capitalize(${field.name})(@Param("${field.name}")${field.type} ${field.name}#foreach( $attrib in $entity.nonKeyAttributes )#if( (${attrib.name} == "isDeleted" || ${attrib.name} == "deleted") && ${field.name} != "isDeleted" && ${field.name} != "deleted" ), @Param("isDeleted")Boolean isDeleted#end#end);
+#end
+#end
+
+###foreach( $field in $entity.getAttributesByCriteria( $const.IN_SELECTED_LINKS ) )
+##	/**
+##	 * Finds ${entity.name} by using ${field.name} as a search criteria.
+##	 * 
+##	 * @param ${field.name}
+##	 * @return An Object ${entity.name} whose ${field.name} is equals to the given ${field.name}. If
+##	 *         no ${entity.name} is found, this method returns null.
+##	 */
+##	@Query("select e from ${entity.name} e where e.${fn.uncapitalize($field.referencedEntityType)}.id = :${field.name}#foreach( $attrib in $entity.nonKeyAttributes )#if( (${attrib.name} == "isDeleted" || ${attrib.name} == "deleted") && ${field.name} != "isDeleted" && ${field.name} != "deleted" ) and e.${attrib.name} = :isDeleted#end#end")
+##	List<${entity.name}> findBy$fn.capitalize($field.name)(@Param("${field.name}")$field.type ${field.name}#foreach( $attrib in $entity.nonKeyAttributes )#if( (${attrib.name} == "isDeleted" || ${attrib.name} == "deleted") && ${field.name} != "isDeleted" && ${field.name} != "deleted" ), @Param("isDeleted")Boolean isDeleted#end#end);
+##
+###end
+#foreach( $link in $entity.selectedLinks )
+#if($link.isCardinalityManyToOne() || $link.isCardinalityOneToOne())
+#set( $entityFk = $link.targetEntity)
+#foreach($joinColumn in $link.joinColumns)
+#set( $attribFk = $entity.getAttributeByColumnName($joinColumn.name) )
+#set($refFieldName = $attribFk.name)
+#set($refFieldType = $attribFk.type)
+#set($refFieldGetter = $attribFk.getter)
+#end
+	/**
+	 * Finds ${entity.name} by using ${refFieldName} as a search criteria.
+	 * 
+	 * @param ${refFieldName}
+	 * @return An Object ${entity.name} whose ${refFieldName} is equals to the given ${refFieldName}. If
+	 *         no ${entity.name} is found, this method returns null.
+	 */
+	@Query("select e from ${entity.name} e where e.${fn.uncapitalize($link.fieldName)}.#foreach( $attrib in $entityFk.keyAttributes )$attrib.name#end = :${refFieldName}#foreach( $attrib in $entity.nonKeyAttributes )#if( (${attrib.name} == "isDeleted" || ${attrib.name} == "deleted") && ${refFieldName} != "isDeleted" && ${refFieldName} != "deleted" ) and e.${attrib.name} = :isDeleted#end#end")
+	List<${entity.name}> findBy$fn.capitalize($refFieldName)(@Param("${refFieldName}")$refFieldType ${refFieldName}#foreach( $attrib in $entity.nonKeyAttributes )#if( (${attrib.name} == "isDeleted" || ${attrib.name} == "deleted") && ${refFieldName} != "isDeleted" && ${refFieldName} != "deleted" ), @Param("isDeleted")Boolean isDeleted#end#end);
+
+#end
+#end
+	/**
+	 * Finds List of ${entity.name} by using $fn.uncapitalize(${entity.name})Dto as a search criteria.
+	 * 
+	 * @param request, em
+	 * @return A List of ${entity.name}
+	 * @throws DataAccessException,ParseException
+	 */
+	default List<${entity.name}> getByCriteria(Request<${entity.name}Dto> request, EntityManager em, Locale locale) throws DataAccessException, Exception {
+		String req = "select e from ${entity.name} e where e IS NOT NULL";
+		HashMap<String, java.lang.Object> param = new HashMap<String, java.lang.Object>();
+		req += getWhereExpression(request, param, locale);
+		req += " order by #foreach( $field in $entity.keyAttributes )e.$field.name#end desc";
+		TypedQuery<${entity.name}> query = em.createQuery(req, ${entity.name}.class);
+		for (Map.Entry<String, java.lang.Object> entry : param.entrySet()) {
+			query.setParameter(entry.getKey(), entry.getValue());
+		}
+		if (request.getIndex() != null && request.getSize() != null) {
+			query.setFirstResult(request.getIndex() * request.getSize());
+			query.setMaxResults(request.getSize());
+		}
+		return query.getResultList();
+	}
+
+	/**
+	 * Finds count of ${entity.name} by using $fn.uncapitalize(${entity.name})Dto as a search criteria.
+	 * 
+	 * @param request, em
+	 * @return Number of ${entity.name}
+	 * 
+	 */
+	default Long count(Request<${entity.name}Dto> request, EntityManager em, Locale locale) throws DataAccessException, Exception  {
+		String req = "select count(e.id) from ${entity.name} e where e IS NOT NULL";
+		HashMap<String, java.lang.Object> param = new HashMap<String, java.lang.Object>();
+		req += getWhereExpression(request, param, locale);
+		req += " order by #foreach( $field in $entity.keyAttributes ) e.$field.name#end desc";
+		javax.persistence.Query query = em.createQuery(req);
+		for (Map.Entry<String, java.lang.Object> entry : param.entrySet()) {
+			query.setParameter(entry.getKey(), entry.getValue());
+		}
+		Long count = (Long) query.getResultList().get(0);
+		return count;
+	}
+
+	/**
+	 * get where expression
+	 * @param request
+	 * @param param
+	 * @param locale
+	 * @return
+	 * @throws Exception
+	 */
+	default String getWhereExpression(Request<${entity.name}Dto> request, HashMap<String, java.lang.Object> param, Locale locale) throws Exception {
+		// main query
+		${entity.name}Dto dto = request.getData() != null ? request.getData() : new ${entity.name}Dto();
+#foreach( $attrib in $entity.nonKeyAttributes )
+#if( ${attrib.name} == "isDeleted" )
+		dto.setIsDeleted(false);
+#end
+#end
+		String mainReq = generateCriteria(dto, param, 0, locale);
+		// others query
+		String othersReq = "";
+		if (request.getDatas() != null && !request.getDatas().isEmpty()) {
+			Integer index = 1;
+			for (${entity.name}Dto elt : request.getDatas()) {
+#foreach( $attrib in $entity.nonKeyAttributes )
+#if( ${attrib.name} == "isDeleted" )
+				elt.setIsDeleted(false);
+#end
+#end
+				String eltReq = generateCriteria(elt, param, index, locale);
+				if (request.getIsAnd() != null && request.getIsAnd()) {
+					othersReq += "and (" + eltReq + ") ";
+				} else {
+					othersReq += "or (" + eltReq + ") ";
+				}
+				index++;
+			}
+		}
+		String req = "";
+		if (!mainReq.isEmpty()) {
+			req += " and (" + mainReq + ") ";
+		}
+		req += othersReq;
+		return req;
+	}
+
+	/**
+	 * generate sql query for dto
+	 * @param dto
+	 * @param param
+	 * @param index
+	 * @param locale
+	 * @return
+	 * @throws Exception
+	 */
+	default String generateCriteria(${entity.name}Dto dto, HashMap<String, java.lang.Object> param, Integer index,  Locale locale) throws Exception{
+		List<String> listOfQuery = new ArrayList<String>();
+		if (dto != null) {
+#foreach( $field in $entity.getAttributesByCriteria( $const.NOT_IN_LINKS ) )
+#set ( $padderString = "" )
+#if($field.isTimestampType())
+	#set ( $searchParamType = "SearchParam<String>" )
+#else
+	#set ( $searchParamType = "SearchParam<" + ${field.type}+ ">" )
+#end
+#set ( $searchParamName = ${field.name} + "Param" )
+#set ( $searchParamGetter = ${field.getter} + "Param" )
+#set ( $searchParamSetter = ${field.setter} + "Param" )
+#if( $field.isNumberType() && !$field.isDecimalType() )
+			if (dto.${field.getter}()!= null && dto.${field.getter}() > 0) {
+#end
+#if( $field.isNumberType() && $field.isDecimalType() )
+			if (dto.${field.getter}()!= null && dto.${field.getter}().intValue() > 0) {
+#end
+#if( $field.isStringType() )
+			if (Utilities.notBlank(dto.${field.getter}())) {
+#end
+#if( !$field.isStringType() && !$field.isNumberType() && $field.isTimestampType() )
+			if (Utilities.notBlank(dto.${field.getter}())) {
+#end
+#if( !$field.isStringType() && !$field.isNumberType() && !$field.isTimestampType() )
+			if (dto.${field.getter}()!= null) {
+#end
+				listOfQuery.add(CriteriaUtils.generateCriteria("$field.name", dto.${field.getter}(), "e.$field.name", "$field.type", dto.$searchParamGetter(), param, index, locale));
+			}
+#end
+###foreach( $field in $entity.getAttributesByCriteria( $const.IN_SELECTED_LINKS ) )
+###if( $field.isNumberType() )
+##			if (dto.${field.getter}()!= null && dto.${field.getter}() > 0) {
+##				req += " AND e.${fn.uncapitalize($field.referencedEntityType)}.id = :$field.name";
+##				param.put("$field.name", dto.${field.getter}());
+##			}
+###end
+###if( $field.isStringType() )
+##			if (dto.${field.getter}()!= null && !dto.${field.getter}().isEmpty()) {
+##				req += " AND e.${fn.uncapitalize($field.referencedEntityType)}.id = :$field.name";
+##				param.put("$field.name", dto.${field.getter}());
+##			}
+###end		
+###end
+#foreach( $link in $entity.selectedLinks )
+#if($link.isCardinalityManyToOne() || $link.isCardinalityOneToOne())
+#set( $entityFk = $link.targetEntity)
+#foreach($joinColumn in $link.joinColumns)
+#set( $attribFk = $entity.getAttributeByColumnName($joinColumn.name) )
+#set($refFieldName = $attribFk.name)
+#set($refFieldType = $attribFk.type)
+#set($refFieldGetter = $attribFk.getter)
+#set($isStringType = $attribFk.isStringType())
+#set($isNumberType = $attribFk.isNumberType())
+#set ( $searchParamType = "SearchParam<" + $refFieldType+ ">" )
+#set ( $searchParamName = ${refFieldName} + "Param" )
+#set ( $searchParamGetter = ${refFieldGetter} + "Param" )
+#end
+#if( $isNumberType )
+			if (dto.${refFieldGetter}()!= null && dto.${refFieldGetter}() > 0) {
+#end
+#if( $isStringType )
+			if (Utilities.notBlank(dto.${refFieldGetter}())) {
+#end
+				listOfQuery.add(CriteriaUtils.generateCriteria("$refFieldName", dto.${refFieldGetter}(), "e.${fn.uncapitalize($link.fieldName)}.#foreach( $attrib in $entityFk.keyAttributes )$attrib.name#end", "$refFieldType", dto.$searchParamGetter(), param, index, locale));
+			}
+#end
+#end
+##-------------------------------------------------------------------BEGIN
+#foreach( $link in $entity.selectedLinks )
+#if($link.isCardinalityManyToOne() || $link.isCardinalityOneToOne())
+#set( $entityFk = $link.targetEntity)
+##--------------------
+#foreach($attrib in $entityFk.attributes)
+#if($listOfForeignAttrib.indexOf($attrib.name) != -1)
+#set ( $padderString = "" )
+#set($refFieldName = "$fn.uncapitalize($entityFk.name)$fn.capitalize($attrib.name)")
+#set($refFieldType = $attrib.type)
+#set($refFieldGetter = "get" + $fn.capitalize($refFieldName))
+#set($isStringType = $attrib.isStringType())
+#set($isNumberType = $attrib.isNumberType())
+#if($attrib.isTimestampType())
+	#set ( $searchParamType = "SearchParam<String>" )
+#end
+#if(!$attrib.isTimestampType())
+	#set ( $searchParamType = "SearchParam<" + ${attrib.type}+ ">" )
+#end
+#set ( $searchParamName = ${refFieldName} + "Param" )
+#set ( $searchParamGetter = ${refFieldGetter} + "Param" )
+#if( $isNumberType )
+			if (dto.${refFieldGetter}()!= null && dto.${refFieldGetter}() > 0) {
+#end
+#if( $isStringType )
+			if (Utilities.notBlank(dto.${refFieldGetter}())) {
+#end
+				listOfQuery.add(CriteriaUtils.generateCriteria("$refFieldName", dto.${refFieldGetter}(), "e.${fn.uncapitalize($link.fieldName)}.$attrib.name", "$refFieldType", dto.$searchParamGetter(), param, index, locale));
+			}
+#end
+#end
+##--------------------
+#end
+#end
+##-------------------------------------------------------------------END
+			List<String> listOfCustomQuery = _generateCriteria(dto, param, index, locale);
+			if (Utilities.isNotEmpty(listOfCustomQuery)) {
+				listOfQuery.addAll(listOfCustomQuery);
+			}
+		}
+		return CriteriaUtils.getCriteriaByListOfQuery(listOfQuery);
+	}
+}

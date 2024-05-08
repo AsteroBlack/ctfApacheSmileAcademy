@@ -1,0 +1,43 @@
+.auth-container {
+  .auth-main {
+    .auth-form-section {
+      .auth-wrapper {
+        .logo-part {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          flex: 1;
+          margin-bottom: 15px;
+          .logo_client {
+            width: auto;
+            height: 120px;
+          }
+
+          .logo-app-part {
+            img {
+              height: auto;
+              width: 90%;
+            }
+            // .logo_app{
+            //     // width: 100%;
+            //     // height: 50px;
+
+            //     height: auto;
+            //     width: 90%;
+            // }
+          }
+        }
+
+        .text-login {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+::ng-deep .modal-custom {
+  width: 40%;
+  max-width: none;
+}

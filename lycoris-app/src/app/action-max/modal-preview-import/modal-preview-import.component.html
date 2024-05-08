@@ -1,0 +1,139 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">
+    {{ title | titlecase }}
+  </h4>
+
+  <button
+    mat-icon-button
+    class="pull-right"
+    (click)="bsModalRef.hide()"
+    aria-label="Close dialog"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div
+  class="modal-body"
+  [ngBusy]="{
+    busy: busySave,
+    message: 'Veuillez patienter ...',
+    backdrop: false
+  }"
+>
+<div class="">
+  <div class="row clearfix">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="card">
+        <div class="body table-responsive">
+          <table
+            class="table table-condensed table-striped table-hover"
+          >
+            <thead>
+              <tr>
+                <th colspan="11">
+                  <div class="row mt-4">
+
+                    <div class="col-md-12">
+                      <div class="col-md-4 pull-right">
+                        <input
+                          id="file"
+                          type="file"
+                          class="custom-input form-control inpColor"
+                          accept=".xlsx, .csv"
+                          (change)="uploadFile($event)"
+                          name="fichier"
+                          [disabled]= "click"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </th>
+              </tr>
+              <tr class="custom-table-head">
+                <th>
+                  <a
+                    style="cursor: pointer"
+                    (click)="currentPage = 1; getItems()"
+                    title="Actualiser"
+                  >
+                    <em class="fa fa-redo-alt"></em></a
+                  >&nbsp;&nbsp; #
+                </th>
+                <th>Code</th>
+                <th>Libelle</th>
+                <th>Date et Heure création</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let item of items; let indice = index">
+                <td class="txt-align-center">{{ indice + 1 }}</td>
+
+                <td>
+                  {{ item?.code }}
+                </td>
+                <td>{{ item?.libelle }}</td>
+                
+               
+                <td>{{ item?.createdAt }}</td>
+              </tr>
+            </tbody>
+
+            <tfoot>
+              <tr *ngIf="items && items.length > 0">
+                <td colspan="4">
+                  <div class="row pagination-part">
+                    <div
+                      class="col-md-9"
+                      style="text-align: center"
+                    >
+                      <pagination
+                        [boundaryLinks]="true"
+                        [itemsPerPage]="itemsPerPage"
+                        [totalItems]="totalItems"
+                        [(ngModel)]="currentPage"
+                        class="pagination-sm"
+                        previousText="&lsaquo;"
+                        nextText="&rsaquo;"
+                        firstText="&laquo;"
+                        lastText="&raquo;"
+                        (pageChanged)="pageChanged($event)"
+                      ></pagination> <!--[totalItems]="totalItems"-->
+                    </div>
+
+                    <div class="col-md-3">
+                      <span class="span_total_entree pull-right"
+                        >Total : {{ items.length }}</span
+                      >
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <tr *ngIf="!items || items.length == 0">
+                <td colspan="12">
+                  <div class="col-md-12 txt-align-center">
+                    Aucune données disponible
+                  </div>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="modal-footer modal-footer-custom">
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+    <button
+      type="button"
+      class="btn btn-md btn-cancel pull-right"
+      (click)="bsModalRef.hide()"
+    >
+      Fermer
+    </button>
+  </div>
+</div>

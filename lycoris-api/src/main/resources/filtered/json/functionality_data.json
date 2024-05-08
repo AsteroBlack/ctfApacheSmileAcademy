@@ -1,0 +1,534 @@
+{
+	"user": 1,
+	"datas": [
+		{
+			"code": "ACTION_EN_MASSE",
+			"name": "ACTION_EN_MASSE"
+		},
+		{
+			"code": "VIEW_ACTION_EN_MASSE",
+			"parentCode": "ACTION_EN_MASSE",
+			"name": "VIEW ACTION_EN_MASSE"
+		},
+		{
+			"code": "CREATE_ACTION_EN_MASSE",
+			"parentCode": "ACTION_EN_MASSE",
+			"name": "CREATE ACTION_EN_MASSE"
+		},
+		{
+			"code": "UPDATE_ACTION_EN_MASSE",
+			"parentCode": "ACTION_EN_MASSE",
+			"name": "UPDATE ACTION_EN_MASSE"
+		},
+		{
+			"code": "DELETE_ACTION_EN_MASSE",
+			"parentCode": "ACTION_EN_MASSE",
+			"name": "DELETE ACTION_EN_MASSE"
+		},
+		{
+			"code": "ACTION_PARAMETRABLE",
+			"name": "ACTION_PARAMETRABLE"
+		},
+		{
+			"code": "VIEW_ACTION_PARAMETRABLE",
+			"parentCode": "ACTION_PARAMETRABLE",
+			"name": "VIEW ACTION_PARAMETRABLE"
+		},
+		{
+			"code": "CREATE_ACTION_PARAMETRABLE",
+			"parentCode": "ACTION_PARAMETRABLE",
+			"name": "CREATE ACTION_PARAMETRABLE"
+		},
+		{
+			"code": "UPDATE_ACTION_PARAMETRABLE",
+			"parentCode": "ACTION_PARAMETRABLE",
+			"name": "UPDATE ACTION_PARAMETRABLE"
+		},
+		{
+			"code": "DELETE_ACTION_PARAMETRABLE",
+			"parentCode": "ACTION_PARAMETRABLE",
+			"name": "DELETE ACTION_PARAMETRABLE"
+		},
+		{
+			"code": "ACTION_SIMSWAP",
+			"name": "ACTION_SIMSWAP"
+		},
+		{
+			"code": "VIEW_ACTION_SIMSWAP",
+			"parentCode": "ACTION_SIMSWAP",
+			"name": "VIEW ACTION_SIMSWAP"
+		},
+		{
+			"code": "CREATE_ACTION_SIMSWAP",
+			"parentCode": "ACTION_SIMSWAP",
+			"name": "CREATE ACTION_SIMSWAP"
+		},
+		{
+			"code": "UPDATE_ACTION_SIMSWAP",
+			"parentCode": "ACTION_SIMSWAP",
+			"name": "UPDATE ACTION_SIMSWAP"
+		},
+		{
+			"code": "DELETE_ACTION_SIMSWAP",
+			"parentCode": "ACTION_SIMSWAP",
+			"name": "DELETE ACTION_SIMSWAP"
+		},
+		{
+			"code": "ACTION_UTILISATEUR",
+			"name": "ACTION_UTILISATEUR"
+		},
+		{
+			"code": "VIEW_ACTION_UTILISATEUR",
+			"parentCode": "ACTION_UTILISATEUR",
+			"name": "VIEW ACTION_UTILISATEUR"
+		},
+		{
+			"code": "CREATE_ACTION_UTILISATEUR",
+			"parentCode": "ACTION_UTILISATEUR",
+			"name": "CREATE ACTION_UTILISATEUR"
+		},
+		{
+			"code": "UPDATE_ACTION_UTILISATEUR",
+			"parentCode": "ACTION_UTILISATEUR",
+			"name": "UPDATE ACTION_UTILISATEUR"
+		},
+		{
+			"code": "DELETE_ACTION_UTILISATEUR",
+			"parentCode": "ACTION_UTILISATEUR",
+			"name": "DELETE ACTION_UTILISATEUR"
+		},
+		{
+			"code": "ATION_TO_NOTIFIABLE",
+			"name": "ATION_TO_NOTIFIABLE"
+		},
+		{
+			"code": "VIEW_ATION_TO_NOTIFIABLE",
+			"parentCode": "ATION_TO_NOTIFIABLE",
+			"name": "VIEW ATION_TO_NOTIFIABLE"
+		},
+		{
+			"code": "CREATE_ATION_TO_NOTIFIABLE",
+			"parentCode": "ATION_TO_NOTIFIABLE",
+			"name": "CREATE ATION_TO_NOTIFIABLE"
+		},
+		{
+			"code": "UPDATE_ATION_TO_NOTIFIABLE",
+			"parentCode": "ATION_TO_NOTIFIABLE",
+			"name": "UPDATE ATION_TO_NOTIFIABLE"
+		},
+		{
+			"code": "DELETE_ATION_TO_NOTIFIABLE",
+			"parentCode": "ATION_TO_NOTIFIABLE",
+			"name": "DELETE ATION_TO_NOTIFIABLE"
+		},
+		{
+			"code": "CATEGORY",
+			"name": "CATEGORY"
+		},
+		{
+			"code": "VIEW_CATEGORY",
+			"parentCode": "CATEGORY",
+			"name": "VIEW CATEGORY"
+		},
+		{
+			"code": "CREATE_CATEGORY",
+			"parentCode": "CATEGORY",
+			"name": "CREATE CATEGORY"
+		},
+		{
+			"code": "UPDATE_CATEGORY",
+			"parentCode": "CATEGORY",
+			"name": "UPDATE CATEGORY"
+		},
+		{
+			"code": "DELETE_CATEGORY",
+			"parentCode": "CATEGORY",
+			"name": "DELETE CATEGORY"
+		},
+		{
+			"code": "CIVILITE",
+			"name": "CIVILITE"
+		},
+		{
+			"code": "VIEW_CIVILITE",
+			"parentCode": "CIVILITE",
+			"name": "VIEW CIVILITE"
+		},
+		{
+			"code": "CREATE_CIVILITE",
+			"parentCode": "CIVILITE",
+			"name": "CREATE CIVILITE"
+		},
+		{
+			"code": "UPDATE_CIVILITE",
+			"parentCode": "CIVILITE",
+			"name": "UPDATE CIVILITE"
+		},
+		{
+			"code": "DELETE_CIVILITE",
+			"parentCode": "CIVILITE",
+			"name": "DELETE CIVILITE"
+		},
+		{
+			"code": "DEMANDE",
+			"name": "DEMANDE"
+		},
+		{
+			"code": "VIEW_DEMANDE",
+			"parentCode": "DEMANDE",
+			"name": "VIEW DEMANDE"
+		},
+		{
+			"code": "CREATE_DEMANDE",
+			"parentCode": "DEMANDE",
+			"name": "CREATE DEMANDE"
+		},
+		{
+			"code": "UPDATE_DEMANDE",
+			"parentCode": "DEMANDE",
+			"name": "UPDATE DEMANDE"
+		},
+		{
+			"code": "DELETE_DEMANDE",
+			"parentCode": "DEMANDE",
+			"name": "DELETE DEMANDE"
+		},
+		{
+			"code": "FONCTIONNALITE",
+			"name": "FONCTIONNALITE"
+		},
+		{
+			"code": "VIEW_FONCTIONNALITE",
+			"parentCode": "FONCTIONNALITE",
+			"name": "VIEW FONCTIONNALITE"
+		},
+		{
+			"code": "CREATE_FONCTIONNALITE",
+			"parentCode": "FONCTIONNALITE",
+			"name": "CREATE FONCTIONNALITE"
+		},
+		{
+			"code": "UPDATE_FONCTIONNALITE",
+			"parentCode": "FONCTIONNALITE",
+			"name": "UPDATE FONCTIONNALITE"
+		},
+		{
+			"code": "DELETE_FONCTIONNALITE",
+			"parentCode": "FONCTIONNALITE",
+			"name": "DELETE FONCTIONNALITE"
+		},
+		{
+			"code": "HISTORIQUE",
+			"name": "HISTORIQUE"
+		},
+		{
+			"code": "VIEW_HISTORIQUE",
+			"parentCode": "HISTORIQUE",
+			"name": "VIEW HISTORIQUE"
+		},
+		{
+			"code": "CREATE_HISTORIQUE",
+			"parentCode": "HISTORIQUE",
+			"name": "CREATE HISTORIQUE"
+		},
+		{
+			"code": "UPDATE_HISTORIQUE",
+			"parentCode": "HISTORIQUE",
+			"name": "UPDATE HISTORIQUE"
+		},
+		{
+			"code": "DELETE_HISTORIQUE",
+			"parentCode": "HISTORIQUE",
+			"name": "DELETE HISTORIQUE"
+		},
+		{
+			"code": "LISTE_DIFFUSION",
+			"name": "LISTE_DIFFUSION"
+		},
+		{
+			"code": "VIEW_LISTE_DIFFUSION",
+			"parentCode": "LISTE_DIFFUSION",
+			"name": "VIEW LISTE_DIFFUSION"
+		},
+		{
+			"code": "CREATE_LISTE_DIFFUSION",
+			"parentCode": "LISTE_DIFFUSION",
+			"name": "CREATE LISTE_DIFFUSION"
+		},
+		{
+			"code": "UPDATE_LISTE_DIFFUSION",
+			"parentCode": "LISTE_DIFFUSION",
+			"name": "UPDATE LISTE_DIFFUSION"
+		},
+		{
+			"code": "DELETE_LISTE_DIFFUSION",
+			"parentCode": "LISTE_DIFFUSION",
+			"name": "DELETE LISTE_DIFFUSION"
+		},
+		{
+			"code": "NUMERO_STORIES",
+			"name": "NUMERO_STORIES"
+		},
+		{
+			"code": "VIEW_NUMERO_STORIES",
+			"parentCode": "NUMERO_STORIES",
+			"name": "VIEW NUMERO_STORIES"
+		},
+		{
+			"code": "CREATE_NUMERO_STORIES",
+			"parentCode": "NUMERO_STORIES",
+			"name": "CREATE NUMERO_STORIES"
+		},
+		{
+			"code": "UPDATE_NUMERO_STORIES",
+			"parentCode": "NUMERO_STORIES",
+			"name": "UPDATE NUMERO_STORIES"
+		},
+		{
+			"code": "DELETE_NUMERO_STORIES",
+			"parentCode": "NUMERO_STORIES",
+			"name": "DELETE NUMERO_STORIES"
+		},
+		{
+			"code": "PARAMETRAGE",
+			"name": "PARAMETRAGE"
+		},
+		{
+			"code": "VIEW_PARAMETRAGE",
+			"parentCode": "PARAMETRAGE",
+			"name": "VIEW PARAMETRAGE"
+		},
+		{
+			"code": "CREATE_PARAMETRAGE",
+			"parentCode": "PARAMETRAGE",
+			"name": "CREATE PARAMETRAGE"
+		},
+		{
+			"code": "UPDATE_PARAMETRAGE",
+			"parentCode": "PARAMETRAGE",
+			"name": "UPDATE PARAMETRAGE"
+		},
+		{
+			"code": "DELETE_PARAMETRAGE",
+			"parentCode": "PARAMETRAGE",
+			"name": "DELETE PARAMETRAGE"
+		},
+		{
+			"code": "PARAMETRAGE_PROFIL",
+			"name": "PARAMETRAGE_PROFIL"
+		},
+		{
+			"code": "VIEW_PARAMETRAGE_PROFIL",
+			"parentCode": "PARAMETRAGE_PROFIL",
+			"name": "VIEW PARAMETRAGE_PROFIL"
+		},
+		{
+			"code": "CREATE_PARAMETRAGE_PROFIL",
+			"parentCode": "PARAMETRAGE_PROFIL",
+			"name": "CREATE PARAMETRAGE_PROFIL"
+		},
+		{
+			"code": "UPDATE_PARAMETRAGE_PROFIL",
+			"parentCode": "PARAMETRAGE_PROFIL",
+			"name": "UPDATE PARAMETRAGE_PROFIL"
+		},
+		{
+			"code": "DELETE_PARAMETRAGE_PROFIL",
+			"parentCode": "PARAMETRAGE_PROFIL",
+			"name": "DELETE PARAMETRAGE_PROFIL"
+		},
+		{
+			"code": "PROFIL",
+			"name": "PROFIL"
+		},
+		{
+			"code": "VIEW_PROFIL",
+			"parentCode": "PROFIL",
+			"name": "VIEW PROFIL"
+		},
+		{
+			"code": "CREATE_PROFIL",
+			"parentCode": "PROFIL",
+			"name": "CREATE PROFIL"
+		},
+		{
+			"code": "UPDATE_PROFIL",
+			"parentCode": "PROFIL",
+			"name": "UPDATE PROFIL"
+		},
+		{
+			"code": "DELETE_PROFIL",
+			"parentCode": "PROFIL",
+			"name": "DELETE PROFIL"
+		},
+		{
+			"code": "PROFIL_FONCTIONNALITE",
+			"name": "PROFIL_FONCTIONNALITE"
+		},
+		{
+			"code": "VIEW_PROFIL_FONCTIONNALITE",
+			"parentCode": "PROFIL_FONCTIONNALITE",
+			"name": "VIEW PROFIL_FONCTIONNALITE"
+		},
+		{
+			"code": "CREATE_PROFIL_FONCTIONNALITE",
+			"parentCode": "PROFIL_FONCTIONNALITE",
+			"name": "CREATE PROFIL_FONCTIONNALITE"
+		},
+		{
+			"code": "UPDATE_PROFIL_FONCTIONNALITE",
+			"parentCode": "PROFIL_FONCTIONNALITE",
+			"name": "UPDATE PROFIL_FONCTIONNALITE"
+		},
+		{
+			"code": "DELETE_PROFIL_FONCTIONNALITE",
+			"parentCode": "PROFIL_FONCTIONNALITE",
+			"name": "DELETE PROFIL_FONCTIONNALITE"
+		},
+		{
+			"code": "STATUS",
+			"name": "STATUS"
+		},
+		{
+			"code": "VIEW_STATUS",
+			"parentCode": "STATUS",
+			"name": "VIEW STATUS"
+		},
+		{
+			"code": "CREATE_STATUS",
+			"parentCode": "STATUS",
+			"name": "CREATE STATUS"
+		},
+		{
+			"code": "UPDATE_STATUS",
+			"parentCode": "STATUS",
+			"name": "UPDATE STATUS"
+		},
+		{
+			"code": "DELETE_STATUS",
+			"parentCode": "STATUS",
+			"name": "DELETE STATUS"
+		},
+		{
+			"code": "TACHE",
+			"name": "TACHE"
+		},
+		{
+			"code": "VIEW_TACHE",
+			"parentCode": "TACHE",
+			"name": "VIEW TACHE"
+		},
+		{
+			"code": "CREATE_TACHE",
+			"parentCode": "TACHE",
+			"name": "CREATE TACHE"
+		},
+		{
+			"code": "UPDATE_TACHE",
+			"parentCode": "TACHE",
+			"name": "UPDATE TACHE"
+		},
+		{
+			"code": "DELETE_TACHE",
+			"parentCode": "TACHE",
+			"name": "DELETE TACHE"
+		},
+		{
+			"code": "TYPE_DEMANDE",
+			"name": "TYPE_DEMANDE"
+		},
+		{
+			"code": "VIEW_TYPE_DEMANDE",
+			"parentCode": "TYPE_DEMANDE",
+			"name": "VIEW TYPE_DEMANDE"
+		},
+		{
+			"code": "CREATE_TYPE_DEMANDE",
+			"parentCode": "TYPE_DEMANDE",
+			"name": "CREATE TYPE_DEMANDE"
+		},
+		{
+			"code": "UPDATE_TYPE_DEMANDE",
+			"parentCode": "TYPE_DEMANDE",
+			"name": "UPDATE TYPE_DEMANDE"
+		},
+		{
+			"code": "DELETE_TYPE_DEMANDE",
+			"parentCode": "TYPE_DEMANDE",
+			"name": "DELETE TYPE_DEMANDE"
+		},
+		{
+			"code": "TYPE_NUMERO",
+			"name": "TYPE_NUMERO"
+		},
+		{
+			"code": "VIEW_TYPE_NUMERO",
+			"parentCode": "TYPE_NUMERO",
+			"name": "VIEW TYPE_NUMERO"
+		},
+		{
+			"code": "CREATE_TYPE_NUMERO",
+			"parentCode": "TYPE_NUMERO",
+			"name": "CREATE TYPE_NUMERO"
+		},
+		{
+			"code": "UPDATE_TYPE_NUMERO",
+			"parentCode": "TYPE_NUMERO",
+			"name": "UPDATE TYPE_NUMERO"
+		},
+		{
+			"code": "DELETE_TYPE_NUMERO",
+			"parentCode": "TYPE_NUMERO",
+			"name": "DELETE TYPE_NUMERO"
+		},
+		{
+			"code": "TYPE_PARAMETRAGE",
+			"name": "TYPE_PARAMETRAGE"
+		},
+		{
+			"code": "VIEW_TYPE_PARAMETRAGE",
+			"parentCode": "TYPE_PARAMETRAGE",
+			"name": "VIEW TYPE_PARAMETRAGE"
+		},
+		{
+			"code": "CREATE_TYPE_PARAMETRAGE",
+			"parentCode": "TYPE_PARAMETRAGE",
+			"name": "CREATE TYPE_PARAMETRAGE"
+		},
+		{
+			"code": "UPDATE_TYPE_PARAMETRAGE",
+			"parentCode": "TYPE_PARAMETRAGE",
+			"name": "UPDATE TYPE_PARAMETRAGE"
+		},
+		{
+			"code": "DELETE_TYPE_PARAMETRAGE",
+			"parentCode": "TYPE_PARAMETRAGE",
+			"name": "DELETE TYPE_PARAMETRAGE"
+		},
+		{
+			"code": "USER",
+			"name": "USER"
+		},
+		{
+			"code": "VIEW_USER",
+			"parentCode": "USER",
+			"name": "VIEW USER"
+		},
+		{
+			"code": "CREATE_USER",
+			"parentCode": "USER",
+			"name": "CREATE USER"
+		},
+		{
+			"code": "UPDATE_USER",
+			"parentCode": "USER",
+			"name": "UPDATE USER"
+		},
+		{
+			"code": "DELETE_USER",
+			"parentCode": "USER",
+			"name": "DELETE USER"
+		}
+
+	]
+}

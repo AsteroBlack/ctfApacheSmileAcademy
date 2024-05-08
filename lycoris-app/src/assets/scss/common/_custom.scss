@@ -1,0 +1,245 @@
+.custom_btn_primary {
+  background-color: #ff7900 !important;
+  // border-radius: 30px !important;
+  color: #000 !important;
+  border: 1px solid #f89137;
+  font-size: 12px !important;
+
+  &:hover {
+    background-color: #000 !important;
+    color: #fff !important;
+    border: 1px solid #f89137;
+  }
+}
+
+.custom_btn_success {
+  background-color: #32c832 !important;
+  // border-radius: 30px !important;
+  color: #fff !important;
+  border: 1px solid #5dc65c;
+  font-size: 12px !important;
+
+  &:hover {
+    background-color: #fff !important;
+    color: #3dbe3b !important;
+    border: 1px solid #5dc65c;
+  }
+}
+
+.required_champs {
+  color: red;
+}
+
+.settingSidebar {
+  display: none;
+}
+
+.custom-btn-update {
+  color: #87c587;
+}
+
+.custom-btn-delete {
+  color: #fa7575;
+}
+
+.custom-btn-lock {
+  color: #f89137;
+  &:hover {
+    color: #000 !important;
+  }
+}
+.custom-btn-unlock{
+  color: #000;
+  &:hover {
+    color: #f89137 !important;
+  }
+}
+
+.custom-td-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.body {
+  padding-top: 0px !important;
+}
+
+.custom-input {
+  // border-radius: 30px;
+
+  &:focus {
+    border: 1px solid #b7b7b4;
+    box-shadow: none !important;
+  }
+}
+
+tr > td {
+  font-size: 12px !important;
+  padding: 5px;
+}
+
+.txt-align-center {
+  text-align: center;
+}
+
+.btn-cancel {
+  background-color: #86888a !important;
+  // border-radius: 30px !important;
+  color: #ffffff !important;
+  border: 1px solid #7d8080;
+  font-size: 12px !important;
+
+  &:hover {
+    background-color: #ffffff !important;
+    color: #242525 !important;
+  }
+}
+
+.modal-footer-custom {
+  border-top: 1px solid #eceeee !important;
+  padding: 0px;
+}
+
+.modal .modal-header {
+  background-color: #ff7900 !important;
+  padding: 10px !important;
+  color: #000;
+}
+
+.modal-content {
+  padding: 0px !important;
+}
+
+.mat-expansion-panel:not([class*="mat-elevation-z"]) {
+ // box-shadow: none 
+  background-color: rgba(0, 0, 255, 0.094) !important;
+  font-weight: bold;
+  box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.871) !important;
+}
+
+.mat-expansion-panel-body {
+  border: 1px solid #eceeee;
+}
+
+tfoot {
+  border: none !important;
+
+  td {
+    border-bottom: 0px !important;
+
+    .span_total_entree {
+      color: #f89137;
+      font-weight: 700;
+    }
+
+    .pagination-part {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.swal2-icon.swal2-warning.swal2-icon-show {
+  display: none !important;
+}
+
+.swal2-container.swal2-center > .swal2-popup {
+  width: 370px;
+  font-size: 12px;
+}
+
+.custom-table-head {
+  th {
+    a {
+      cursor: pointer;
+    }
+  }
+}
+
+.body {
+  &.table-responsive {
+    padding: 0px !important;
+  }
+}
+
+.isInactif {
+  color: rgb(247, 107, 107);
+}
+
+label {
+  font-weight: 700 !important;
+}
+
+.custom-table-head {
+  th {
+    background-color: #f89137 !important;
+  }
+}
+
+.custom-btn-details {
+  color: #858585;
+  cursor: pointer;
+}
+
+.form-control:disabled {
+  background-color: #e9ecef !important;
+}
+
+.custom-fieldset {
+  border: 1px solid #eceeee;
+  border-radius: 5px;
+  padding: 8px;
+
+  legend {
+    font-size: 11px;
+    color: #fb5a5a;
+  }
+}
+
+.theme-white .sidebar .menu .list li {
+  cursor: pointer;
+
+  // &.active {
+  //   border: 1px solid #c6c8cb;
+  //   border-radius: 10px;
+  // }
+}
+
+::ng-deep .mat-expansion-panel {
+  background-color: #ededed !important;
+}
+
+::ng-deep .mat-expansion-panel-body {
+  background-color: #fff;
+  padding: 10px !important;
+}
+::ng-deep .cdk-overlay-container {
+  position: fixed;
+  z-index: 10000;
+}
+
+.custom-width-td-action {
+  width: 130px !important;
+}
+
+.custom-input-app {
+  padding-left: 10px !important;
+}
+
+.btn-custom-action-dropdown {
+  background-color: #737676;
+  color: #ffffff;
+  font-size: 11px !important;
+  border: 1px solid #737676;
+
+  &:hover{
+    background-color: #fff;
+    color: #737676;
+    border: 1px solid #737676;
+  }
+}
+
+.dropdown-menu {
+  left: -35px !important;
+}

@@ -1,0 +1,26 @@
+spring.profiles.active=@spring.profiles.active@
+spring.datasource.platform=MySQL
+spring.messages.basename=errorMessage
+hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
+spring.jpa.properties.hibernate.id.new_generator_mappings=false
+spring.jpa.show-sql=false
+spring.messages.encoding=UTF-8
+spring.output.ansi.enabled=always
+
+server.port = 8080
+
+#api d'envoi de mail
+smtp.mail.adresse=backend.smile@gmail.com
+smtp.mail.password=smile@backend2021
+smtp.mail.host=smtp.gmail.com
+smtp.mail.port=587
+
+#api d'envoi de SMS 
+api.sms.header.authorization=Authorization
+api.sms.token=GVuuKuune7Lslo0CvQjOuWzrT2sy
+#api.sms.token=VWFkG56cNDIVUowa5p16iuammRP3
+api.sms.contentType.key=Content-Type
+api.sms.bearer=Bearer
+api.sms.contentType.value=application/json
+api.sms.url=https://api.orange.com/smsmessaging/v1/outbound/tel%3A%2B22500000000/requests
+api.sms.senderAddress=tel:+22500000000

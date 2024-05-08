@@ -1,0 +1,25 @@
+<div class="col-12">
+    <table class="table table-condensed table-striped table-hover">
+        <thead>
+          <tr class="custom-table-head">
+            <th  class="txt-align-center">&nbsp;&nbsp; # </th>
+            <th>Validateur</th>
+            <th>Fonction</th>
+            <th> Date décision </th>
+            <th>Décision</th>
+            <th>Observation</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of circuitValidations; let indice = index">
+            <td class="txt-align-center">{{ indice + 1 }}</td>
+            <td>{{ item?.nomValidateur || (item?.userNom +' '+item?.userPrenom) }}</td>
+            <td>{{ item?.fonctionValideur ||  item?.fonctionValidateur}}</td>
+            <td> {{ item?.dateDecision}} </td>
+            <td>{{ item?.decision }}</td>
+            <td>{{ item?.observation }}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>

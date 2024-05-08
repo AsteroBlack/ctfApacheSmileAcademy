@@ -1,0 +1,56 @@
+Update date : Thu Oct 06 04:59:15 GMT 2022
+ 
+ Table 'action_en_masse' found in repository
+ (=) table 'action_en_masse' unchanged
+ 
+ Table 'action_utilisateur' found in repository
+ . Column 'id_category' added
+ . Foreign key 'action_utilisateur_Fk_4' added
+ (*) table 'action_utilisateur' updated : 2 change(s)
+ 
+ Table 'category' found in repository
+ (=) table 'category' unchanged
+ 
+ Table 'civilite' found in repository
+ (=) table 'civilite' unchanged
+ 
+ Table 'demande' found in repository
+ . Column 'motif' added
+ (*) table 'demande' updated : 1 change(s)
+ 
+ Table 'fonctionnalite' found in repository
+ . Column 'deleted_at' added
+ (*) table 'fonctionnalite' updated : 1 change(s)
+ 
+ Table 'historique' found in repository
+ (=) table 'historique' unchanged
+ 
+ Table 'numero_stories' found in repository
+ . Column 'id_category' added
+ . Foreign key 'numero_stories_FK_3' added
+ (*) table 'numero_stories' updated : 2 change(s)
+ 
+ Table 'profil' found in repository
+ . Column 'deleted_at' added
+ . Column 'deleted_by' added
+ (*) table 'profil' updated : 2 change(s)
+ 
+ Table 'profil_fonctionnalite' found in repository
+ . Column 'date' deleted
+ . Column 'deleted_at' added
+ . Column 'code' added
+ . Column 'libelle' added
+ (*) table 'profil_fonctionnalite' updated : 4 change(s)
+ 
+ Table 'status' found in repository
+ (=) table 'status' unchanged
+ 
+ Table 'tache' found in repository
+ . Column 'date_demande' added
+ (*) table 'tache' updated : 1 change(s)
+ 
+ Table 'type_demande' found in repository
+ (=) table 'type_demande' unchanged
+ 
+ Table 'user' found in repository
+ (=) table 'user' unchanged

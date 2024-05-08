@@ -1,0 +1,197 @@
+<section class="content">
+    <div class="content-block">
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="header mb-3">
+              <h2><strong>Log Alertes</strong></h2>
+            </div>
+            <div class="body">
+              <section
+                class="section-parametre"
+                [ngBusy]="{
+                  busy: busyGet,
+                  message: 'Veuillez patienter ...',
+                  backdrop: false
+                }"
+              >
+                <div class="">
+                  <div class="row clearfix">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <div class="card">
+                        <div class="body table-responsive">
+                          <table
+                            class="table table-condensed table-striped table-hover"
+                          >
+                            <thead>
+                              <tr>
+                                <th colspan="12">
+                                  <div class="test">
+                                    <div class="">
+                                      <input
+                                        [(ngModel)]="searchTerm"
+                                        class="form-control custom-input pull-left"
+                                        placeholder="Rechercher ..."
+                                        (keyup)="currentPage = 1; filterItems()"
+                                      />
+                                    </div>
+
+                                    <div class="date">
+                                        <div
+                                        class="btn custom_btn_primary sub-menu"
+                                        >
+                                        <span
+                                          class="p-2 spanstyle"
+                                          id="dateNumeroSensible"
+                                          appDateRangeSelector
+                                          (periode)="onPeriodeEmitted($event)"
+                                          (click)="isActiveDate = true"
+                                          title="Filtrer par période"
+                                        >
+                                          <em
+                                            class="icofont icofont-ui-calendar"
+                                          ></em
+                                          >&nbsp; <span></span>&nbsp;<em
+                                            class="fa fa-caret-down"
+                                          ></em>
+                                        </span>
+                                      </div>
+    
+                                      <ng-container *simSwapIsGranted="'FUNC-UHFU'">
+                                        <div class="btn custom_btn_primary import-file btn-import">
+                                          <button (click)="exportData()" class="btn btnHover"><i class="fa fa-file"></i> Exporter </button>
+                                        </div>
+                                      </ng-container>
+                                    </div>
+                                    
+  
+  
+                                  </div>
+  
+  
+                                </th>
+                              </tr>
+  
+                              <tr class="custom-table-head">
+                                <th>
+                                  <a
+                                    style="cursor: pointer"
+                                    (click)="currentPage = 1; getItems()"
+                                    title="Actualiser"
+                                  >
+                                    <i class="fa fa-redo-alt"></i></a
+                                  >&nbsp;&nbsp; #
+                                </th>
+                                <th>Login</th>
+                                <th>Nom prenoms</th>
+                                <th>Numéro</th>
+                                <th>Action effectué</th>
+                                <th>Statut</th>
+                                <th>Profile</th>
+                                <th>Date et Heure</th>
+                                <th>En masse</th>
+                                <th>IsNotify</th>
+                                <th>Message</th>
+                                <th>Action Statut</th>
+                              </tr>
+                            </thead>
+  
+                            <tbody>
+                              <tr *ngFor="let item of items; let indice = index">
+                                <td class="txt-align-center">{{ indice + 1 }}</td>
+                                <td>{{ item?.userLogin ? item.userLogin : "N/A" }}</td>
+                                <td>{{ item?.userNom ? item.userNom : "N/A" }} {{ item?.userPrenom ? item.userPrenom : "N/A"}}</td>
+                                <td>{{ item?.numero ? item.numero : "N/A"}}</td>
+                                <td>{{ item?.statusCode ? item.statusCode : "N/A"}}</td>
+                                <td>{{item?.statut ? item.statut : "N/A"}}</td>
+                                <td>{{ item?.profilLibelle ? item.profilLibelle : "N/A" }}</td>
+                                <td>{{ item?.createdAt ? item.createdAt : "N/A" }}</td>
+                                <td>{{ item?.isEnMasse == true ? "OUI" : "NON" }}</td>
+                                <td>{{ item?.isNotify == true ? "OUI" : "NON" }}</td>
+                                <td>                                  
+                                    <i class="fa fa-eye" (click)="openModal(item, templateMessage)" ></i>
+
+                                </td>
+                                <td>{{ item?.statutAction ? item.statutAction : "N/A" }}</td>
+                              </tr>
+                            </tbody>
+  
+                            <tfoot>
+                              <tr *ngIf="items && items.length > 0">
+                                <td colspan="4">
+                                  <div class="row pagination-part">
+                                    <div
+                                      class="col-md-9"
+                                      style="text-align: center"
+                                    >
+                                      <pagination
+                                        [boundaryLinks]="true"
+                                        [itemsPerPage]="itemsPerPage"
+                                        [totalItems]="totalItems"
+                                        [(ngModel)]="currentPage"
+                                        class="pagination-sm"
+                                        previousText="&lsaquo;"
+                                        nextText="&rsaquo;"
+                                        firstText="&laquo;"
+                                        lastText="&raquo;"
+                                        (pageChanged)="pageChanged($event)"
+                                      ></pagination>
+                                    </div>
+  
+                                    <div class="col-md-3">
+                                      <span class="span_total_entree pull-right"
+                                        >Total : {{ totalItems }}</span
+                                      >
+                                    </div>
+                                  </div>
+                                </td>
+                              </tr>
+  
+                              <tr *ngIf="!items || items.length == 0">
+                                <td colspan="12">
+                                  <div class="col-md-12 txt-align-center">
+                                    Aucune données disponible
+                                  </div>
+                                </td>
+                              </tr>
+                            </tfoot>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <ng-template #templateMessage>
+                <div class="modal-header">
+                  <h4 class="modal-title pull-left">Message</h4>
+                  <button mat-icon-button class="pull-right" (click)="modalRef.hide()" aria-label="Close dialog">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="col">
+                    <label>Commentaire</label>
+                    <textarea class="form-control custom-input" [(ngModel)]="itemToSave.message" id="" cols="30"
+                      rows="10" disabled></textarea>
+                  </div>
+                  <div class="row btn-manger-part">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                      <!-- <button [disabled]="sendToAnalysePerformProgress" type="button" class="btn btn-md custom_btn_primary pull-right" (click)="SendToAnalysePerform()">
+                        {{ sendToAnalysePerformProgress ? 'En cours' : 'Confirmer' }}
+                      </button> -->
+                      <button type="button" class="btn btn-md btn-cancel pull-right" (click)="modalRef.hide()">
+                        Fermer
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

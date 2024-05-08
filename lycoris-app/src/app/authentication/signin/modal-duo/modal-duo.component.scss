@@ -1,0 +1,71 @@
+.btn-manger-part {
+  border-top: 1px solid #eceeee;
+  padding-top: 15px;
+
+  .btn-cancel {
+    margin-right: 10px;
+  }
+
+  button {
+    margin: 5px;
+
+    &.btn-envoyer-caisse {
+      background-color: #5dad64 !important;
+      border: 1px solid #5dad64;
+
+      &:hover {
+        background-color: #fff !important;
+        color: #5dad64 !important;
+      }
+    }
+
+    &.btn-print {
+      background-color: #ff729a !important;
+      border: 1px solid #ff729a;
+
+      &:hover {
+        background-color: #fff !important;
+        color: #ff729a !important;
+      }
+    }
+  }
+}
+
+.table-details {
+  thead {
+    tr {
+      th {
+        padding: 2px;
+        font-size: 12px;
+        height: 25px;
+      }
+    }
+
+    tr {
+      td {
+        font-size: 12px;
+        height: 30px;
+      }
+    }
+  }
+}
+
+.btn-add {
+  margin-top: 20px;
+  background-color: #489aff;
+  color: #fff;
+}
+
+.derniere-info {
+  color: red;
+  font-size: 11px;
+}
+
+.custom-input-details-cons {
+  font-size: 11px !important;
+}
+
+::ng-deep .cdk-overlay-container {
+  position: fixed;
+  z-index: 10000;
+}

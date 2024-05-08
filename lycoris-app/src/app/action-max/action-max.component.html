@@ -1,0 +1,186 @@
+<section class="content">
+    <div class="content-block">
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="header mb-3">
+              <h2><strong>Action de masse</strong></h2>
+            </div>
+            <div class="body">
+              <section
+                class="section-parametre"
+                [ngBusy]="{
+                  busy: busyGet,
+                  message: 'Veuillez patienter ...',
+                  backdrop: false
+                }"
+              >
+                <div class="">
+                  <div class="row clearfix">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <div class="card">
+                        <div class="body table-responsive">
+                          <table class="table table-condensed table-striped table-hover">
+                            <thead>
+                              <tr>
+                                <th colspan="11">
+                                    
+                                 <!--  <div class="col-md-3 pull-left btnMarge">
+                                      <button
+                                      type="button"
+                                      id="div-import"
+                                      class="import-file btn custom_btn_primary sub-menu"
+                                      (click)="openSearch()"
+                                    >
+                                      <em
+                                        class="fa fa-search" 
+                                        style="
+                                          font-size: 16px;
+                                          position: relative;
+                                          bottom: 1px;
+                                        "
+                                      ></em>
+                                      Rechercher
+                                    </button>
+                                    </div> --> 
+                                    
+                                    
+                                    <div class="posit col-md-2 pull-right btnMarge">
+                                      
+                                    <div class="btn custom_btn_primary sub-menu">
+                                      <span
+                                        class="p-2 spanstyle"
+                                        id="dateActionMax"
+                                        appDateRangeSelector
+                                        (periode)="onPeriodeEmitted($event)"
+                                      >
+                                        <em class="icofont icofont-ui-calendar"></em>&nbsp;
+                                        <span></span>&nbsp;<em class="fa fa-caret-down"></em>
+                                      </span>
+                                    </div>
+                                  
+                                    </div>
+  
+                                   
+                                    
+                                    <div > <!--class="col-md-9"-->
+                                      <div class="posit col-md-1 pull-right btnImporter">
+                                        <button
+                                          type="button"
+                                          id="div-import"
+                                          class="import-file btn custom_btn_primary sub-menu"
+                                          (click)="openPreviewImport()"
+                                          [disabled] = "etatImport.etat == '1' ? true : false"
+                                        >
+                                          <em
+                                            class="fas fa-upload"
+                                            style="
+                                              font-size: 16px;
+                                              position: relative;
+                                              bottom: 1px;
+                                            "
+                                          ></em>
+                                          Importer
+                                        </button>
+                                      </div>
+                                    </div>
+                                    
+                                
+                                </th>
+                              </tr>
+                              <tr class="custom-table-head">
+                                <th>
+                                  <a
+                                    style="cursor: pointer"
+                                    (click)="currentPage = 1; getItems()"
+                                    title="Actualiser"
+                                  >
+                                    <em class="fa fa-redo-alt"></em></a
+                                  >&nbsp;&nbsp; #
+                                </th>
+                                <th>Code</th>
+                                <th>Libelle</th>
+                                <th>Date et Heure création</th>
+                                <th class="txt-align-center">Actions</th>
+                              </tr>
+                            </thead>
+  
+                            <tbody>
+                              <tr *ngFor="let item of items; let indice = index">
+                                <td class="txt-align-center">{{ indice + 1 }}</td>
+                                <td>
+                                  {{ item?.code}}
+                                </td>
+                                <td>{{ item?.libelle }}</td>
+
+                                <td>{{ item?.createdAt }}</td> <!--| date: "dd/MM/yyyy H:mm:ss" -->
+                                
+                                <td class="iconAction">
+                                  
+                                        <ng-container>
+                                          <a
+                                          href="{{item?.lienFichier}}"
+                                          title="Téléchargé"
+                                          class="custom-btn-lock"
+                                        >
+                                          <em class="fa fa-download"></em
+                                        ></a>
+                                        </ng-container>
+
+                                </td>
+                              </tr>
+                            </tbody>
+  
+                            <tfoot>
+                              <tr *ngIf="items && items.length > 0">
+                                <td colspan="4">
+                                  <div class="row pagination-part">
+                                    <div
+                                      class="col-md-9"
+                                      style="text-align: center"
+                                    >
+                                      <pagination
+                                        [boundaryLinks]="true"
+                                        [itemsPerPage]="itemsPerPage"
+                                        [totalItems]="totalItems"
+                                        [(ngModel)]="currentPage"
+                                        class="pagination-sm"
+                                        previousText="&lsaquo;"
+                                        nextText="&rsaquo;"
+                                        firstText="&laquo;"
+                                        lastText="&raquo;"
+                                        (pageChanged)="pageChanged($event)"
+                                      ></pagination> <!--[totalItems]="totalItems"-->
+                                    </div>
+  
+                                    <div class="col-md-3">
+                                      <span class="span_total_entree pull-right"
+                                        >Total : {{ items.length }}</span> <!--totalItems--->
+                                    </div>
+                                  </div>
+                                </td>
+                              </tr>
+  
+                              <tr *ngIf="!items || items.length == 0">
+                                <td colspan="12">
+                                  <div class="col-md-12 txt-align-center">
+                                    Aucune données disponible
+                                  </div>
+                                </td>
+                              </tr>
+                            
+                            </tfoot>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

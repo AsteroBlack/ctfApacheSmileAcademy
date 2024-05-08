@@ -1,0 +1,27 @@
+Update date : Wed Jun 29 14:50:30 GMT 2022
+ 
+ Table 'action_utilisateur' found in repository
+ (=) table 'action_utilisateur' unchanged
+ 
+ Table 'civilite' found in repository
+ (=) table 'civilite' unchanged
+ 
+ Table 'fonctionnalite' found in repository
+ (=) table 'fonctionnalite' unchanged
+ 
+ Table 'historique' found in repository
+ (=) table 'historique' unchanged
+ 
+ Table 'profil' found in repository
+ (=) table 'profil' unchanged
+ 
+ Table 'profil_fonctionnalite' found in repository
+ . Foreign key 'fk_profil_fonctionnalite_1' added
+ . Foreign key 'fk_profil_fonctionnalite_2' added
+ (*) table 'profil_fonctionnalite' updated : 2 change(s)
+ 
+ Table 'status' found in repository
+ (=) table 'status' unchanged
+ 
+ Table 'user' found in repository
+ (=) table 'user' unchanged

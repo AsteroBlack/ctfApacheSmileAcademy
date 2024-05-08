@@ -1,0 +1,270 @@
+.btn-manger-part {
+  border-top: 1px solid #eceeee;
+  padding-top: 15px;
+
+  .btn-cancel {
+    margin-right: 10px;
+  }
+
+  button {
+    margin: 5px;
+
+    &.btn-envoyer-caisse {
+      background-color: #5dad64 !important;
+      border: 1px solid #5dad64;
+
+      &:hover {
+        background-color: #fff !important;
+        color: #5dad64 !important;
+      }
+    }
+
+    &.btn-print {
+      background-color: #ff729a !important;
+      border: 1px solid #ff729a;
+
+      &:hover {
+        background-color: #fff !important;
+        color: #ff729a !important;
+      }
+    }
+  }
+}
+
+.table-details {
+  thead {
+    tr {
+      th {
+        padding: 2px;
+        font-size: 12px;
+        height: 25px;
+      }
+    }
+
+    tr {
+      td {
+        font-size: 12px;
+        height: 30px;
+      }
+    }
+  }
+}
+
+.btn-add {
+  margin-top: 20px;
+  background-color: #489aff;
+  color: #fff;
+}
+
+.derniere-info {
+  color: red;
+  font-size: 11px;
+}
+
+.custom-input-details-cons {
+  font-size: 11px !important;
+}
+
+::ng-deep .cdk-overlay-container {
+  position: fixed;
+  z-index: 10000;
+}
+
+.arrange {
+  display: flex;
+  align-items: center;
+  //width: 30%;
+  //border: 2px solid red;
+}
+
+.arrange button, .liste-numbers, .div-select{
+  margin-left: 1rem;
+}
+
+.test-input {
+  width: 65%;
+}
+
+.test{
+  display: flex;
+  justify-content: space-between;
+  //border: 2px solid red;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.action{
+  margin-right: 0.5rem;
+}
+
+.table-cell {
+  white-space: nowrap;
+}
+
+// #options {
+//   margin-left: 0.5rem;
+//   width: 35%;
+// }
+
+.toggle-button {
+  // position: relative;
+  // display: inline-block;
+  // margin-top: 0.5rem;
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toggle-button input[type="checkbox"] {
+  display: none;
+}
+
+.toggle-button label {
+  display: block;
+  width: 50px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: #ccc;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.toggle-button label:after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+  transition: left 0.3s ease-in-out;
+}
+
+.toggle-button input[type="checkbox"]:checked + label {
+  background-color: #ff7900;
+}
+
+.toggle-button input[type="checkbox"]:checked + label:after {
+  left: calc(100% - 25px);
+}
+
+.toggle-text {
+  // position: absolute;
+  // top: 8px;
+  // left: 60px;
+  color: #666;
+  font-weight: bold;
+}
+
+/* Styles pour le conteneur de liste */
+.dropdown-list {
+  border: 1px solid #cccccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  width: 125px; /* ou la largeur que vous préférez */
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+}
+
+/* Styles pour chaque élément de la liste */
+.dropdown-list li {
+  list-style: none;
+  padding: 10px;
+  border-bottom: 1px solid #eeeeee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Supprimer la bordure du dernier élément */
+.dropdown-list li:last-child {
+  border-bottom: none;
+}
+
+/* Styles pour le bouton de suppression */
+.dropdown-list button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #ff0000;
+}
+
+/* Styles pour le bouton de suppression au survol */
+.dropdown-list button:hover {
+  text-decoration: underline;
+}
+
+/* Styles pour l'input et le bouton d'ajout */
+.add-item-input {
+  margin-bottom: 10px;
+}
+
+.add-item-button {
+  margin-left: 5px;
+}
+
+
+.div-btn-numbers{
+  display: flex;
+  width: 60%;
+}
+
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.checkbox-item label {
+  margin-left: 5px;
+}
+
+/* Styles pour le bouton de suppression */
+.btn-supprimer {
+  margin-top: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f44336;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-supprimer:hover {
+  background-color: #d32f2f;
+}
+
+.test-num{
+  display: flex;
+  border: 2px solid red;
+  width: 70%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.div-multi-items-in{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  //border: 2px solid red;
+}
+
+.div-multi-items{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.multi-item{
+  margin-right: 1rem;
+}
+

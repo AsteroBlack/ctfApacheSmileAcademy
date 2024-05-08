@@ -1,0 +1,122 @@
+#set ($urlBase = "{{main_url}}")
+#set ($collection_name = "${ROOT_PKG}" )
+#set ( $listOfIgnoreAttrib = ["isDeleted", "createdAt", "createdBy", "updatedAt", "updatedBy"])
+{
+    "info": {
+        "_postman_id": "project.id",
+        "name": "$collection_name.replace(".", "_")",
+        "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+    },
+    "item": [
+#set ($count = $selectedEntities.size())
+#set ($index = 0)
+#foreach( $entity in $selectedEntities )
+#set ($index = $index + 1)
+        {
+            "name": "${fn.uncapitalize($entity.name)}",
+            "item": [
+                {
+                    "name": "${fn.uncapitalize($entity.name)}-getByCriteria",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+#set ($countGet = $entity.attributesCount)
+#set ($indexGet = 0)
+                            "raw": "{\n\t\"user\":\"1\",\n\t\"isSimpleLoading\":false,\n\t\"data\":{\n  #foreach($attrib in $entity.attributes)#set ($indexGet = $indexGet + 1)\t\t\"$attrib.name\": \"\"#if($indexGet != $countGet),\n#end#end\n\t}  \n}"
+                        },
+                        "url": "{{main_url}}/${fn.uncapitalize($entity.name)}/getByCriteria"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "${fn.uncapitalize($entity.name)}-create",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+#set ($countCreate = 0)
+#foreach ( $attrib in $entity.nonKeyAttributes )
+#if(!$listOfIgnoreAttrib.contains($attrib.name))
+#set ($countCreate = $countCreate + 1)
+#end
+#end
+#set ($indexCreate = 0)
+                            "raw": "{\n\t\"user\":\"1\",\n\t\"datas\":[\n\t\t{\n  #foreach($attrib in $entity.nonKeyAttributes)#if(!$listOfIgnoreAttrib.contains($attrib.name))#set ($indexCreate = $indexCreate + 1)\t\t\t\"$attrib.name\": \"\"#if($indexCreate != $countCreate),\n#end#end#end\n\t\t} \n\t]  \n}"
+                        },
+                        "url": "{{main_url}}/${fn.uncapitalize($entity.name)}/create"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "${fn.uncapitalize($entity.name)}-update",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+#set ($countUpdate = 0)
+#foreach ( $attrib in $entity.attributes )
+#if(!$listOfIgnoreAttrib.contains($attrib.name))
+#set ($countUpdate = $countUpdate + 1)
+#end
+#end
+#set ($indexUpdate = 0)
+                            "raw": "{\n\t\"user\":\"1\",\n\t\"datas\":[\n\t\t{\n  #foreach($attrib in $entity.attributes)#if(!$listOfIgnoreAttrib.contains($attrib.name))#set ($indexUpdate = $indexUpdate + 1)\t\t\t\"$attrib.name\": \"\"#if($indexUpdate != $countUpdate),\n#end#end#end\n\t\t} \n\t]  \n}"
+                        },
+                        "url": "{{main_url}}/${fn.uncapitalize($entity.name)}/update"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "${fn.uncapitalize($entity.name)}-delete",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+#set ($countDelete = $entity.keyAttributesCount)
+#set ($indexDelete = 0)
+                            "raw": "{\n\t\"user\":\"1\",\n\t\"datas\":[\n\t\t{\n  #foreach($attrib in $entity.keyAttributes)#set ($indexDelete = $indexDelete + 1)\t\t\t\"$attrib.name\": \"\"#if($indexDelete != $countDelete),\n#end#end\n\t\t} \n\t]  \n}"
+                        },
+                        "url": "{{main_url}}/${fn.uncapitalize($entity.name)}/delete"
+                    },
+                    "response": []
+                }
+            ]
+     #if ($index != $count)
+		},
+#else
+		}
+#end
+#end
+    ],
+     "variable": [
+        {
+            "key": "main_url",
+            "value": "http://localhost:8080"
+        }
+    ]
+}

@@ -1,0 +1,59 @@
+##-------------------------------------------------------------------------------------------------------
+## JPA beans suffix
+#set ( $env.entityClassNameSuffix = "" )
+##-------------------------------------------------------------------------------------------------------
+#if( $entity.hasCompositePrimaryKey() )
+#set( $entityKeyType = ${entity.name} + "EntityKey" )
+#else
+#if($entity.keyAttributesCount > 0)
+#set( $entityKeyType = ${entity.keyAttributes[0].formattedType(0)} )
+#end
+#if($entity.keyAttributesCount <= 0)
+#set( $entityKeyType = "Integer" )
+#end
+#end
+##-------------------------------------------------------------------------------------------------------
+package ${target.javaPackageFromFolder(${SRC})};
+
+#foreach( $import in $java.imports($entity) )
+import $import;
+#end
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Locale;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import ${ROOT_PKG}.utils.*;
+import ${ROOT_PKG}.utils.dto.*;
+import ${ROOT_PKG}.utils.contract.*;
+import ${ROOT_PKG}.utils.contract.Request;
+import ${ROOT_PKG}.utils.contract.Response;
+import ${ENTITY_PKG}.*;
+#if ( $entity.hasCompositePrimaryKey() )
+import ${ENTITY_PKG}.${entityKeyType};
+#end
+
+/**
+ * Repository customize : ${entity.name}.
+ */
+@Repository
+public interface _${entity.name}Repository {
+	default List<String> _generateCriteria(${entity.name}Dto dto, HashMap<String, java.lang.Object> param, Integer index, Locale locale) throws Exception {
+		List<String> listOfQuery = new ArrayList<String>();
+
+		// PUT YOUR RIGHT CUSTOM CRITERIA HERE
+
+		return listOfQuery;
+	}
+}

@@ -1,0 +1,44 @@
+.btn-add-document{
+    color: rgb(52, 100, 163);
+    border: 1px solid rgb(52, 100, 163);
+}
+
+.btn-defaut-supprimer{
+    color: #fff;
+    background-color: rgb(224, 114, 114);
+    font-size: 11px;
+    padding: 5px;
+}
+
+.img-add{
+    height: 80px;
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid #eceeee;
+}
+
+.isBiggerImg{
+    position: absolute;
+    width: 354px;
+    height: auto;
+    z-index: 103;
+    left: 60px;
+    background: #ffffff !important;
+    border-radius: 0;
+    box-shadow: 1px 18px 52px 20px #6c7171;
+    border: 5px solid #ffffff;
+    animation: fade-left 500ms ease-in-out;
+    transition: all 200ms ease-in-out;
+}
+
+.link-close
+{
+    display: block;
+    position: absolute;
+    text-align: right;
+    left: 393px;
+    z-index: 200;
+    color: #000;
+    background: #fff;
+    padding: 10px 15px;
+}

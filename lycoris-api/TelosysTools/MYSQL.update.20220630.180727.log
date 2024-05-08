@@ -1,0 +1,43 @@
+Update date : Thu Jun 30 18:07:27 GMT 2022
+ 
+ Table 'action_utilisateur' found in repository
+ . Column 'date' deleted
+ . Column 'is_validated' deleted
+ (*) table 'action_utilisateur' updated : 2 change(s)
+ 
+ Table 'civilite' found in repository
+ . Column 'created_at' added
+ . Column 'created_by' added
+ . Column 'updated_at' added
+ . Column 'updated_by' added
+ . Column 'is_deleted' added
+ (*) table 'civilite' updated : 5 change(s)
+ 
+ Table 'fonctionnalite' found in repository
+ . Column 'is_validated' deleted
+ (*) table 'fonctionnalite' updated : 1 change(s)
+ 
+ Table 'historique' found in repository
+ . Column 'id_user' deleted
+ . Column 'is_validated' deleted
+ . Column 'date' deleted
+ . Column 'nom' added
+ . Column 'prenom' added
+ (*) table 'historique' updated : 5 change(s)
+ 
+ Table 'profil' found in repository
+ . Column 'is_validated' deleted
+ (*) table 'profil' updated : 1 change(s)
+ 
+ Table 'profil_fonctionnalite' found in repository
+ . Column 'date' deleted
+ . Column 'is_validated' deleted
+ (*) table 'profil_fonctionnalite' updated : 2 change(s)
+ 
+ Table 'status' found in repository
+ . Column 'is_validated' deleted
+ (*) table 'status' updated : 1 change(s)
+ 
+ Table 'user' found in repository
+ . Column 'is_connected' added
+ (*) table 'user' updated : 1 change(s)

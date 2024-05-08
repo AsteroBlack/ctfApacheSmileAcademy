@@ -1,0 +1,24 @@
+spring.datasource.url=jdbc:mysql://localhost:3306/$fn.get("PROJECT_NAME","to.be.defined")?autoReconnect=true&useSSL=false
+spring.datasource.username=root
+spring.datasource.password=root
+spring.datasource.driverClassName=com.mysql.jdbc.Driver
+
+minio.access.name=minio
+minio.access.secret=minio123
+minio.url=http://127.0.0.1:9000
+
+minio.bucket.name=microservice-ged-api
+minio.default.folder=/
+
+url.root= http://127.0.0.1:8080/
+url.admin = http://127.0.0.1:8080/
+
+parametre.dossier = /Users/kouadio/Desktop/
+path.file.image   = /Users/kouadio/Desktop/Donnees/
+path.root         = /Users/kouadio/Desktop/Donnes/
+
+url.image.link=files/
+otherfile.directory=files/
+image.directory=files/
+textfile.directory=files/
+video.directory=files/

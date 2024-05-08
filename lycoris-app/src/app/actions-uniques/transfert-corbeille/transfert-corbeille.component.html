@@ -1,0 +1,422 @@
+<section class="content">
+  <div class="content-block">
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="header mb-3">
+            <h2><strong>Transfert de corbeille unique</strong></h2>
+          </div>
+          <div class="body">
+            <section
+              class="section-parametre"
+              [ngBusy]="{
+                busy: busyGet,
+                message: 'Veuillez patienter ...',
+                backdrop: false
+              }"
+            >
+              <div class="">
+                <div class="row clearfix">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="card">
+                      <div class="body table-responsive">
+                        <table
+                          class="table table-condensed table-striped table-hover"
+                        >
+                          <thead>
+                            <tr>
+                              <th colspan="15">
+                                <div class="test">
+                                  <!-- <div class="">
+                                      <button
+                                        type="button"
+                                        id="div-import"
+                                        class="import-file btn custom_btn_primary sub-menu"
+                                        (click)="openSearch()"
+                                      >
+                                        <em
+                                          class="fa fa-search"
+                                          style="
+                                            font-size: 16px;
+                                            position: relative;
+                                            bottom: 1px;
+                                          "
+                                        ></em>
+                                        Rechercher sur BSCS
+                                      </button>
+                                    </div> -->
+
+                                  <div class="">
+                                    <input
+                                      [(ngModel)]="searchTerm"
+                                      class="form-control custom-input pull-left"
+                                      placeholder="Rechercher Port, numéro série"
+                                      (keyup)="currentPage = 1; filterItems()"
+                                    />
+                                  </div>
+
+                                  <!-- <div class="toggle-button">
+                                      <input
+                                        type="checkbox"
+                                        id="toggle"
+                                        [(ngModel)]="isOn"
+                                        (change)="onChangeToggle()"
+                                      />
+                                      <label for="toggle"></label>
+                                      <span class="toggle-text">{{
+                                        isOn ? "Corail" : "Bscs"
+                                      }}</span>
+                                    </div> -->
+
+                                  <div class="toggle-button">
+                                    <input
+                                      type="checkbox"
+                                      id="toggle-2"
+                                      [(ngModel)]="isOnUnBlocked"
+                                      (change)="onChangeToggleIdUnBloque()"
+                                    />
+                                    <label for="toggle-2"></label>
+                                    <span class="toggle-text">{{
+                                      isOnUnBlocked
+                                        ? "Numéro(s) Débloqué(s)"
+                                        : "Numéro(s) Bloqué(s)"
+                                    }}</span>
+                                  </div>
+
+                                  <div
+                                    *ngIf="datasCreateDem.length > 0"
+                                    @animationSelectedActions
+                                    class=""
+                                  >
+                                    <div class="div-multi-items-in">
+                                      <ng-container *simSwapIsGranted="'FUNC-AY0K'">
+                                        <div class="multi-item" *ngIf="checkAuthority(datasCreateDem, 4)">
+                                          <a
+                                            title="Transfert de corbeille"
+                                            (click)="
+                                              demandeTransfertCorb(
+                                                datasCreateDem,
+                                                2
+                                              )
+                                            "
+                                            class="custom-btn-delete"
+                                          >
+                                            <em class="fa fa-redo-alt"></em
+                                          ></a>
+                                        </div>
+                                      </ng-container>
+                                    </div>
+                                  </div>
+
+                                  <div class="date">
+                                    <div
+                                      class="btn custom_btn_primary sub-menu"
+                                    >
+                                      <span
+                                        class="p-2 spanstyle"
+                                        id="dateNumeroSensible"
+                                        appDateRangeSelector
+                                        (periode)="onPeriodeEmitted($event)"
+                                        (click)="isActiveDate = true"
+                                        title="Filtrer par période"
+                                      >
+                                        <em
+                                          class="icofont icofont-ui-calendar"
+                                        ></em
+                                        >&nbsp; <span></span>&nbsp;<em
+                                          class="fa fa-caret-down"
+                                        ></em>
+                                      </span>
+                                    </div>
+
+                                    <ng-container>
+                                      <div
+                                        *ngIf="filePath"
+                                        class="btn custom_btn_primary import-file btn-import"
+                                      >
+                                        <button
+                                          (click)="exporterFichier()"
+                                          class="btn btnHover"
+                                        >
+                                        <i class="fa fa-file"></i>
+                                          Exporter 
+                                        </button>
+                                      </div>
+                                    </ng-container>
+                                  </div>
+                                </div>
+
+                                <!--
+                                    <div class="posit col-md-2 pull-right btnMarge">
+                                      <button (click)="exportData()" class="import-file btn custom_btn_primary sub-menu"> Exporter <i class="fa fa-file"></i></button>
+                                    </div>
+  
+                                    <div *simSwapIsGranted ="'NJ5H'" > class="col-md-9"
+                                      <div class="posit col-md-1 pull-right btnImporter">
+                                        <button
+                                          type="button"
+                                          id="div-import"
+                                          class="import-file btn custom_btn_primary sub-menu"
+                                          (click)="openPreviewImport()"
+                                          [disabled] = "etatImport.etat == '1' ? true : false"
+                                        >
+                                          <em
+                                            class="fas fa-upload"
+                                            style="
+                                              font-size: 16px;
+                                              position: relative;
+                                              bottom: 1px;
+                                            "
+                                          ></em>
+                                          Importer
+                                        </button>
+                                      </div>
+                                    </div> -->
+                              </th>
+                            </tr>
+
+                            <div class="table-responsive">
+                              <table>
+                                <thead>
+                                  <tr class="custom-table-head">
+                                    <th></th>
+                                    <th>
+                                      <a
+                                        style="cursor: pointer"
+                                        (click)="currentPage = 1; getItemsAll()"
+                                        title="Actualiser"
+                                      >
+                                        <em class="fa fa-redo-alt"></em></a
+                                      >&nbsp;&nbsp; #
+                                    </th>
+                                    <th>Utilisateur</th>
+                                    <th>Numéro</th>
+                                    
+                                    <th>Offre</th>
+                                    <th>Numéro Port</th>
+                                    <th>Numéro Série</th>
+                                    <th>Categorie</th>
+                                    <th>Statut SIM</th>
+                                    <th>Motif</th>
+                                    <!--- <th>Statut Action</th> -->
+                                    <th>Date Action</th>
+                                    <th>Mise en Machine</th>
+                                    <th>Date Mise en Machine</th>
+                                    <th>Statut TELCO</th>
+
+                                    <th class="txt-align-center">Actions</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr
+                                    *ngFor="
+                                      let item of items;
+                                      let indice = index
+                                    "
+                                    class="ligne"
+                                  >
+                                    <td>
+                                      <input
+                                        type="checkbox"
+                                        [ngModelOptions]="{
+                                          standalone: true
+                                        }"
+                                        name="ligneChecked"
+                                        [(ngModel)]="item.isChecked"
+                                        (change)="setCheckedItem(item, $event)"
+                                      />
+                                    </td>
+                                    <td class="txt-align-center">
+                                      {{ indice + 1 }}
+                                    </td>
+                                    <td>{{ item?.userLogin }}</td>
+                                    <td class="table-cell">
+                                      {{
+                                        item?.numero | mask : "00 00 00 00 00"
+                                      }}
+                                    </td>
+                                    
+                                    <td>{{ item?.offerName }}</td>
+                                    <td>{{ item?.portNumber }}</td>
+                                    <td>{{ item?.serialNumber }}</td>
+                                    <td>{{ item?.categoryCode }}</td>
+                                    <td>
+                                      <span
+                                        *ngIf="item?.statusCode == 'DEBLOQUE'"
+                                        style="background-color: green"
+                                        class="badge badge-success"
+                                        >{{ item?.statusCode }}</span
+                                      >
+                                      <span
+                                        *ngIf="item?.statusCode == 'BLOQUE'"
+                                        style="
+                                          background-color: rgb(242, 186, 1);
+                                        "
+                                        class="badge badge-danger"
+                                        >{{ item?.statusCode }}</span
+                                      >
+                                      <span
+                                        *ngIf="
+                                          item?.statusCode == 'MISE EN MACHINE'
+                                        "
+                                        style="
+                                          background-color: rgb(50, 111, 233);
+                                        "
+                                        class="badge badge-danger"
+                                        >Mise en Machine</span
+                                      >
+
+                                      <span
+                                        *ngIf="item?.statusCode == 'SUPPRIMER'"
+                                        style="background-color: red"
+                                        class="badge badge-danger"
+                                        >{{ item?.statusCode }}</span
+                                      >
+                                    </td>
+                                    <!-- <td>{{ item?.motif ? item.motif.substring(0, 10) : "N/A" }}</td> -->
+                                    <td>                                  
+                                      <i class="fa fa-eye" (click)="openModal(item, templateMotif)" ></i>
+                                    </td>
+                                    <td>{{ item?.updatedAt }}</td>
+                                    <!--| date: "dd/MM/yyyy H:mm:ss" -->
+                                    <td>
+                                      <span
+                                        *ngIf="item?.isMachine == true"
+                                        style="background-color: green"
+                                        class="badge badge-success"
+                                        >MISE EN MACHINE</span
+                                      >
+
+                                      <span
+                                        *ngIf="item?.isMachine == false"
+                                        style="background-color: red"
+                                        class="badge badge-danger"
+                                        >PAS EN MACHINE</span
+                                      >
+                                    </td>
+                                    <td>{{ item?.lastMachineDate }}</td>
+                                    <!--| date: "dd/MM/yyyy H:mm:ss" -->
+                                    <td>
+                                      <span
+                                        *ngIf="item?.statusBscs == 'Actif'"
+                                        style="background-color: green"
+                                        class="badge badge-success"
+                                        >Actif</span
+                                      >
+
+                                      <span
+                                        *ngIf="item?.statusBscs == false"
+                                        style="background-color: red"
+                                        class="badge badge-danger"
+                                        >Inactif</span
+                                      >
+
+                                      <span
+                                        *ngIf="item?.statusBscs == 'Suspendu'"
+                                        style="background-color: red"
+                                        class="badge badge-danger"
+                                        >Suspendu</span
+                                      >
+                                    </td>
+                                    <td *simSwapIsGranted="'FUNC-AB5G'">
+                                      <ng-container
+                                        *simSwapIsGranted="'FUNC-AY0K'"
+                                      >
+                                        <a
+                                          *ngIf="
+                                            item?.typeNumeroLibelle === 'CORAIL' &&
+                                            !item?.isTransferred
+                                          "
+                                          title="Transfert de corbeille"
+                                          (click)="
+                                            demandeTransfertCorb(item, 2)
+                                          "
+                                          class="custom-btn-delete action"
+                                        >
+                                          <em class="fa fa-redo-alt"></em
+                                        ></a>
+                                      </ng-container>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </thead>
+
+                          <tfoot>
+                            <tr *ngIf="items && items.length > 0">
+                              <td colspan="4">
+                                <div class="row pagination-part">
+                                  <div
+                                    class="col-md-12"
+                                    style="text-align: center"
+                                  >
+                                    <mat-paginator
+                                      *ngIf="items && items.length > 0"
+                                      [pageSizeOptions]="[5, 10, 20, 40, 80]"
+                                      [pageIndex]="currentPage"
+                                      [pageSize]="itemsPerPage"
+                                      [length]="totalItems"
+                                      (page)="pageChanged($event)"
+                                      showFirstLastButtons
+                                    >
+                                    </mat-paginator>
+                                  </div>
+
+                                  <div class="col-md-6">
+                                    <span class="span_total_entree pull-right"
+                                      >Total : {{ items.length }}</span
+                                    >
+                                    <!--totalItems--->
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr *ngIf="!items || items.length == 0">
+                              <td colspan="12">
+                                <div class="col-md-12 txt-align-center">
+                                  Aucune données disponible
+                                </div>
+                              </td>
+                            </tr>
+                          </tfoot>
+                        </table>
+
+                        <ng-template #templateMotif>
+                          <div class="modal-header">
+                            <h4 class="modal-title pull-left">Motif</h4>
+                            <button mat-icon-button class="pull-right" (click)="modalRef.hide()" aria-label="Close dialog">
+                              <mat-icon>close</mat-icon>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="col">
+                              <label>Motif</label>
+                              <textarea class="form-control custom-input" [(ngModel)]="itemToSave.motif ?? valeurVide" id="" cols="30"
+                                rows="10" disabled></textarea>
+                            </div>
+                            <div class="row btn-manger-part">
+                              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                <!-- <button [disabled]="sendToAnalysePerformProgress" type="button" class="btn btn-md custom_btn_primary pull-right" (click)="SendToAnalysePerform()">
+                                  {{ sendToAnalysePerformProgress ? 'En cours' : 'Confirmer' }}
+                                </button> -->
+                                <button type="button" class="btn btn-md btn-cancel pull-right" (click)="modalRef.hide()">
+                                  Fermer
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </ng-template>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

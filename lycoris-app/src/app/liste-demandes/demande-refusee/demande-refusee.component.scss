@@ -1,0 +1,113 @@
+.full-screen-modal {
+    width: 99%;
+  }
+
+  .active {
+    opacity: 1;
+  }
+  .inactive {
+    opacity: 0.4;
+  }
+
+  ::ng-deep .cdk-overlay-container {
+    position: fixed;
+    z-index: 10000;
+  }
+
+  .table-details {
+    thead {
+      tr {
+        th {
+          padding: 2px;
+          font-size: 12px;
+          height: 25px;
+        }
+      }
+
+      tr {
+        td {
+          font-size: 12px;
+          height: 30px;
+        }
+      }
+    }
+  }
+
+  .inpColor{
+    background-color: #f89137
+  }
+
+  ::ng-deep .modal-custo {
+    width: 70%;
+    max-width: none;
+  }
+
+  .statutCode{
+    //border: 1px solid rgb(24, 9, 9);
+    text-transform: uppercase;
+    width: 90%;
+    margin: 0;
+
+  }
+
+  .btnMarge{
+    //border: 1px solid rebeccapurple;
+    margin-top: 1%;
+  }
+
+  .iconAction{
+    //border: 1px solid orangered;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .btnMarge{
+    //border: 1px solid rebeccapurple;
+    margin-top: 1%;
+  }
+
+
+
+  .box-action{
+    display: flex;
+  }
+
+  .date{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    //border: 1px solid green;
+    width: 30%;
+    padding-left: 1.5rem;
+  }
+
+  .test{
+    display: flex;
+    justify-content: space-between;
+    //border: 2px solid red;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .addInput{
+    display: flex;
+    margin-right: 6px; 
+    margin-bottom: 1rem;
+  }
+
+  .addInput:last-child{
+    margin-right: 0;
+  }
+
+  .btn-import{
+    padding: 0 1.5rem 0 1.5rem;
+  }
+
+  .btnHover:hover{
+    color: aliceblue;
+  }
+
+  .table-cell {
+    white-space: nowrap;
+  }

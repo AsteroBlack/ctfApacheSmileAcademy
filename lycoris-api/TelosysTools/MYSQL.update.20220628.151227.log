@@ -1,0 +1,31 @@
+Update date : Tue Jun 28 15:12:27 GMT 2022
+ 
+ Table 'action_utilisateur' found in repository
+ (=) table 'action_utilisateur' unchanged
+ 
+ Table 'civilite' not found in repository
+ (+) table 'civilite' added
+ 
+ Table 'fonctionnalite' found in repository
+ . Column 'code' added
+ (*) table 'fonctionnalite' updated : 1 change(s)
+ 
+ Table 'historique' found in repository
+ (=) table 'historique' unchanged
+ 
+ Table 'profil' found in repository
+ (=) table 'profil' unchanged
+ 
+ Table 'profil_fonctionnalite' found in repository
+ (=) table 'profil_fonctionnalite' unchanged
+ 
+ Table 'status' found in repository
+ (=) table 'status' unchanged
+ 
+ Table 'user' found in repository
+ . Column 'id_civilite' added
+ . Foreign key 'fk_user_2' added
+ (*) table 'user' updated : 2 change(s)
+ 
+ Table 'type_numero' no longer exists in database
+ (-) table 'type_numero' removed

@@ -1,0 +1,217 @@
+<section class="content">
+  <div class="content-block">
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="header mb-3">
+            <h2><strong>Log connexion</strong></h2>
+          </div>
+          <div class="body">
+            <section
+              class="section-parametre"
+              [ngBusy]="{
+                busy: busyGet,
+                message: 'Veuillez patienter ...',
+                backdrop: false
+              }"
+            >
+              <div class="">
+                <div class="row clearfix">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="card">
+                      <div class="body table-responsive">
+                        <table
+                          class="table table-condensed table-striped table-hover"
+                        >
+                          <thead>
+                            <tr>
+                              <th colspan="11">
+                                <div class="test">
+                                  <div class="">
+                                    <input
+                                      [(ngModel)]="searchTerm"
+                                      class="form-control custom-input pull-left"
+                                      placeholder="Rechercher ..."
+                                      (keyup)="
+                                        currentPage = 1;
+                                        isLogUser
+                                          ? filterItemsAllCo()
+                                          : filterItemsFirstCo()
+                                      "
+                                    />
+                                  </div>
+
+                                  <div class="toggle-button">
+                                    <input
+                                      type="checkbox"
+                                      id="toggle"
+                                      [(ngModel)]="isLogUser"
+                                      (change)="getItems()"
+                                    />
+                                    <label for="toggle"></label>
+                                    <span class="toggle-text">{{
+                                      isLogUser
+                                        ? "Toute les connexions"
+                                        : "Première et dernière connexion"
+                                    }}</span>
+                                  </div>
+
+                                  <div class="date">
+                                    <div
+                                      class="btn custom_btn_primary sub-menu mx-2"
+                                    >
+                                      <span
+                                        class="p-2 spanstyle"
+                                        id="dateNumeroSensible"
+                                        appDateRangeSelector
+                                        (periode)="PeriodEmitted($event)"
+                                        (click)="isActiveDate = true"
+                                        title="Filtrer par période"
+                                      >
+                                        <em
+                                          class="icofont icofont-ui-calendar"
+                                        ></em
+                                        >&nbsp; <span></span>&nbsp;<em
+                                          class="fa fa-caret-down"
+                                        ></em>
+                                      </span>
+                                    </div>
+
+                                    <ng-container
+                                      *simSwapIsGranted="'FUNC-XKQN'"
+                                    >
+                                      <div
+                                        *ngIf="filePath"
+                                        class="btn custom_btn_primary import-file btn-import"
+                                      >
+                                        <button
+                                          (click)="exporterFichier()"
+                                          class="btn btnHover"
+                                        >
+                                          <i class="fa fa-file"></i> Exporter
+                                        </button>
+                                      </div>
+                                    </ng-container>
+                                  </div>
+                                </div>
+                              </th>
+                            </tr>
+
+                            <tr class="custom-table-head" *ngIf="isLogUser">
+                              <th>
+                                <a
+                                  style="cursor: pointer"
+                                  (click)="currentPage = 1; getItems()"
+                                  title="Actualiser"
+                                >
+                                  <i class="fa fa-redo-alt"></i></a
+                                >&nbsp;&nbsp; #
+                              </th>
+                              <th>Login</th>
+                              <th>Nom prenoms</th>
+                              <th>Action effectuée</th>
+                              <th>Machine</th>
+                              <th>Adresse ip</th>
+                              <th>Statut connexion</th>
+                              <th>Date et Heure</th>
+                            </tr>
+
+                            <tr class="custom-table-head" *ngIf="!isLogUser">
+                              <th>
+                                <a
+                                  style="cursor: pointer"
+                                  (click)="currentPage = 1; getItems()"
+                                  title="Actualiser"
+                                >
+                                  <i class="fa fa-redo-alt"></i></a
+                                >&nbsp;&nbsp; #
+                              </th>
+                              <th>Login</th>
+                              <th>Première connexion</th>
+                              <th>Dernière connexion</th>
+                              <th>Machine</th>
+                              <th>Adresse ip</th>
+                              <th>Statut connexion</th>
+                            </tr>
+                          </thead>
+
+                          <tbody *ngIf="isLogUser">
+                            <tr *ngFor="let item of items; let indice = index">
+                              <td class="txt-align-center">{{ indice + 1 }}</td>
+                              <td>{{ item?.login ?? "N/A" }}</td>
+                              <td>
+                                {{ item?.nom ?? "N/A" }}
+                                {{ item?.prenom ?? "N/A" }}
+                              </td>
+                              <td>{{ item?.actionService ?? "N/A" }}</td>
+                              <td>{{ item?.machine ?? "N/A" }}</td>
+                              <td>{{ item?.ipadress ?? "N/A" }}</td>
+                              <td>{{ item?.statusConnection ?? "N/A" }}</td>
+                              <td>{{ item?.createdAt ?? "N/A" }}</td>
+                            </tr>
+                          </tbody>
+
+                          <tbody *ngIf="!isLogUser">
+                            <tr *ngFor="let item of items; let indice = index">
+                              <td class="txt-align-center">{{ indice + 1 }}</td>
+                              <td>{{ item?.login ?? "N/A" }}</td>
+                              <td>{{ item?.firstConnection ?? "N/A" }}</td>
+                              <td>{{ item?.lastConnection ?? "N/A" }}</td>
+                              <td>{{ item?.machine ?? "N/A" }}</td>
+                              <td>{{ item?.ipadress ?? "N/A" }}</td>
+                              <td>{{ item?.statusConnection ?? "N/A" }}</td>
+                            </tr>
+                          </tbody>
+
+                          <tfoot>
+                            <tr *ngIf="items && items.length > 0">
+                              <td colspan="4">
+                                <div class="row pagination-part">
+                                  <div
+                                    class="col-md-9"
+                                    style="text-align: center"
+                                  >
+                                    <pagination
+                                      [boundaryLinks]="true"
+                                      [itemsPerPage]="itemsPerPage"
+                                      [totalItems]="totalItems"
+                                      [(ngModel)]="currentPage"
+                                      class="pagination-sm"
+                                      previousText="&lsaquo;"
+                                      nextText="&rsaquo;"
+                                      firstText="&laquo;"
+                                      lastText="&raquo;"
+                                      (pageChanged)="pageChanged($event)"
+                                    ></pagination>
+                                  </div>
+
+                                  <div class="col-md-3">
+                                    <span class="span_total_entree pull-right"
+                                      >Total : {{ totalItems }}</span
+                                    >
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr *ngIf="!items || items.length == 0">
+                              <td colspan="12">
+                                <div class="col-md-12 txt-align-center">
+                                  Aucune données disponible
+                                </div>
+                              </td>
+                            </tr>
+                          </tfoot>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

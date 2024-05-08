@@ -1,0 +1,25 @@
+/*
+ * Created on $today.date ( Time $today.time )
+ * Generator tool : $generator.name ( version $generator.version )
+ * Copyright 2018 Geo. All Rights Reserved.
+ */
+
+package ${target.javaPackageFromFolder(${SRC})};
+
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Target;
+
+import org.mapstruct.Qualifier;
+
+/**
+ * Request Base
+ * 
+ * @author Geo
+ *
+ */
+@Qualifier
+@Target(ElementType.METHOD)
+public @interface FullTransformerQualifier {
+
+}

@@ -1,0 +1,25 @@
+Update date : Mon Jul 18 20:17:47 GMT 2022
+ 
+ Table 'action_utilisateur' no longer exists in database
+ (-) table 'action_utilisateur' removed
+ 
+ Table 'civilite' no longer exists in database
+ (-) table 'civilite' removed
+ 
+ Table 'fonctionnalite' no longer exists in database
+ (-) table 'fonctionnalite' removed
+ 
+ Table 'historique' no longer exists in database
+ (-) table 'historique' removed
+ 
+ Table 'profil' no longer exists in database
+ (-) table 'profil' removed
+ 
+ Table 'profil_fonctionnalite' no longer exists in database
+ (-) table 'profil_fonctionnalite' removed
+ 
+ Table 'status' no longer exists in database
+ (-) table 'status' removed
+ 
+ Table 'user' no longer exists in database
+ (-) table 'user' removed

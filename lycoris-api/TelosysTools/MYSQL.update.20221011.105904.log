@@ -1,0 +1,58 @@
+Update date : Tue Oct 11 10:59:05 GMT 2022
+ 
+ Table 'action_en_masse' found in repository
+ (=) table 'action_en_masse' unchanged
+ 
+ Table 'action_utilisateur' found in repository
+ . Column 'is_machine' added
+ (*) table 'action_utilisateur' updated : 1 change(s)
+ 
+ Table 'category' found in repository
+ (=) table 'category' unchanged
+ 
+ Table 'civilite' found in repository
+ (=) table 'civilite' unchanged
+ 
+ Table 'demande' found in repository
+ (=) table 'demande' unchanged
+ 
+ Table 'fonctionnalite' found in repository
+ . Column 'id_parent' deleted
+ . Column 'parent_id' added
+ . Column 'deleted_by' added
+ . Foreign key 'fk_fonctionnalite_1' updated
+ (*) table 'fonctionnalite' updated : 4 change(s)
+ 
+ Table 'historique' found in repository
+ (=) table 'historique' unchanged
+ 
+ Table 'numero_stories' found in repository
+ . Column 'created_at' : Database type changed to DATETIME
+ . Column 'created_at' : JDBC type code changed to 93
+ . Column 'created_at' : Size changed to 19
+ . Column 'created_at' updated
+ (*) table 'numero_stories' updated : 1 change(s)
+ 
+ Table 'profil' found in repository
+ (=) table 'profil' unchanged
+ 
+ Table 'profil_fonctionnalite' found in repository
+ . Column 'id_profil' deleted
+ . Column 'id_fonctionnalite' deleted
+ . Column 'profil_id' added
+ . Column 'fonctionnalite_id' added
+ . Foreign key 'FK95e2tu7yehlal800t8esq5enb' updated
+ . Foreign key 'FKludlf40s7tc98ydiaoqxbx4fn' updated
+ (*) table 'profil_fonctionnalite' updated : 6 change(s)
+ 
+ Table 'status' found in repository
+ (=) table 'status' unchanged
+ 
+ Table 'tache' found in repository
+ (=) table 'tache' unchanged
+ 
+ Table 'type_demande' found in repository
+ (=) table 'type_demande' unchanged
+ 
+ Table 'user' found in repository
+ (=) table 'user' unchanged

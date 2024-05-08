@@ -1,0 +1,95 @@
+.full-screen-modal {
+    width: 99%;
+  }
+  
+  .active {
+    opacity: 1;
+  }
+  .inactive {
+    opacity: 0.4;
+  }
+  .inpColor{
+    background-color: #f89137
+  }
+  
+  ::ng-deep .cdk-overlay-container {
+    position: fixed;
+    z-index: 10000;
+  }
+  
+  .table-details {
+    thead {
+      tr {
+        th {
+          padding: 2px;
+          font-size: 12px;
+          height: 25px;
+        }
+      }
+  
+      tr {
+        td {
+          font-size: 12px;
+          height: 30px;
+        }
+      }
+    }
+  }
+  
+  ::ng-deep .modal-custo {
+    width: 70%;
+    max-width: none;
+  }
+
+  .statutCode{
+    //border: 1px solid rgb(24, 9, 9);
+    text-transform: uppercase;
+    width: 50%;
+    margin: 0;
+
+  }
+
+  .iconAction{
+    //border: 1px solid orangered;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .btnMarge{
+    //border: 1px solid rebeccapurple;
+    margin-top: 1%;
+  }
+
+  .btnImporter{
+    //border: 1px solid rebeccapurple;
+    width: 20%;
+    margin-top: 1%;
+  }
+
+  .spanstyle{
+    //border: 1px solid red;
+    width: 15%;
+    display: flex;
+    justify-content: end;
+  }
+
+  .test{
+    display: flex;
+    justify-content: space-between;
+    //border: 2px solid red;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .div-multi-items-in{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    //border: 2px solid red;
+  }
+
+  .btnHover:hover{
+    color: aliceblue;
+  }

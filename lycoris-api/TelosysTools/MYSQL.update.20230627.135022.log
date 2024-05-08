@@ -1,0 +1,89 @@
+Update date : Tue Jun 27 13:50:24 GMT 2023
+ 
+ Table 'action_en_masse' found in repository
+ (=) table 'action_en_masse' unchanged
+ 
+ Table 'action_utilisateur' found in repository
+ . Column 'type_numero_id' added
+ . Foreign key 'action_utilisateur_FK_1' added
+ (*) table 'action_utilisateur' updated : 2 change(s)
+ 
+ Table 'category' found in repository
+ (=) table 'category' unchanged
+ 
+ Table 'civilite' found in repository
+ (=) table 'civilite' unchanged
+ 
+ Table 'demande' found in repository
+ (=) table 'demande' unchanged
+ 
+ Table 'fonctionnalite' found in repository
+ . Foreign key 'FK2skvhnc8s72njrkt5dvx8c6dg' added
+ (*) table 'fonctionnalite' updated : 1 change(s)
+ 
+ Table 'historique' found in repository
+ . Foreign key 'historique_FK' deleted
+ (*) table 'historique' updated : 1 change(s)
+ 
+ Table 'liste_diffusion' found in repository
+ (=) table 'liste_diffusion' unchanged
+ 
+ Table 'numero_stories' found in repository
+ . Column 'id_profil' : NotNull changed to false
+ . Column 'id_profil' updated
+ . Column 'created_by' : NotNull changed to false
+ . Column 'created_by' updated
+ . Foreign key 'numero_stories_FK' updated
+ . Foreign key 'numero_stories_FK_1' updated
+ . Foreign key 'numero_stories_FK_2' updated
+ . Foreign key 'numero_stories_FK_3' updated
+ (*) table 'numero_stories' updated : 6 change(s)
+ 
+ Table 'parametrage' found in repository
+ . Foreign key 'parametrage_FK' added
+ (*) table 'parametrage' updated : 1 change(s)
+ 
+ Table 'parametrage_profil' found in repository
+ . Foreign key 'parametrage_profil_FK' added
+ (*) table 'parametrage_profil' updated : 1 change(s)
+ 
+ Table 'profil' found in repository
+ (=) table 'profil' unchanged
+ 
+ Table 'profil_fonctionnalite' found in repository
+ . Foreign key 'FK95e2tu7yehlal800t8esq5enb' deleted
+ . Foreign key 'FKludlf40s7tc98ydiaoqxbx4fn' deleted
+ . Foreign key 'profil_fonctionnalite_FK' added
+ . Foreign key 'profil_fonctionnalite_FK_1' added
+ (*) table 'profil_fonctionnalite' updated : 4 change(s)
+ 
+ Table 'status' found in repository
+ (=) table 'status' unchanged
+ 
+ Table 'tache' found in repository
+ . Foreign key 'tache_ibfk_1' deleted
+ . Column 'id_demande' : NotNull changed to false
+ . Column 'id_demande' updated
+ . Column 'id_type_demande' : NotNull changed to false
+ . Column 'id_type_demande' updated
+ . Column 'id_user' : NotNull changed to false
+ . Column 'id_user' updated
+ . Foreign key 'tache_FK' updated
+ . Foreign key 'tache_FK_1' updated
+ . Foreign key 'tache_FK_2' added
+ (*) table 'tache' updated : 7 change(s)
+ 
+ Table 'type_demande' found in repository
+ (=) table 'type_demande' unchanged
+ 
+ Table 'type_numero' found in repository
+ (=) table 'type_numero' unchanged
+ 
+ Table 'type_parametrage' found in repository
+ (=) table 'type_parametrage' unchanged
+ 
+ Table 'user' found in repository
+ (=) table 'user' unchanged
+ 
+ Table 'sensible_number_type' no longer exists in database
+ (-) table 'sensible_number_type' removed

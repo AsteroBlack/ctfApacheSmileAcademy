@@ -1,0 +1,57 @@
+Update date : Thu Jun 22 11:40:14 GMT 2023
+ 
+ Table 'action_en_masse' found in repository
+ (=) table 'action_en_masse' unchanged
+ 
+ Table 'action_utilisateur' found in repository
+ (=) table 'action_utilisateur' unchanged
+ 
+ Table 'category' found in repository
+ (=) table 'category' unchanged
+ 
+ Table 'civilite' found in repository
+ (=) table 'civilite' unchanged
+ 
+ Table 'demande' found in repository
+ . Column 'validated_telco' added
+ . Column 'validated_omci' added
+ (*) table 'demande' updated : 2 change(s)
+ 
+ Table 'fonctionnalite' found in repository
+ (=) table 'fonctionnalite' unchanged
+ 
+ Table 'historique' found in repository
+ (=) table 'historique' unchanged
+ 
+ Table 'liste_diffusion' found in repository
+ (=) table 'liste_diffusion' unchanged
+ 
+ Table 'numero_stories' found in repository
+ (=) table 'numero_stories' unchanged
+ 
+ Table 'parametrage' found in repository
+ (=) table 'parametrage' unchanged
+ 
+ Table 'parametrage_profil' found in repository
+ (=) table 'parametrage_profil' unchanged
+ 
+ Table 'profil' found in repository
+ (=) table 'profil' unchanged
+ 
+ Table 'profil_fonctionnalite' found in repository
+ (=) table 'profil_fonctionnalite' unchanged
+ 
+ Table 'status' found in repository
+ (=) table 'status' unchanged
+ 
+ Table 'tache' found in repository
+ (=) table 'tache' unchanged
+ 
+ Table 'type_demande' found in repository
+ (=) table 'type_demande' unchanged
+ 
+ Table 'type_parametrage' found in repository
+ (=) table 'type_parametrage' unchanged
+ 
+ Table 'user' found in repository
+ (=) table 'user' unchanged

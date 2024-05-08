@@ -1,0 +1,30 @@
+Update date : Mon Jun 13 14:54:25 GMT 2022
+ 
+ Table 'action_utilisateur' found in repository
+ . Column 'empreinte' added
+ (*) table 'action_utilisateur' updated : 1 change(s)
+ 
+ Table 'fonctionnalite' found in repository
+ (=) table 'fonctionnalite' unchanged
+ 
+ Table 'historique' found in repository
+ . Column 'response' : Database type changed to LONGTEXT
+ . Column 'response' : JDBC type code changed to -1
+ . Column 'response' : Size changed to 2147483647
+ . Column 'response' updated
+ (*) table 'historique' updated : 1 change(s)
+ 
+ Table 'profil' found in repository
+ (=) table 'profil' unchanged
+ 
+ Table 'profil_fonctionnalite' found in repository
+ (=) table 'profil_fonctionnalite' unchanged
+ 
+ Table 'status' found in repository
+ (=) table 'status' unchanged
+ 
+ Table 'type_numero' found in repository
+ (=) table 'type_numero' unchanged
+ 
+ Table 'user' found in repository
+ (=) table 'user' unchanged

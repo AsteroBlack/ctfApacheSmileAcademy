@@ -1,0 +1,94 @@
+.full-screen-modal {
+  width: 99%;
+}
+
+.active {
+  opacity: 1;
+}
+.inactive {
+  opacity: 0.4;
+}
+
+::ng-deep .cdk-overlay-container {
+  position: fixed;
+  z-index: 10000;
+}
+
+.table-details {
+  thead {
+    tr {
+      th {
+        padding: 2px;
+        font-size: 12px;
+        height: 25px;
+      }
+    }
+
+    tr {
+      td {
+        font-size: 12px;
+        height: 30px;
+      }
+    }
+  }
+}
+
+
+.divElement{
+  display: flex;
+  justify-content: space-between;
+}
+.btnHover:hover{
+  color: aliceblue;
+}
+
+.divImport{
+  margin-right: 30px;
+}
+
+.posit{
+  margin-top: 3%;
+}
+.spanstyle{
+  border-radius: 5px;
+  background-color: #ff7900;
+}
+
+.test{
+  display: flex;
+  justify-content: space-between;
+  //border: 2px solid red;
+  align-items: center;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.date{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  //border: 1px solid green;
+  width: 30%;
+  padding-left: 1.5rem;
+}
+
+.btn-import{
+  padding: 0 1.5rem 0 1.5rem;
+}
+
+.table-mat{
+  width: 100%;
+}
+
+::ng-deep .mat-expansion-panel {
+  transition: box-shadow 0.3s ease;
+  box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.871);
+   /* Ajoutez votre style d'ombre ici */
+}
+.custom-mat{
+  transition: box-shadow 0.3s ease;
+  box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.871);
+}
+
+
+

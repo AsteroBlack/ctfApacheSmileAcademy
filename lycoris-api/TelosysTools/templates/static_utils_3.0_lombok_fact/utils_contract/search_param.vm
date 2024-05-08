@@ -1,0 +1,26 @@
+
+/*
+ * Created on $today.date ( Time $today.time )
+ * Generator tool : $generator.name ( version $generator.version )
+ * Copyright 2018 Geo. All Rights Reserved.
+ */
+
+package ${target.javaPackageFromFolder(${SRC})};
+
+import lombok.*;
+
+/**
+ * Search Param
+ * 
+ * @author Geo
+ *
+ */
+@Data
+@ToString
+@NoArgsConstructor
+public class SearchParam<T> {
+
+	String	operator;
+	T		start;
+	T		end;
+}

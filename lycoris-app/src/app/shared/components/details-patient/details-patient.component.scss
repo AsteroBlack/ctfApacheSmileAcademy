@@ -1,0 +1,67 @@
+.img-assure {
+  width: 70px;
+  height: 70px;
+  border: 1px solid #eceeee;
+  padding: 1px;
+  margin-left: -2px;
+}
+
+.search-part {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.form-control:disabled {
+  background-color: #e9ecef !important;
+}
+
+.custom-input {
+  font-size: 11px !important;
+}
+
+::ng-deep .cdk-overlay-container {
+  position: fixed;
+  z-index: 10000;
+}
+
+.table-details {
+  thead {
+    tr {
+      th {
+        padding: 2px;
+        font-size: 12px;
+        height: 25px;
+      }
+    }
+
+    tr {
+      td {
+        font-size: 12px;
+        height: 30px;
+      }
+    }
+  }
+}
+.col-md-12 {
+  margin: 0 !important;
+}
+
+.table-reception {
+  thead {
+    tr {
+      th {
+        padding: 2px;
+        font-size: 12px;
+        height: 25px;
+      }
+    }
+
+    tr {
+      td {
+        font-size: 12px;
+        height: 30px;
+      }
+    }
+  }
+}

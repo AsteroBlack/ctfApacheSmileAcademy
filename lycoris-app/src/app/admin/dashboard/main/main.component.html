@@ -1,0 +1,90 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header d-flex justify-content-between">
+      <!-- breadcrumb [active_item]="" -->
+      <div>
+        <app-breadcrumb [title]="'Dashboard'" [items]="[]"></app-breadcrumb>
+      </div>
+      <div class="posit">
+        <span
+          class="p-2 spanstyle"
+          id="reportrange"
+          appDateRangeSelector
+          (periode)="onPeriodeEmitted($event)"
+          (click)="isActiveDate = true"
+          title="Filtrer par période"
+        >
+          <em class="icofont icofont-ui-calendar"></em>&nbsp;
+          <span></span>&nbsp;<em class="fa fa-caret-down"></em>
+        </span>
+      </div>
+    </div>
+    <ng-container *simSwapIsGranted= "'FUNC-AZID'">
+      <ng-container *ngIf="dashboardSectionsDatas">
+        <ng-container
+          *ngFor="
+            let dashboardSectionKey of getObjectKeys(dashboardSectionsDatas)
+          "
+        >
+        <ng-container
+        >
+          <div class="block-header chart-card-header d-flex justify-content-between">
+            <div>
+              <h2>{{ dashboardSectionKey.toUpperCase() }}</h2>
+            </div>
+          </div>
+          <!-- Widgets -->
+          <div
+            class="row"
+            *ngFor="
+              let subDashBoardSectionKey of getObjectKeys(
+                dashboardSectionsDatas[dashboardSectionKey]
+              )
+            "
+          >
+              <div
+                *ngFor="
+                  let dashboardInfosCard of dashboardInfosCards[
+                    subDashBoardSectionKey
+                  ]
+                "
+                class="card-dash" [ngStyle]="{'display': dashboardInfosCard.key ? 'block' : 'none'}"
+              >
+
+              <app-dashboard-infos-card
+                [userProperties]="getCodeGranted(dashboardInfosCard, dashboardInfosCards[subDashBoardSectionKey])"
+                [label]="dashboardInfosCard.label"
+                [label2]="dashboardInfosCard.label2"
+                [icon]="dashboardInfosCard.icon"
+                [totalValue]="
+                  getDashboardKpiValueToShow(
+                    dashboardSectionsDatas[dashboardSectionKey][
+                      subDashBoardSectionKey
+                    ][dashboardInfosCard.key].TOTAL
+                  )
+                "
+                [leftValueLabel]="dashboardInfosCard.leftValueLabel"
+                [leftValue]="
+                  getDashboardKpiValueToShow(
+                    dashboardSectionsDatas[dashboardSectionKey][
+                      subDashBoardSectionKey
+                    ][dashboardInfosCard.key].BSCS
+                  )
+                "
+                [rightValueLabel]="dashboardInfosCard.rightValueLabel"
+                [rightValue]="
+                  getDashboardKpiValueToShow(
+                    dashboardSectionsDatas[dashboardSectionKey][
+                      subDashBoardSectionKey
+                    ][dashboardInfosCard.key].CORAIL
+                  )
+                "
+              ></app-dashboard-infos-card>
+            </div>
+          </div>
+        </ng-container>    
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+</section>

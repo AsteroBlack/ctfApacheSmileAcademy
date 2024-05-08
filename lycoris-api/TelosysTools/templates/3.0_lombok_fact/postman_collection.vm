@@ -1,0 +1,185 @@
+#set ($urlBase = "{{main_url}}")
+#set ($collection_name = "${ROOT_PKG}" )
+#set ( $listOfIgnoreAttrib = ["isDeleted", "createdAt", "createdBy", "updatedAt", "updatedBy"])
+
+{
+	"id": "project.id",
+	"name": "$collection_name.replace(".", "_")",
+	"description": "",
+	"order": [],
+	"timestamp": 1497267117086,
+	"owner": "1151918",
+	"public": false,
+	"folders": [
+#set ($count = $selectedEntities.size())
+#set ($index = 0)
+#foreach( $entity in $selectedEntities )
+#set ($index = $index + 1)
+		{
+			"id": "${fn.uncapitalize($entity.name)}.id",
+			"name": "${fn.uncapitalize($entity.name)}",
+			"description": "",
+			"order": [
+				"${fn.uncapitalize($entity.name)}.getByCriteria",
+				"${fn.uncapitalize($entity.name)}.create",
+				"${fn.uncapitalize($entity.name)}.update",
+				"${fn.uncapitalize($entity.name)}.delete"
+			],
+			"owner": "1151918"
+#if ($index != $count)
+		},
+#else
+		}
+#end
+#end
+	],
+	"requests": [
+#set ($count = $selectedEntities.size())
+#set ($index = 0)
+#foreach( $entity in $selectedEntities )
+#set ($index = $index + 1)
+		{
+			"id": "${fn.uncapitalize($entity.name)}.create",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "$urlBase/${fn.uncapitalize($entity.name)}/create",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1497439012859,
+			"name": "${fn.uncapitalize($entity.name)}-create",
+			"description": "",
+			"collectionId": "project.id",
+			"responses": [],
+#set ($countCreate = 0)
+#foreach ( $attrib in $entity.nonKeyAttributes )
+#if(!$listOfIgnoreAttrib.contains($attrib.name))
+#set ($countCreate = $countCreate + 1)
+#end
+#end
+#set ($indexCreate = 0)
+			"rawModeData": "{\n\t\"user\":\"1\",\n\t\"datas\":[\n\t\t{\n  #foreach($attrib in $entity.nonKeyAttributes)#if(!$listOfIgnoreAttrib.contains($attrib.name))#set ($indexCreate = $indexCreate + 1)\t\t\t\"$attrib.name\": \"\"#if($indexCreate != $countCreate),\n#end#end#end\n\t\t} \n\t]  \n}"
+		},
+		{
+			"id": "${fn.uncapitalize($entity.name)}.update",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "$urlBase/${fn.uncapitalize($entity.name)}/update",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1497439012859,
+			"name": "${fn.uncapitalize($entity.name)}-update",
+			"description": "",
+			"collectionId": "project.id",
+			"responses": [],
+#set ($countUpdate = 0)
+#foreach ( $attrib in $entity.attributes )
+#if(!$listOfIgnoreAttrib.contains($attrib.name))
+#set ($countUpdate = $countUpdate + 1)
+#end
+#end
+#set ($indexUpdate = 0)
+			"rawModeData": "{\n\t\"user\":\"1\",\n\t\"datas\":[\n\t\t{\n  #foreach($attrib in $entity.attributes)#if(!$listOfIgnoreAttrib.contains($attrib.name))#set ($indexUpdate = $indexUpdate + 1)\t\t\t\"$attrib.name\": \"\"#if($indexUpdate != $countUpdate),\n#end#end#end\n\t\t} \n\t]  \n}"
+		},
+		{
+			"id": "${fn.uncapitalize($entity.name)}.delete",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "$urlBase/${fn.uncapitalize($entity.name)}/delete",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1497439012859,
+			"name": "${fn.uncapitalize($entity.name)}-delete",
+			"description": "",
+			"collectionId": "project.id",
+			"responses": [],
+#set ($countDelete = $entity.keyAttributesCount)
+#set ($indexDelete = 0)
+			"rawModeData": "{\n\t\"user\":\"1\",\n\t\"datas\":[\n\t\t{\n  #foreach($attrib in $entity.keyAttributes)#set ($indexDelete = $indexDelete + 1)\t\t\t\"$attrib.name\": \"\"#if($indexDelete != $countDelete),\n#end#end\n\t\t} \n\t]  \n}"
+		},
+		{
+			"id": "${fn.uncapitalize($entity.name)}.getByCriteria",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "$urlBase/${fn.uncapitalize($entity.name)}/getByCriteria",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1497439015040,
+			"name": "${fn.uncapitalize($entity.name)}-getByCriteria",
+			"description": "",
+			"collectionId": "project.id",
+			"responses": [],
+#set ($countGet = $entity.attributesCount)
+#set ($indexGet = 0)
+			"rawModeData": "{\n\t\"user\":\"1\",\n\t\"isSimpleLoading\":false,\n\t\"data\":{\n  #foreach($attrib in $entity.attributes)#set ($indexGet = $indexGet + 1)\t\t\"$attrib.name\": \"\"#if($indexGet != $countGet),\n#end#end\n\t}  \n}"
+#if ($index != $count)
+		},
+#else
+		}
+#end
+#end
+	]
+}
