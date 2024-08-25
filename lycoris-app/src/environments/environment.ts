@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
- apiUrl: ' http://192.168.33.20/api/lyco-api/',
+ apiUrl: ' http://lycoris-ha-1:8080/api/lyco-api/',
 
 
 };
