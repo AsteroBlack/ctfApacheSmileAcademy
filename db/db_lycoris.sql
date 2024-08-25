@@ -26,6 +26,8 @@ SET time_zone = "+00:00";
 --
 -- Structure de la table `action_en_masse`
 --
+CREATE DATABASE db_lycoris;
+USE db_lycoris;
 
 CREATE TABLE `action_en_masse` (
   `id` int(11) NOT NULL,

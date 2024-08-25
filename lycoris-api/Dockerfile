@@ -10,7 +10,7 @@ COPY pom.xml ./
 COPY src ./src
 
 # Télécharger les dépendances et construire le package
-RUN mvn clean install 
+RUN mvn clean package -Dspring.profiles.active=production
 
 # Stage 2 : Déploiement sur Tomcat
 FROM tomcat:9.0.89-jdk8

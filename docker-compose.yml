@@ -3,7 +3,7 @@ version: '3.7'
 services:
   # App services
   lycoris-app-1:
-    image: tigolifrederic283/lycoris-app:1.0.3
+    image: tigolifrederic283/lycoris-app:1.0
     environment:
       - APP_INSTANCE=1
     container_name: lycoris-app-1
@@ -12,9 +12,10 @@ services:
     volumes:
       - ./lycoris-app/httpd.conf:/etc/httpd/httpd.conf
       - ./lycoris-app/lycoris.conf:/etc/httpd/conf.d/lycoris.conf
-
+    expose:
+      - 80
   lycoris-app-2:
-    image: tigolifrederic283/lycoris-app:1.0.3
+    image: tigolifrederic283/lycoris-app:1.0
     environment:
       - APP_INSTANCE=2
     container_name: lycoris-app-2
@@ -23,10 +24,11 @@ services:
     volumes:
       - ./lycoris-app/httpd.conf:/etc/httpd/httpd.conf
       - ./lycoris-app/lycoris.conf:/etc/httpd/conf.d/lycoris.conf
-
+    expose: 
+      - 80
   # Api services
   lycoris-api-1:
-    image: tigolifrederic283/lycoris-api:1.0.2
+    image: tigolifrederic283/lycoris-api:1.0
     environment:
       - APP_INSTANCE=1
     container_name: lycoris-api-1
@@ -34,18 +36,10 @@ services:
       - lycoris-network
 
   lycoris-api-2:
-    image: tigolifrederic283/lycoris-api:1.0.2
+    image: tigolifrederic283/lycoris-api:1.0
     environment:
       - APP_INSTANCE=2
     container_name: lycoris-api-2
-    networks:
-      - lycoris-network
-
-  lycoris-api-3:
-    image: tigolifrederic283/lycoris-api:1.0.4
-    environment:
-      - APP_INSTANCE=3
-    container_name: lycoris-api-3
     networks:
       - lycoris-network
 
@@ -63,7 +57,7 @@ services:
     environment:
       - MARIADB_ROOT_PASSWORD=P@ssword2024
     volumes:
-      - ./db/galera_node1.cnf:/etc/mysql/conf.d/galera.cnf
+      - ./db/galera1.cnf:/etc/mysql/conf.d/galera.cnf
       - ./db/db_lycoris.sql:/docker-entrypoint-initdb.d/db_lycoris.sql
     networks:
       - lycoris-network
@@ -79,7 +73,7 @@ services:
     environment:
       - MARIADB_ROOT_PASSWORD=P@ssword2024
     volumes:
-      - ./db/galera_node2.cnf:/etc/mysql/conf.d/galera.cnf
+      - ./db/galera2.cnf:/etc/mysql/conf.d/galera.cnf
       - ./db/db_lycoris.sql:/docker-entrypoint-initdb.d/db_lycoris.sql
     networks:
       - lycoris-network
@@ -94,20 +88,20 @@ services:
     environment:
       - MARIADB_ROOT_PASSWORD=P@ssword2024
     volumes:
-      - ./db/galera_node3.cnf:/etc/mysql/conf.d/galera.cnf
+      - ./db/galera3.cnf:/etc/mysql/conf.d/galera.cnf
       - ./db/db_lycoris.sql:/docker-entrypoint-initdb.d/db_lycoris.sql
     networks:
       - lycoris-network
 
   # haproxy service
   haproxy-front:
-    image: haproxy:3.0.3-alpine3.20
+    image: haproxy:3.1-dev4
     depends_on:
       - lycoris-app-1
       - lycoris-app-2
     container_name: lycoris-ha-1
     volumes:
-      - ./ha-conf/haFront.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - ./ha-proxy/haFront.cfg:/usr/local/etc/haproxy/haproxy.cfg
     networks:
       - lycoris-network
     ports:
@@ -119,14 +113,21 @@ services:
     depends_on:
       - lycoris-api-1
       - lycoris-api-2
-      - lycoris-api-3
       - db-node1
     volumes:
-      - ./ha-conf/haBack.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - ./ha-proxy/haBack.cfg:/usr/local/etc/haproxy/haproxy.cfg
     networks:
       - lycoris-network
     ports:
       - 8001:8001
+  #redis lycoris
+  redis:
+    image: redis:7.4.0
+    container_name: lycoris-redis
+    volumes: 
+      - ./lycoris-api/redis.conf:/usr/local/etc/redis/redis.conf
+    networks: 
+      - lycoris-network
 
 networks:
   lycoris-network:
